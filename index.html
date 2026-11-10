@@ -112,13 +112,22 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 .sobre-texto a{color:var(--yellow);text-decoration:none;border-bottom:1px solid var(--yellow)}
 
-/* Leitura das críticas */
+/* Leitura das notas */
 .critica-texto p,
 .texto-critica p{
   text-align:justify;
   text-justify:inter-word;
   margin:0 0 28px;
   line-height:1.85;
+}
+
+
+/* Respiro abaixo de Em Destaque */
+#destaque .titulo-secao,
+.destaque .titulo-secao,
+#destaque h2,
+.destaque h2{
+  margin-bottom:48px;
 }
 
 </style>
@@ -150,7 +159,6 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="inicio" class="pagina ativa">
   <h2 class="titulo-pagina">Em destaque</h2>
-  <p class="subtitulo-pagina">Quatro filmes que continuam comigo.</p>
   <div id="inicio-grid" class="grid-filmes"></div>
 
   <div class="em-breve">
@@ -161,7 +169,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
     <div class="breve-texto">
       <h2>EM BREVE</h2>
       <div class="linha-amarela"></div>
-      <p>Próxima crítica no ar.</p>
+      <p>PRÓXIMO no ar.</p>
     </div>
   </div>
 
@@ -174,7 +182,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="arquivo" class="pagina">
   <h2 class="titulo-pagina">Arquivo</h2>
-  <p class="subtitulo-pagina">Todas as críticas, organizadas por ano.</p>
+  <p class="subtitulo-pagina">Todas as notas, organizadas por ano.</p>
 
   <div class="busca-arquivo">
     <input
@@ -205,7 +213,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="pagina-critica" class="pagina">
   <div class="critica-conteudo">
-    <div class="tipo">CRÍTICA</div>
+    <div class="tipo">NOTA</div>
     <h2 id="critica-titulo" class="titulo-critica"></h2>
     <p id="critica-dados" class="dados-filme"></p>
     <img id="critica-imagem" class="imagem-critica" src="" alt="">
@@ -213,7 +221,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
     <div class="navegacao-critica">
       <a class="botao" onclick="voltarPagina()">← VOLTAR</a>
-      <a class="botao" onclick="proximaCritica()">PRÓXIMA CRÍTICA →</a>
+      <a class="botao" onclick="proximaCritica()">PRÓXIMO →</a>
     </div>
   </div>
 </section>
@@ -252,7 +260,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
    Coloque o filme mais novo NO TOPO da lista.
    ========================================================== */
 
-const filmes = [
+const filmes = [,
 
   {
     id: "novo-filme",
@@ -261,7 +269,7 @@ const filmes = [
     ano: 2026,
     imagem: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80",
     texto: `
-      <p>Esta é uma crítica de exemplo. Quando você publicar uma nova crítica, substitua este texto pelo seu.</p>
+      <p>Esta é uma nota de exemplo. Quando você publicar uma nova nota, substitua este texto pelo seu.</p>
       <p>O mais importante é: você cadastra o filme somente aqui, e o site se organiza sozinho.</p>
     `
   },
@@ -307,20 +315,30 @@ const filmes = [
     ano: 2026,
     imagem: "https://m.media-amazon.com/images/M/MV5BZDJjMGMyMTQtM2VkNy00NmFhLTgwMzQtYWY2NTIyMTlkMWNkXkEyXkFqcGc@._V1_.jpg",
     texto: `
-      <p>Em <strong>Test</strong>, a ideia de teste ultrapassa o sentido literal da palavra e passa a contaminar as relações, os corpos e as escolhas dos personagens.</p>
-      <p>O filme trabalha com a dúvida e com a sensação de que qualquer resposta pode ser provisória. Talvez o maior teste seja justamente continuar vivendo quando não existe uma resposta suficientemente segura.</p>
-    `
+    <p>Há algo especialmente triste em Eddie, o protagonista de Test: ele parece ter aprendido a transformar qualquer angústia em disciplina. Vivendo em uma pequena cidade de Ohio e sob a influência constante de uma mãe nem tão devota e emocionalmente dependente, o jovem encontra no fisiculturismo uma última promessa de futuro. Seu corpo se torna projeto, profissão e quase uma forma de fé. Porém, ele não consegue ganhar as competições locais. O que o qualificaria como profissional e o projetaria.</p>
+    
+    <p>Sam McConnell não demora a mostrar o preço dessa obsessão. A aproximação com o treinador Mike oferece a Eddie uma chance concreta de avançar na carreira, ampliando o universo de possibilidades para as drogas de performance e exigências cada vez pesadas. Ao mesmo tempo, nasce entre os dois uma atração que confronta a educação religiosa e toda a masculinidade construída num ambiente como esses.</p>
+    
+    <p>Não é um filme que compreende na sexualidade algum tipo de libertação. Mas é um filme atado às suas convicções, diante das contradições de um homem em busca da perfeição. Eu ia usar honesto aqui, mas é um conceito bastante flutuante. Ele é um jovem que não se trai diante dos acontecimentos. Mesmo que eles balancem a sua base.</p>
+    
+    <p>Não subverte o tema, ainda mais nos dias de hoje, onde o universo virtual e a exploração do corpos paga as contas e transforma realidades, mas é uma leitura muito potente desse universo. O fisiculturismo é um espaço de exposição e, ao mesmo tempo, de camuflagem. Ele constrói e trabalha o corpo para ser visto, admirado e desejado, mas passa boa parte do tempo tentando esconder o que sente. É uma analise bacana sobre masculinidade: talvez a armadura que alguém constrói para sobreviver seja também aquilo que mais dificulta sua liberdade.</p>
+    
+    <p>Eu amo o final. Entre fé, desejo e ambição, o que poderia ser apenas uma narrativa de superação esportiva ganha outra dimensão: a competição passa a importar menos do que aquilo que Eddie está disposto a sacrificar para chegar até ela. Tammy Blanchard magnífica. E Brock Yurich, espetacular na jornada desse protagonista.</p>
+  `
   },
-
-  {
+{
     id: "fjord",
     titulo: "Fjord",
-    diretor: "—",
+    diretor: "Cristian Mungiu",
     ano: 2026,
-    imagem: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80",
+    imagem: "fjord.jpg",
     texto: `
-      <p><strong>Fjord</strong> trabalha o limite como uma paisagem. Entre a imensidão da natureza e a solidão dos personagens, existe uma tensão permanente entre permanecer e partir.</p>
-      <p>O espaço não serve apenas como cenário. Ele se transforma em uma extensão dos conflitos internos e das dificuldades de encontrar uma posição estável diante do mundo.</p>
+      <p>A diferença é apenas a diferença, porra.</p>
+      <p>É um filme que trabalha no limite boa parte dele. Ele opera num terreno instável, desconfortável, inconsistente. O que começa como a história de uma família que tenta reconstruir a vida em uma pequena comunidade norueguesa, logo se revela apto para um conflito mais amplo, envolvendo religião, imigração, educação e os limites da intervenção do Estado.</p>
+      <p>A chegada de um casal conservador e seus cinco filhos a uma pequena comunidade norueguesa coloca em choque diferentes valores, especialmente quando surgem suspeitas sobre a forma como aquelas crianças são criadas. Com a chegada do Conselho Tutelar, há um deslocamento abrupto da certeza. A maneira como tudo é conduzido parece legítima, mas é também impregnada de preconceitos. A escalada da defesa da liberdade religiosa não serve como justificativa para encobrir relações de violência. E os pais reconhecem o fato. Mas as professoras se atém a um único fato isolado, seguindo os protocolos, mas indiferentes às consequências.</p>
+      <p>É desconfortável não conseguir escolher um lado. Cadê o meu direito de julgar impiedosamente? Cristian Mungiu constrói uma história em que as aparências, as crenças e até mesmo as boas intenções mudam de significado o tempo todo. O que não é aceitável duela com o que tem que ser combatido.</p>
+      <p>A paisagem fria e aquelas montanhas enormes que parecem engolir aquela pequena cidade parece ampliar a distância entre as pessoas, entre suas diferenças culturais, religiosas, principalmente em como elas lidam com o cuidado. A intimidade da família passa a pertencer ao olhar da comunidade, das instituições, das convicções.</p>
+      <p>Há afeto e controle, proteção e diferentes tipos de violência, preocupação e preconceito convivendo no mesmo espaço. Num embate silencioso, civilizado. E tem aquela última cena, num sopro de afeto esgarçado, diante da balsa que parte em fuga e que me pula uma pulga interrogação: menino, mas era sobre isso? E tudo se repensa. Renate Reinsve na primeira reunião, sendo informada de tudo. Sebastian Stan num trabalho de contenção dificílimo de manter. Só o reconheci nos créditos.</p>
     `
   }
 
@@ -336,7 +354,7 @@ function cardFilme(filme){
       <div class="filme-info">
         <h3>${filme.titulo}</h3>
         <p class="diretor">${filme.diretor} | ${filme.ano}</p>
-        <span class="ler-critica">LER CRÍTICA →</span>
+        <span class="ler-critica">LER NOTA →</span>
       </div>
     </article>
   `;
