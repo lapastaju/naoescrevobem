@@ -111,6 +111,16 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 .sobre-texto a{color:var(--yellow);text-decoration:none;border-bottom:1px solid var(--yellow)}
+
+/* Leitura das críticas */
+.critica-texto p,
+.texto-critica p{
+  text-align:justify;
+  text-justify:inter-word;
+  margin:0 0 28px;
+  line-height:1.85;
+}
+
 </style>
 </head>
 
@@ -263,11 +273,14 @@ const filmes = [
     ano: 2026,
     imagem: "https://images.mubicdn.net/images/film/470825/cache-1126176-1776107446/image-w1280.jpg?size=800x",
     texto: `
-      <p>A estrada sempre foi um território fértil para o cinema queer, e <strong>Flesh & Fuel</strong> se aproxima desse universo com uma abordagem própria, mais física e menos interessada em romantizar aquilo que acontece entre dois corpos em movimento.</p>
-      <p>No filme de Pierre le Gall, o encontro entre os personagens não nasce de uma promessa grandiosa. Ele surge nos intervalos, nos espaços provisórios e naquilo que a rotina deixa escapar.</p>
-      <p>O desejo existe sem precisar ser disfarçado ou transformado em espetáculo. Há uma atenção aos gestos, ao cansaço, ao silêncio e à possibilidade de encontrar intimidade mesmo em lugares feitos para a passagem.</p>
-      <p>No fim, <strong>Flesh & Fuel</strong> é também um filme sobre pausa: aquele breve momento em que o movimento diminui e o presente se transforma, ainda que temporariamente, em um lugar de pertencimento.</p>
-    `
+    <p>O cinema queer parece estar descobrindo, cada vez mais, o desejo que circula pelas estradas e pelos espaços tradicionalmente associados à masculinidade dos caminhoneiros. Se em 'El Caminho' (David Pablos, 2025) acompanhávamos um gay trambiqueiro em fuga dos homens que enganou, até que o acaso o coloca diante de alguém com quem surge uma química inesperada, 'Flesh &amp; Fuel' amplia esse universo e desloca o interesse do filme para outra dimensão do afeto.</p>
+    
+    <p>Aqui não há um jogo de encenação na manutenção da performance da masculinidade. Ambos, de forma reservada, lidam bem com sua sexualidade. Ela não precisa ser constantemente disfarçada, negada ou omitida: simplesmente existe. E, em momentos pontuais, o filme deixa claro que essa também é uma informação que atravessa suas relações familiares, recebida com naturalidade e carinho. O conflito já foi superado. Embora sejam heteronormativos, solteiros, sempre em movimento, na estrada, buscando prazer nos poucos intervalos, de forma furtiva. Até que cruzam os caminhos. Como transformar atração em vínculo quando a própria vida é organizada pelo trânsito, pela distância e pela necessidade permanente de partir?</p>
+    
+    <p>É curioso e difícil porque revela a solidão de quem conhece tão bem o trajeto. De quem sabe ler mapas, atalhos, estradas. Mas se perde de si mesmo. De quem conhece a responsabilidade, reconhece do que abre mão e parece seguir, enfrentando, porque até aquele momento, estava confortável jogar o jogo. A chegada de Bartosz altera o percurso sem oferecer o gabarito. ‘Por que você fez isso’, ele pergunta e Étienne responde ‘Eu não sei’. Há uma ternura muito particular na tentativa desses dois homens de inventar espaço para o amor. É um lance de romper fronteiras mesmo, por mais ordinário que possa parecer.</p>
+    
+    <p>Eu me lembrei de ‘Plara Quemada’, um dos filmes da minha vida, porque se utiliza da masculinidade para estilhaçar a masculinidade. Ou o que pensamos que seja ela.</p>
+  `
   },
 
   {
@@ -317,7 +330,7 @@ function cardFilme(filme){
       <img src="${filme.imagem}" alt="${filme.titulo}">
       <div class="filme-info">
         <h3>${filme.titulo}</h3>
-        <p class="diretor">Dir. ${filme.diretor} — ${filme.ano}</p>
+        <p class="diretor">${filme.diretor} | ${filme.ano}</p>
         <span class="ler-critica">LER CRÍTICA →</span>
       </div>
     </article>
@@ -373,7 +386,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
             <img src="${filme.imagem}" alt="${filme.titulo}">
             <div>
               <h3>${filme.titulo}</h3>
-              <p>Dir. ${filme.diretor} — ${filme.ano}</p>
+              <p>${filme.diretor} | ${filme.ano}</p>
             </div>
             <span class="seta">→</span>
           </div>
@@ -415,7 +428,7 @@ function abrirCritica(id){
 
   document.getElementById("critica-titulo").textContent = filme.titulo;
   document.getElementById("critica-dados").textContent =
-    `Dir. ${filme.diretor} — ${filme.ano}`;
+    `${filme.diretor} | ${filme.ano}`;
   document.getElementById("critica-imagem").src = filme.imagem;
   document.getElementById("critica-imagem").alt = filme.titulo;
   document.getElementById("critica-texto").innerHTML = filme.texto;
