@@ -173,7 +173,6 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   </div>
 
   <div class="centro">
-    <a class="botao" onclick="mostrarPagina('arquivo')">ACESSAR ARQUIVO →</a>
   </div>
 </section>
 
@@ -474,6 +473,14 @@ function abrirCritica(id){
   document.getElementById("critica-imagem").alt = filme.titulo;
   document.getElementById("critica-texto").innerHTML = filme.texto;
 
+  const indiceAtual = filmes.findIndex(item => item.id === filme.id);
+  const botaoProximo = document.querySelector('[onclick="proximaCritica()"]');
+
+  if(botaoProximo){
+    botaoProximo.style.display =
+      indiceAtual >= filmes.length - 1 ? "none" : "";
+  }
+
   mostrarPagina("pagina-critica");
 }
 
@@ -482,9 +489,13 @@ function voltarPagina(){
 }
 
 function proximaCritica(){
-  let indice = filmes.findIndex(f => f.id === filmeAtualId);
-  indice = (indice + 1) % filmes.length;
-  abrirCritica(filmes[indice].id);
+  let indice = filmes.findIndex(filme => filme.id === filmeAtualId);
+
+  if(indice === -1 || indice >= filmes.length - 1){
+    return;
+  }
+
+  abrirCritica(filmes[indice + 1].id);
 }
 
 montarInicio();
