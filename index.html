@@ -249,11 +249,11 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
    altere: id, titulo, diretor, ano, imagem e texto.
 
    O site organiza automaticamente:
-   - INÍCIO: os 4 filmes mais recentes
+   - INÍCIO: os 6 filmes mais recentes
    - ARQUIVO: TODOS os filmes
 
    Quando você adicionar um novo filme no topo,
-   o quinto filme sai do Início automaticamente,
+   o sétimo filme sai do Início automaticamente,
    mas continua guardado no Arquivo.
 
    IMPORTANTE:
@@ -261,6 +261,36 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
    ========================================================== */
 
 const filmes = [
+  {
+    id: "la-bola-negra",
+    titulo: "La Bola Negra",
+    diretor: "Javier Ambrossi, Javier Calvo",
+    ano: 2026,
+    imagem: "la-bola-negra.webp",
+    texto: `
+      <p>Há em mim, desde os anos 1990, um pesar profundo sobre o tanto de vidas perdidas pela aids. Provavelmente porque foi a epidemia mais violenta que eu presenciei no início da minha vida jovem, já me compreendendo um cara viado, o Tom Hanks definhando tomando vinho e ouvindo ópera, ganhando um oscar e milhares de pessoas morrendo, tendo suas vidas interrompidas. Gerações de atores, escritores, artistas de inúmeras áreas, cujas contribuições poderiam ser expressivas, plurais, inclusivas para o avanço e a permanência da cultura queer. Eu lamento tanto esse lapso, esse apagar de homens e mulheres, vozes, corpos, ideias, poesia. É importante repetir: a poesia.</p>
+      <p>Aqui, uma epopeia. Literal, esse abraço na palavra escrita, nos grandes feitos heróicos através da história, que insiste em erradicar, enterrar e assassinar a coragem. Existe um peso incomensurável nas coisas que o tempo decide deixar inacabadas. Eis uma tentativa de ecoar e honrar a continuidade dos afetos. Herdar a luta de gerações, muitas delas apagadas porque o amor entre homens era um ato de resistência quase suicida, se não houvesse cuidado e silêncio.</p>
+      <p>A narrativa se divide e se conecta através de três momentos cruciais da história espanhola, acompanhando personagens cujos destinos ecoam uns nos outros. E é delicioso quando os encaixes começam a dar forma e sentido às conexões, que começam 1932, 1937 (durante a Guerra Civil Espanhola) e 2017.</p>
+      <p>Em 1932, o filme captura a fragilidade de uma juventude que ousa sonhar em meio a estruturas sociais rígidas e castradoras, simbolizadas pela metáfora de uma votação secreta que dá nome à obra, onde bastava um único voto com a bola preta para banir a existência de alguém dentro daquele grupo. Anos mais tarde, em 1937, o cenário se corrói pelo fogo cruzado da Guerra Civil, transformando radicalmente a vida de Sebastián, onde o filme lindamente começa. Em 2017, essas histórias retornam, como uma herança familiar que liga os fios, que reconecta e acende todas as luzes sobre o passado. Sobre o amor. Sobre homens que amavam homens, apesar da guerra, dos destroços, dos horrores e corpos empilhados, do desespero e da falta de compreensão do mundo com as diferenças.</p>
+      <p>Sempre houve uma brecha para o amor. Apesar do mundo.</p>
+      <p>É linda demais essa ideia da poesia como herança. Como algo que se resgata para que sobreviva ao tempo, para que não nos deixe esquecer do passado, de todos que vieram antes e lutaram e tentaram resistir aos absurdos do fascismo, autoritarismo, delírios de poder. É linda demais a ideia de exumar essas histórias, na tentaiva de espelhar o passado nos dias de hoje. Ou o contrário. De conectar o tempo através do desenho do desejo homoafetivo através da palavra. De um papelzinho dobrado no bolso. escrito por um homem apaixonado. Por outro homem, desdobrando esse mesmo papel e encontrando, pela primera vez na vida, um poema escrito para ele, sobre eles.</p>
+      <p>Você já se viu diante de palavras que mudaram a sua vida? Que romperam a barreira dos olhos e entraram na circulação e reviraram os sentidos, questionaram os significados, que sopraram a estrutura, que um milhão de coisas minhas que você jamais vai saber, que um milhão de coisas suas que eu jamais vou imaginar?</p>
+      <p>Lorca ficaria feliz, acho. Eu fiquei.</p>
+    `
+  },
+  {
+    id: "soy-mario",
+    titulo: "Soy Mario",
+    diretor: "Sharon Kleinberg",
+    ano: 2026,
+    imagem: "soy-mario.jpg",
+    texto: `
+      <p>É uma dramaturgia que desafia as convenções sociais para construir uma represntação (possível) sobre identidade, masculinidade e o desejo de constituir uma família. Mario, um taxista trans de 40 anos, vê na gravidez inesperada a possibilidade de realizar o sonho de ser pai, mas essa experiência também o coloca diante de contradições que atravessam sua própria percepção de si.</p>
+      <p>A masculinidade não é apenas uma imposição externa, mas também uma construção de um compromisso, que carrega inseguranças e conflitos particulares. A gravidez irrompe seu corpo masculino, reorganizando certezas que pareciam estabelecidas. Sua jornada para pertencer e se estabelecer diante dos colegas de trabalho e do mundo ao seu redor, precisa se reconfigurar, de dentro para fora.</p>
+      <p>"Soy Mario" procura compreender as ambiguidades de um homem que deseja construir sua própria ideia de família, sem abrir mão da identidade que construiu. Sharon Kleinberg conduz a narrativa para um terreno em que afeto, vulnerabilidade e autonomia se tornam elementos fundamentais, sobre a paternidade e modelos familiares legítimos. As concepções rígidas de gênero aparecem aos olhos de sua mãe, em alguns momentos, mas vem dela também a compreensão cheia de afeto. Da irmã e sobrinha. Os laços familiares são uma rede de apoio fundamental na sua trajetória.</p>
+      <p>Tudo funciona ao redor de Oustin de León. É um ator espetacular, que aprofunda, investiga, atento aos detalhes, muito potente nos conflitos e muito suave na sua relação com a paternidade. Que seja o primeiro de muitos protagonistas.</p>
+    `
+  },
 {
     id: "fjord",
     titulo: "Fjord",
@@ -350,9 +380,9 @@ function cardFilme(filme){
 }
 
 function montarInicio(){
-  // Sempre pega apenas os 4 primeiros filmes da lista.
+  // Sempre pega os 6 filmes mais recentes da lista.
   document.getElementById("inicio-grid").innerHTML =
-    filmes.slice(0,4).map(cardFilme).join("");
+    filmes.slice(0, 6).map(cardFilme).join("");
 }
 
 
