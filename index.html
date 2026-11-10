@@ -180,7 +180,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="arquivo" class="pagina">
   <h2 class="titulo-pagina">Arquivo</h2>
-  <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
+  <p class="subtitulo-pagina">Todas as notas, organizadas por ano.</p>
 
   <div class="busca-arquivo">
     <input
@@ -211,7 +211,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="pagina-critica" class="pagina">
   <div class="critica-conteudo">
-    <div class="tipo">ANOTAÇÃO</div>
+    <div class="tipo">NOTA</div>
     <h2 id="critica-titulo" class="titulo-critica"></h2>
     <p id="critica-dados" class="dados-filme"></p>
     <img id="critica-imagem" class="imagem-critica" src="" alt="">
@@ -371,7 +371,7 @@ function cardFilme(filme){
       <div class="filme-info">
         <h3>${filme.titulo}</h3>
         <p class="diretor">${filme.diretor} | ${filme.ano}</p>
-        <span class="ler-critica">LER →</span>
+        <span class="ler-critica">LER NOTA →</span>
       </div>
     </article>
   `;
@@ -444,7 +444,7 @@ function buscarFilmes(){
   montarArquivo(anoSelecionado);
 }
 
-function mostrarPagina(nome){
+function mostrarPagina(nome, atualizarUrl = true){
   document.querySelectorAll(".pagina").forEach(p => p.classList.remove("ativa"));
   document.getElementById(nome).classList.add("ativa");
 
@@ -452,10 +452,15 @@ function mostrarPagina(nome){
   const menu = document.getElementById("menu-" + nome);
   if(menu) menu.classList.add("ativo");
 
+  if(atualizarUrl && nome !== "pagina-critica"){
+    const urlLimpa = window.location.pathname;
+    history.pushState({pagina:nome}, "", urlLimpa);
+  }
+
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function abrirCritica(id){
+function abrirCritica(id, atualizarUrl = true){
   const filme = filmes.find(f => f.id === id);
   if(!filme) return;
 
@@ -481,7 +486,14 @@ function abrirCritica(id){
       indiceAtual >= filmes.length - 1 ? "none" : "";
   }
 
-  mostrarPagina("pagina-critica");
+  mostrarPagina("pagina-critica", false);
+
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("filme", id);
+    history.pushState({filme:id}, "", url);
+  }
 }
 
 function voltarPagina(){
@@ -498,9 +510,22 @@ function proximaCritica(){
   abrirCritica(filmes[indice + 1].id);
 }
 
+function carregarPeloEndereco(){
+  const parametros = new URLSearchParams(window.location.search);
+  const id = parametros.get("filme");
+
+  if(id && filmes.some(filme => filme.id === id)){
+    abrirCritica(id, false);
+  }else{
+    mostrarPagina("inicio", false);
+  }
+}
+
+window.addEventListener("popstate", carregarPeloEndereco);
+
 montarInicio();
 montarArquivo();
-mostrarPagina("inicio");
+carregarPeloEndereco();
 
 </script>
 </body>
