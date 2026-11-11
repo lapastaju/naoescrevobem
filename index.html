@@ -130,6 +130,31 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   margin-bottom:48px;
 }
 
+
+/* LISTAS */
+.lista-homenagem{max-width:900px;margin:-8px auto 30px;font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray);font-style:italic}
+.lista-homenagem a{color:var(--gray);text-decoration:none;border-bottom:1px solid var(--yellow)}
+.lista-homenagem a:hover{color:var(--yellow)}
+.lista-destaque{max-width:900px;margin:10px auto 0}
+.lista-card{background:var(--panel);border-left:5px solid var(--yellow);padding:32px;cursor:pointer;transition:.2s}
+.lista-card:hover{transform:translateY(-3px)}
+.lista-card .lista-etiqueta{font-family:Arial,sans-serif;letter-spacing:4px;color:var(--yellow);font-size:.8rem;font-weight:bold}
+.lista-card h3{font-family:Arial,sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;margin:12px 0}
+.lista-card p{font-family:"Courier New",monospace;color:var(--gray)}
+.lista-ver{display:inline-block;margin-top:22px;color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold}
+.lista-conteudo{max-width:900px;margin:auto}
+.lista-intro{font-family:"Courier New",monospace;color:var(--gray);margin-bottom:38px}
+.ranking-lista{border-top:1px solid var(--line)}
+.item-ranking{display:grid;grid-template-columns:86px 82px 1fr;gap:22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.numero-ranking{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:2.1rem;letter-spacing:-1px}
+.poster-ranking{width:82px;height:116px;background:#171717;border:1px solid #333;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-family:Arial,sans-serif;font-size:.72rem;line-height:1.1;color:#777}
+.poster-ranking img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
+.ranking-info h3{font-family:Arial,sans-serif;font-size:1.55rem;line-height:1.1;margin-bottom:7px}
+.ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)}
+.ranking-info p{font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray)}
+.ranking-info .tem-anotacao{display:inline-block;margin-top:10px;color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold}
+@media(max-width:600px){.item-ranking{grid-template-columns:46px 64px 1fr;gap:13px}.poster-ranking{width:64px;height:92px}.numero-ranking{font-size:1.5rem}.ranking-info h3{font-size:1.18rem}.lista-card{padding:24px}}
+
 </style>
 </head>
 
@@ -150,6 +175,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
     <nav>
       <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
       <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">Arquivo</a>
+      <a onclick="mostrarPagina('listas')" id="menu-listas">Listas</a>
       <a onclick="mostrarPagina('sobre')" id="menu-sobre">Sobre</a>
     </nav>
   </div>
@@ -180,7 +206,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="arquivo" class="pagina">
   <h2 class="titulo-pagina">Arquivo</h2>
-  <p class="subtitulo-pagina">Todas as notas, organizadas por ano.</p>
+  <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
 
   <div class="busca-arquivo">
     <input
@@ -194,6 +220,26 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
   <div id="anos" class="anos"></div>
   <div id="arquivo-lista"></div>
+</section>
+
+
+<section id="listas" class="pagina">
+  <h2 class="titulo-pagina">Listas</h2>
+  <p class="subtitulo-pagina">Rankings, obsessões e filmes que continuam comigo.</p>
+  <p class="lista-homenagem">Tudo por causa do <a href="https://filmesdochico.com.br/" target="_blank" rel="noopener noreferrer">Chico Fireman</a>.</p>
+  <div id="listas-grid" class="lista-destaque"></div>
+</section>
+
+<section id="pagina-lista" class="pagina">
+  <div class="lista-conteudo">
+    <div class="tipo">LISTA</div>
+    <h2 id="lista-titulo" class="titulo-critica"></h2>
+    <p id="lista-subtitulo" class="lista-intro"></p>
+    <div id="lista-ranking" class="ranking-lista"></div>
+    <div class="navegacao-critica">
+      <a class="botao" onclick="voltarPagina()">← VOLTAR</a>
+    </div>
+  </div>
 </section>
 
 <section id="sobre" class="pagina">
@@ -211,7 +257,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="pagina-critica" class="pagina">
   <div class="critica-conteudo">
-    <div class="tipo">NOTA</div>
+    <div class="tipo">ANOTAÇÃO</div>
     <h2 id="critica-titulo" class="titulo-critica"></h2>
     <p id="critica-dados" class="dados-filme"></p>
     <img id="critica-imagem" class="imagem-critica" src="" alt="">
@@ -361,6 +407,65 @@ const filmes = [
 
 ];
 
+
+const listas = [
+  {
+    id: "top-10-festival-do-rj-2026",
+    etiqueta: "TOP 10",
+    titulo: "Festival do RJ 2026",
+    subtitulo: "Dez filmes que ficaram comigo.",
+    filmes: [
+      {titulo:"Club Kid", diretor:"Jordan Firstman"},
+      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra"},
+      {titulo:"Covarde", diretor:"Lukas Dhont"},
+      {titulo:"Elefantes na Névoa", diretor:"Abinash Bikram Shah"},
+      {titulo:"Vicentina Pede Desculpas", diretor:"Gabriel Martins"},
+      {titulo:"Djinn Wedding", diretor:"Ferit Karahan"},
+      {titulo:"Rose", diretor:"Markus Schleinzer"},
+      {titulo:"Jim Queen", diretor:"Marco Nguyen, Nicolas Athané"},
+      {titulo:"Primavera", diretor:"Rostislav Kirpicenko"},
+      {titulo:"Funk", diretor:"Aly Muritiba"}
+    ]
+  }
+];
+
+function montarListas(){
+  document.getElementById("listas-grid").innerHTML = listas.map(lista => `
+    <article class="lista-card" onclick="abrirLista('${lista.id}')">
+      <div class="lista-etiqueta">${lista.etiqueta}</div>
+      <h3>${lista.titulo}</h3>
+      <p>${lista.subtitulo}</p>
+      <span class="lista-ver">VER LISTA →</span>
+    </article>
+  `).join("");
+}
+
+function abrirLista(id, atualizarUrl = true){
+  const lista = listas.find(l => l.id === id);
+  if(!lista) return;
+  paginaAnterior = "listas";
+  document.getElementById("lista-titulo").textContent = lista.titulo;
+  document.getElementById("lista-subtitulo").textContent = lista.subtitulo;
+  document.getElementById("lista-ranking").innerHTML = lista.filmes.map((filme, i) => `
+    <article class="item-ranking">
+      <div class="numero-ranking">${String(i+1).padStart(2,"0")}</div>
+      <div class="poster-ranking">${filme.titulo}</div>
+      <div class="ranking-info">
+        <h3 class="${filme.criticaId ? 'link-critica' : ''}" ${filme.criticaId ? `onclick="abrirCritica('${filme.criticaId}')"` : ''}>${filme.titulo}</h3>
+        <p>${filme.diretor}</p>
+        ${filme.criticaId ? '<span class="tem-anotacao">LER ANOTAÇÃO →</span>' : ''}
+      </div>
+    </article>
+  `).join("");
+  mostrarPagina("pagina-lista", false);
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("lista", id);
+    history.pushState({lista:id}, "", url);
+  }
+}
+
 let paginaAnterior = "inicio";
 let filmeAtualId = null;
 
@@ -371,7 +476,7 @@ function cardFilme(filme){
       <div class="filme-info">
         <h3>${filme.titulo}</h3>
         <p class="diretor">${filme.diretor} | ${filme.ano}</p>
-        <span class="ler-critica">LER NOTA →</span>
+        <span class="ler-critica">LER →</span>
       </div>
     </article>
   `;
@@ -512,10 +617,13 @@ function proximaCritica(){
 
 function carregarPeloEndereco(){
   const parametros = new URLSearchParams(window.location.search);
-  const id = parametros.get("filme");
+  const filmeId = parametros.get("filme");
+  const listaId = parametros.get("lista");
 
-  if(id && filmes.some(filme => filme.id === id)){
-    abrirCritica(id, false);
+  if(filmeId && filmes.some(filme => filme.id === filmeId)){
+    abrirCritica(filmeId, false);
+  }else if(listaId && listas.some(lista => lista.id === listaId)){
+    abrirLista(listaId, false);
   }else{
     mostrarPagina("inicio", false);
   }
@@ -525,6 +633,7 @@ window.addEventListener("popstate", carregarPeloEndereco);
 
 montarInicio();
 montarArquivo();
+montarListas();
 carregarPeloEndereco();
 
 </script>
