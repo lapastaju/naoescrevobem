@@ -175,7 +175,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
     <nav>
       <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
       <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">Arquivo</a>
-      <a onclick="mostrarPagina('listas')" id="menu-listas">Listas</a>
+      <a href="?pagina=listas" onclick="mostrarPagina('listas')" id="menu-listas">Listas</a>
       <a onclick="mostrarPagina('sobre')" id="menu-sobre">Sobre</a>
     </nav>
   </div>
@@ -619,8 +619,11 @@ function carregarPeloEndereco(){
   const parametros = new URLSearchParams(window.location.search);
   const filmeId = parametros.get("filme");
   const listaId = parametros.get("lista");
+  const pagina = parametros.get("pagina");
 
-  if(filmeId && filmes.some(filme => filme.id === filmeId)){
+  if(pagina === "listas"){
+    mostrarPagina("listas", false);
+  }else if(filmeId && filmes.some(filme => filme.id === filmeId)){
     abrirCritica(filmeId, false);
   }else if(listaId && listas.some(lista => lista.id === listaId)){
     abrirLista(listaId, false);
