@@ -148,7 +148,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 .item-ranking{display:grid;grid-template-columns:86px 82px 1fr;gap:22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
 .numero-ranking{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:2.1rem;letter-spacing:-1px}
 .poster-ranking{width:82px;height:116px;background:#171717;border:1px solid #333;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-family:Arial,sans-serif;font-size:.72rem;line-height:1.1;color:#777}
-.poster-ranking img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
+.poster-ranking img{width:100%;height:100%;object-fit:cover}
 .ranking-info h3{font-family:Arial,sans-serif;font-size:1.55rem;line-height:1.1;margin-bottom:7px}
 .ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)}
 .ranking-info p{font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray)}
@@ -416,11 +416,11 @@ const listas = [
     subtitulo: "Dez filmes que ficaram comigo.",
     filmes: [
       {titulo:"Club Kid", diretor:"Jordan Firstman", imagem:"https://static.filmvandaag.nl/covers/original/151000/151952.jpg?v=2&width=800"},
-      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra", imagem:"https://www.impawards.com/intl/spain/2026/posters/la_bola_negra_ver4.jpg"},
-      {titulo:"Covarde", diretor:"Lukas Dhont", imagem:"https://m.media-amazon.com/images/M/MV5BYjE2ZjUyNDQtMGUzNS00YTNjLTg3YzMtMDJhMTc4YTE2NGVhXkEyXkFqcGc%40._V1_.jpg"},
+      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra", imagem:"la-bola-negra.webp"},
+      {titulo:"Covarde", diretor:"Lukas Dhont", imagem:"coward.jpg"},
       {titulo:"Elefantes na Névoa", diretor:"Abinash Bikram Shah", imagem:"https://tr.web.img3.acsta.net/img/55/2b/552b5326c8e9e4719db1c6e1afe8142f.jpg"},
       {titulo:"Vicentina Pede Desculpas", diretor:"Gabriel Martins", imagem:"https://images.ctfassets.net/4cd45et68cgf/1uIdMmbelcamPBs0JkiD60/d82cd87b283dfb4ee204f0287227bb44/pt_br_vicentina_pede_desculpas_main_festivals_-_journey_4_x_5__v__1080px1350p_rgb_theatricalprepre_1.jpg?w=2000"},
-      {titulo:"Djinn Wedding", diretor:"Ferit Karahan", imagem:"https://pbs.twimg.com/media/HNwcAiKWMAA1eKa.jpg"},
+      {titulo:"Djinn Wedding", diretor:"Ferit Karahan", imagem:"djinn-wedding.jpg"},
       {titulo:"Rose", diretor:"Markus Schleinzer", imagem:"https://websitedownloadspiffl.s3.amazonaws.com/film_assets/156_ROSE/003_SocialMedia/Carousel_press/Jetzt/ROSE_carousel_press_1_jetzt_4x5_1.png"},
       {titulo:"Jim Queen", diretor:"Marco Nguyen, Nicolas Athané", imagem:"https://www.thejokersfilms.com/app/uploads/2025/12/jq_posterweb_BD-scaled.jpg"},
       {titulo:"Primavera", diretor:"Rostislav Kirpicenko", imagem:"primavera.jpg"},
@@ -449,7 +449,7 @@ function abrirLista(id, atualizarUrl = true){
   document.getElementById("lista-ranking").innerHTML = lista.filmes.map((filme, i) => `
     <article class="item-ranking">
       <div class="numero-ranking">${String(i+1).padStart(2,"0")}</div>
-      <div class="poster-ranking"><img src="${filme.imagem}" alt="Pôster de ${filme.titulo}" loading="lazy" onerror="this.parentElement.innerHTML='&lt;span&gt;Imagem indisponível&lt;/span&gt;'"> </div>
+      <div class="poster-ranking">${filme.imagem ? `<img src="${filme.imagem}" alt="Pôster de ${filme.titulo}">` : filme.titulo}</div>
       <div class="ranking-info">
         <h3 class="${filme.criticaId ? 'link-critica' : ''}" ${filme.criticaId ? `onclick="abrirCritica('${filme.criticaId}')"` : ''}>${filme.titulo}</h3>
         <p>${filme.diretor}</p>
