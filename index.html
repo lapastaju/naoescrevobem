@@ -171,8 +171,9 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 #busca-minimos::placeholder{color:var(--white);opacity:.7}
 #busca-minimos:focus{border-bottom-color:var(--yellow)}
 .minimos-arquivo{max-width:900px;margin:10px auto 0;border-top:1px solid var(--line)}
-.minimo-item{display:block;padding:22px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.minimo-item h3{color:var(--yellow);font-family:Arial,sans-serif;font-size:.9rem;line-height:1.2}
+.minimo-item{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.minimo-item h3{color:var(--yellow);font-family:Arial,sans-serif;font-size:1.05rem;line-height:1.2}
+.ler-minimo{color:var(--yellow);font-family:Arial,sans-serif;font-size:.8rem;white-space:nowrap}
 .minimo-item:hover h3{color:var(--white)}
 
 .minimo-abertura{display:flex;align-items:center;gap:32px;max-width:780px;margin:0 auto 35px}
@@ -272,6 +273,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   <div class="minimos-arquivo">
     <a class="minimo-item" onclick="abrirMinimo('o-ceu-de-suely')">
       <h3>O CÉU DE SUELY</h3>
+      <span class="ler-minimo">LER →</span>
     </a>
   </div>
 </section>
