@@ -214,17 +214,17 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
     <nav>
       <div class="menu-principal">
-        <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
-        <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">ARQUIVO</a>
-        <a onclick="mostrarPagina('listas')" id="menu-listas">LISTAS</a>
-        <a onclick="mostrarPagina('sobre')" id="menu-sobre">SOBRE</a>
+        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">Início</a>
+        <a href="#arquivo" onclick="mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
+        <a href="#listas" onclick="mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
+        <a href="#sobre" onclick="mostrarPagina('sobre'); return false;" id="menu-sobre">SOBRE</a>
       </div>
       <div class="menu-secundario">
-        <a onclick="mostrarPagina('minimos-obvios')" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
+        <a href="#minimos-obvios" onclick="mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
         <span class="menu-separador">|</span>
-        <a onclick="mostrarPagina('midia-fisica')" id="menu-midia-fisica">MÍDIA FÍSICA</a>
+        <a href="#midia-fisica" onclick="mostrarPagina('midia-fisica'); return false;" id="menu-midia-fisica">MÍDIA FÍSICA</a>
         <span class="menu-separador">|</span>
-        <a onclick="mostrarPagina('nostalgia')" id="menu-nostalgia">NOSTALGIA</a>
+        <a href="#nostalgia" onclick="mostrarPagina('nostalgia'); return false;" id="menu-nostalgia">NOSTALGIA</a>
       </div>
     </nav>
   </div>
@@ -859,8 +859,10 @@ function mostrarPagina(nome, atualizarUrl = true){
   if(menu) menu.classList.add("ativo");
 
   if(atualizarUrl && nome !== "pagina-critica"){
-    const urlLimpa = window.location.pathname;
-    history.pushState({pagina:nome}, "", urlLimpa);
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.hash = "#" + nome;
+    history.pushState({pagina:nome}, "", url);
   }
 
   window.scrollTo({top:0,behavior:"smooth"});
@@ -935,11 +937,14 @@ function carregarPeloEndereco(){
   }else if(nostalgiaId && nostalgias.some(item => item.id === nostalgiaId)){
     abrirNostalgia(nostalgiaId, false);
   }else{
-    mostrarPagina("inicio", false);
+    const paginaHash = window.location.hash.replace("#", "");
+    const paginasValidas = ["inicio","arquivo","listas","sobre","minimos-obvios","midia-fisica","nostalgia"];
+    mostrarPagina(paginasValidas.includes(paginaHash) ? paginaHash : "inicio", false);
   }
 }
 
 window.addEventListener("popstate", carregarPeloEndereco);
+window.addEventListener("hashchange", carregarPeloEndereco);
 
 montarInicio();
 montarArquivo();
