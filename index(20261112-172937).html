@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Não Escrevo Bem — Mas continuo escrevendo.</title>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
+:root{
+  --bg:#070707; --panel:#111; --yellow:#f2cf00;
+  --white:#f5f5f0; --gray:#aaa; --line:#2a2a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:Georgia,"Times New Roman",serif;line-height:1.7}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+header{background:#050505;border-bottom:3px solid var(--yellow)}
+.header-inner{max-width:1400px;margin:auto;min-height:155px;padding:20px 38px;display:flex;align-items:center;gap:24px}
+.rotoscopia{width:145px;height:112px;object-fit:contain;object-position:center;filter:none;mix-blend-mode:normal;flex:0 0 auto}
+.marca{flex:0 1 auto;min-width:0}
+.marca h1{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.25rem,3vw,3.05rem);font-weight:600;letter-spacing:.8px;line-height:.95;white-space:nowrap;text-transform:uppercase}
+.marca p{margin-top:10px;color:#f1ede3;font-family:"Courier New",monospace;font-size:clamp(.78rem,1.35vw,1.05rem);letter-spacing:1px}
+nav{margin-left:auto;display:flex;align-items:center;gap:0;font-family:Georgia,"Times New Roman",serif;font-size:.84rem;font-weight:bold;text-transform:uppercase;white-space:nowrap}
+nav a{cursor:pointer;padding:0 17px;border-left:1px solid var(--yellow)}
+nav a:first-child{border-left:0}
+nav a:hover,nav a.ativo{color:var(--yellow)}
+
+main{max-width:1200px;margin:auto;padding:45px 30px 70px}
+.pagina{display:none;animation:aparecer .3s ease}
+.pagina.ativa{display:block}
+@keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.titulo-pagina{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.75rem,2.35vw,2.45rem);font-weight:600;letter-spacing:.8px;line-height:.95;margin-bottom:6px;text-transform:uppercase}
+#inicio .titulo-pagina{margin-bottom:28px}
+.subtitulo-pagina{font-family:"Courier New",monospace;margin-bottom:35px}
+.grid-filmes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.filme-card{background:var(--panel);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden;cursor:pointer;transition:.2s}
+.filme-card:hover{transform:translateY(-4px)}
+.filme-card img{width:100%;height:100%;min-height:280px;object-fit:cover;filter:grayscale(100%)}
+.filme-info{padding:28px 24px;display:flex;flex-direction:column;justify-content:center}
+.filme-info h3{color:var(--yellow);font-family:Arial,sans-serif;font-size:1.7rem;line-height:1.1;margin-bottom:8px}
+.diretor{font-family:"Courier New",monospace;font-size:.8rem;margin-bottom:20px}
+.ler-critica{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:.9rem}
+
+.em-breve{margin-top:50px;padding-top:35px;border-top:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:35px}
+.poster-breve{width:145px;height:210px;object-fit:cover;border:2px solid var(--white)}
+.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:6px;font-size:2.3rem}
+.linha-amarela{width:110px;height:4px;background:var(--yellow);margin:12px 0 18px}
+.botao{display:inline-block;padding:12px 24px;border:2px solid var(--yellow);color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;text-transform:uppercase;cursor:pointer;transition:.2s}
+.botao:hover{background:var(--yellow);color:#000}
+.centro{text-align:center;margin-top:42px}
+
+.busca-arquivo{margin:28px 0 22px}
+.busca-arquivo input{width:100%;background:#0d0d0d;color:var(--white);border:1px solid var(--yellow);padding:15px 18px;font-family:"Courier New",monospace;font-size:1rem;outline:none}
+.busca-arquivo input:focus{box-shadow:0 0 0 2px rgba(242,207,0,.18)}
+.busca-arquivo input::placeholder{color:#888}
+.anos{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.ano-btn{background:transparent;color:var(--white);border:1px solid var(--white);padding:8px 20px;cursor:pointer}
+.ano-btn.ativo,.ano-btn:hover{background:var(--yellow);color:#000;border-color:var(--yellow)}
+.arquivo-ano{margin-top:32px}
+.arquivo-ano h2{border-bottom:2px solid var(--yellow);padding-bottom:8px;font-family:Arial,sans-serif}
+.arquivo-item{display:grid;grid-template-columns:210px 1fr auto;gap:24px;align-items:center;border-bottom:1px solid var(--yellow);padding:10px 0;cursor:pointer}
+.arquivo-item img{width:210px;height:105px;object-fit:cover;filter:grayscale(100%)}
+.arquivo-item h3{color:var(--yellow);font-family:Arial,sans-serif;font-size:1.3rem}
+.arquivo-item p{font-family:"Courier New",monospace;font-size:.8rem}
+.seta{color:var(--yellow);font-size:2rem;font-family:Arial,sans-serif}
+
+.sobre-imagem{width:100%;max-height:420px;object-fit:cover;filter:grayscale(100%);margin:20px 0 35px}
+.sobre-texto{max-width:800px;margin:auto;border-left:5px solid var(--yellow);padding-left:30px;font-size:1.2rem}
+.sobre-texto strong{color:var(--yellow)}
+
+.critica-conteudo{max-width:900px;margin:auto}
+.tipo{display:inline-block;font-family:Arial,sans-serif;letter-spacing:5px;border-bottom:4px solid var(--yellow);padding-bottom:5px;margin-bottom:15px}
+.titulo-critica{color:var(--yellow);font-family:Arial,sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:.95;margin-bottom:15px}
+.dados-filme{font-family:"Courier New",monospace;font-size:1rem;margin-bottom:25px}
+.imagem-critica{width:100%;max-height:600px;object-fit:cover;filter:grayscale(100%);margin-bottom:35px}
+.texto-critica{max-width:780px;margin:auto;border-left:5px solid var(--yellow);padding-left:35px;font-size:1.15rem}
+.texto-critica p{margin-bottom:25px}
+.texto-critica p:first-child::first-letter{color:var(--yellow);float:left;font-size:5rem;line-height:.75;padding-right:12px;font-weight:bold}
+.navegacao-critica{margin-top:60px;display:flex;justify-content:space-between;gap:15px}
+
+footer{border-top:1px solid var(--line);padding:30px;text-align:center}
+.redes{display:flex;justify-content:center;gap:28px;font-family:Arial,sans-serif;font-size:.9rem;font-weight:bold}
+.redes a:hover{color:var(--yellow)}
+.separador{color:var(--yellow)}
+
+@media(max-width:800px){
+  .header-inner{min-height:auto;flex-wrap:wrap;padding:18px 20px;gap:14px}
+  .rotoscopia{width:78px;height:70px}
+  .marca h1{font-size:clamp(1.9rem,8vw,3rem);letter-spacing:-1px;white-space:normal}
+  .marca p{font-size:.7rem;letter-spacing:.5px}
+  nav{width:100%;justify-content:space-between;gap:0;font-size:.66rem}
+  nav a{padding:0 8px}
+  main{padding:30px 18px 50px}
+  .grid-filmes{grid-template-columns:1fr}
+  .em-breve{gap:20px}
+  .breve-texto h2{font-size:1.7rem;letter-spacing:4px}
+  .arquivo-item{grid-template-columns:105px 1fr auto;gap:12px}
+  .arquivo-item img{width:105px;height:80px}
+  .arquivo-item h3{font-size:1rem}
+  .sobre-texto,.texto-critica{padding-left:20px;font-size:1.05rem}
+  .redes{font-size:.72rem;gap:14px}
+}
+
+.sobre-texto p{margin:0 0 28px}
+.sobre-texto .assinatura-sobre{margin-top:52px;margin-bottom:0;color:var(--yellow)}
+
+
+.sobre-texto p:not(.assinatura-sobre){
+  text-align:justify;
+  text-justify:inter-word;
+}
+
+
+.sobre-texto a{color:var(--yellow);text-decoration:none;border-bottom:1px solid var(--yellow)}
+
+/* Leitura das notas */
+.critica-texto p,
+.texto-critica p{
+  text-align:justify;
+  text-justify:inter-word;
+  margin:0 0 28px;
+  line-height:1.85;
+}
+
+
+/* Respiro entre EM DESTAQUE e os filmes, igual ao espaço após a linha antes de EM BREVE */
+#inicio .titulo-pagina{
+  margin-bottom:35px;
+}
+
+
+/* LISTAS */
+.lista-homenagem{max-width:900px;margin:-8px auto 30px;font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray);font-style:italic}
+.lista-homenagem a{color:var(--gray);text-decoration:none;border-bottom:1px solid var(--yellow)}
+.lista-homenagem a:hover{color:var(--yellow)}
+.lista-destaque{max-width:900px;margin:10px auto 0}
+.lista-card{background:var(--panel);border-left:5px solid var(--yellow);padding:32px;cursor:pointer;transition:.2s}
+.lista-card:hover{transform:translateY(-3px)}
+.lista-card .lista-etiqueta{font-family:Arial,sans-serif;letter-spacing:4px;color:var(--yellow);font-size:.8rem;font-weight:bold}
+.lista-card h3{font-family:Arial,sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;margin:12px 0}
+.lista-card p{font-family:"Courier New",monospace;color:var(--gray)}
+.lista-ver{display:inline-block;margin-top:22px;color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold}
+.lista-conteudo{max-width:900px;margin:auto}
+.lista-intro{font-family:"Courier New",monospace;color:var(--gray);margin-bottom:38px}
+.ranking-lista{border-top:1px solid var(--line)}
+.item-ranking{display:grid;grid-template-columns:86px 82px 1fr;gap:22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.numero-ranking{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:2.1rem;letter-spacing:-1px}
+.poster-ranking{width:82px;height:116px;background:#171717;border:1px solid #333;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-family:Arial,sans-serif;font-size:.72rem;line-height:1.1;color:#777}
+.poster-ranking img{width:100%;height:100%;object-fit:cover}
+.ranking-info h3{font-family:Arial,sans-serif;font-size:1.55rem;line-height:1.1;margin-bottom:7px}
+.ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)}
+.ranking-info p{font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray)}
+.ranking-info .tem-anotacao{display:inline-block;margin-top:10px;color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold}
+@media(max-width:600px){.item-ranking{grid-template-columns:46px 64px 1fr;gap:13px}.poster-ranking{width:64px;height:92px}.numero-ranking{font-size:1.5rem}.ranking-info h3{font-size:1.18rem}.lista-card{padding:24px}}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="rotoscopia"
+      src="camera-header-meio-termo.png"
+      alt="Câmera cinematográfica">
+
+    <div class="marca">
+      <h1>NÃO ESCREVO BEM</h1>
+      <p>Mas continuo escrevendo.</p>
+    </div>
+
+    <nav>
+      <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
+      <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">ARQUIVO</a>
+      <a onclick="mostrarPagina('listas')" id="menu-listas">LISTAS</a>
+      <a onclick="mostrarPagina('sobre')" id="menu-sobre">SOBRE</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section id="inicio" class="pagina ativa">
+  <h2 class="titulo-pagina">Em destaque</h2>
+  <div id="inicio-grid" class="grid-filmes"></div>
+
+  <div class="em-breve">
+    <!-- TROQUE O PÔSTER E O TEXTO AQUI -->
+    <img class="poster-breve"
+      src="eu-vou-ter-saudades-de-voce.jpg"
+      alt="Eu Vou Ter Saudades de Você — Em breve">
+    <div class="breve-texto">
+      <h2>EM BREVE</h2>
+      <div class="linha-amarela"></div>
+    </div>
+  </div>
+
+  <div class="centro">
+  </div>
+</section>
+
+
+
+<section id="arquivo" class="pagina">
+  <h2 class="titulo-pagina">ARQUIVO</h2>
+  <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
+
+  <div class="busca-arquivo">
+    <input
+      type="search"
+      id="campo-busca"
+      placeholder="Buscar filme, diretor ou ano..."
+      oninput="buscarFilmes()"
+      autocomplete="off"
+    >
+  </div>
+
+  <div id="anos" class="anos"></div>
+  <div id="arquivo-lista"></div>
+</section>
+
+
+<section id="listas" class="pagina">
+  <h2 class="titulo-pagina">LISTAS</h2>
+  <p class="subtitulo-pagina">Rankings, obsessões e filmes que continuam comigo.</p>
+  <p class="lista-homenagem">Tudo por causa do <a href="https://filmesdochico.com.br/" target="_blank" rel="noopener noreferrer">Chico Fireman</a>.</p>
+  <div id="listas-grid" class="lista-destaque"></div>
+</section>
+
+<section id="pagina-lista" class="pagina">
+  <div class="lista-conteudo">
+    <div class="tipo">LISTA</div>
+    <h2 id="lista-titulo" class="titulo-critica"></h2>
+    <p id="lista-subtitulo" class="lista-intro"></p>
+    <div id="lista-ranking" class="ranking-lista"></div>
+    <div class="navegacao-critica">
+      <a class="botao" onclick="voltarPagina()">← VOLTAR</a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="pagina">
+  <h2 class="titulo-pagina">SOBRE</h2>
+  <div class="sobre-texto">
+    <p>Lá em casa sempre teve cinema. Quando éramos crianças, eu me lembro de assistir Os Trapalhões, mas é uma lembrança vaga de correria, pipoca e pouca atenção. Um pouco mais tarde, papai me carregava para os saudosos cinemas de rua do Méier e da Tijuca. Curtindo a vida adoidado, Os Goonies, De volta para o futuro, A pequena loja dos horrores, E.T., entre tantos outros, mapeou o final da minha infância e inseriu definitivamente os filmes na minha rotina.</p>
+
+    <p>Na adolescência, papai abriu uma vídeo-locadora. Eu ia fazer 14 anos e tinha centenas de filmes ao meu alcance. Transitamos do VHS para o DVD. Do DVD para o bluray. Perdemos o fôlego na era dos streamings e torrents. A loja fechou 25 anos depois. Os filmes permaneceram.</p>
+
+    <p>Quando eu comecei a compreender a minha relação com a escrita, me pareceu natural que o cinema viesse junto. O <a href="https://minimosobvios.blogspot.com/" target="_blank" rel="noopener noreferrer">Mínimos Óbvios</a> me auxiliou nas crônicas e contos. Aqui a idéia é estender a relação diretamente com os filmes. Profundamente particular. Mas ao alcance da troca, nas discordâncias e nas similaridades.</p>
+
+    <p class="assinatura-sobre">Egídio La Pasta Jr | RJ | Brasil</p>
+  </div>
+</section>
+
+<section id="pagina-critica" class="pagina">
+  <div class="critica-conteudo">
+    <div class="tipo">ANOTAÇÃO</div>
+    <h2 id="critica-titulo" class="titulo-critica"></h2>
+    <p id="critica-dados" class="dados-filme"></p>
+    <img id="critica-imagem" class="imagem-critica" src="" alt="">
+    <div id="critica-texto" class="texto-critica"></div>
+
+    <div class="navegacao-critica">
+      <a class="botao" onclick="voltarPagina()">← VOLTAR</a>
+      <a class="botao" onclick="proximaCritica()">PRÓXIMO →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="redes">
+    <a href="https://www.instagram.com/nao.escrevobem/" target="_blank" rel="noopener noreferrer">◎ INSTAGRAM</a>
+    <span class="separador">|</span>
+    <a href="https://letterboxd.com/lapastaju/" target="_blank" rel="noopener noreferrer">●●● LETTERBOXD</a>
+    <span class="separador">|</span>
+    <a href="mailto:lapastaju@gmail.com">✉ CONTATO</a>
+  </div>
+</footer>
+
+<script>
+
+/* ==========================================================
+   A PARTE MAIS IMPORTANTE PARA VOCÊ
+
+   TODOS OS FILMES SÃO CADASTRADOS SOMENTE AQUI.
+
+   Para adicionar um novo filme, copie um bloco inteiro e
+   altere: id, titulo, diretor, ano, imagem e texto.
+
+   O site organiza automaticamente:
+   - INÍCIO: os 6 filmes mais recentes
+   - ARQUIVO: TODOS os filmes
+
+   Quando você adicionar um novo filme no topo,
+   o sétimo filme sai do Início automaticamente,
+   mas continua guardado no Arquivo.
+
+   IMPORTANTE:
+   Coloque o filme mais novo NO TOPO da lista.
+   ========================================================== */
+
+const filmes = [
+  {
+    id: "primetime",
+    titulo: "Primetime",
+    diretor: "Lance Oppenheim",
+    ano: 2026,
+    imagem: "primetime.jpg",
+    texto: `
+      <p>“Se você soubesse quem você é.<br>Até onde vai a sua fé<br>O que você faria?<br>Pagaria pra ver?”</p>
+      <p>Em algum momento da internet, há alguns anos, passou por mim um ou outro corte desse programa e eu bloqueei. Me constrangia na abordagem. Me dava ódio/nojo dos homens, pela burrice, pela falta de noção, pela ausência completa de civilidade. Vendo o filme, me veio rapidamente a associação e eu pressenti que ia ser uma experiência desconfortável.</p>
+      <p>A televisão, pós Big Brother, com carta branca para explorar os limites do sensacionalismo, compreende que não precisa inventar monstros: basta descobrir como iluminá-los. ‘To catch a predator’ nasce de uma promessa, simples, de expor criminosos, mas a fronteira entre ‘serviço público’, vingança e entretenimento se torna difícil de definir. É um show de horrores que transforma crime, medo e humilhação em audiência. Jornalismo? Entretenimento?</p>
+      <p>O formato do programa obedecia a um roteiro bastante previsível: diante dos suspeitos, o apresentador Chris Hansen (Pattisnon com sangue nos olhos) recuperava e lia integralmente as mensagens de conteúdo sexual trocadas pela internet, intercalando a exposição com comentários, notas de ironia, provocações. Antes de sua entrada em cena, porém, os homens eram conduzidos a situações cuidadosamente preparadas. Sem perceber que estavam sendo gravados, muitos eram estimulados pelos atores que assumiam falsas identidades a avançar nas conversas. Assim, quando Hansen finalmente surgia, o constrangimento já estava instalado e a armadilha televisiva pronta para ser transformada em espetáculo.</p>
+      <p>É um momento de popularidade, finalmente para o apresentador. Ele ganha o horário principal da grade da emissora. E esse homem se perde na persona de justiceiro, progressivamente, contaminado pela própria imagem que precisa sustentar diante das câmeras. Mas não dá para carregar a bandeja da moral e bons costumes quando o teto é de vidro. Essa escalada desse cara, essa ambição descontrolada, coloca ele num lugar de predador tão voraz quando os que ele instiga. E paga-se um preço.</p>
+      <p>Merrit Wever, por quem sou apaixonado, faz a produtora. Ela é a rede de segurança da equipe, embora compreenda os mecanismos de como funciona seu programa, de como consegue administrar o ego do apresentador, do quanto o horror da humanidade é necessário para que ela coloque o programa no ar. Sua última fala é uma observação cruel sobre o seu ofício e arrisco que ela funciona como uma rede elástica, que não vê problema moral algum em extrapolar os limites, mas funciona como contenção e suporte incondicional ao protagonista. Puta performance.</p>
+      <p>Skyler Gisondo faz Dan, o jovem ator que cai de paraquedas no programa, enxergando naquela oportunidade uma porta de entrada para a carreira artística, mas aos poucos percebe que a engrenagem é bastante perversa. É admirável como ele constrói a transição do entusiasmo para compreensões muito duras sobre seu trabalho. De como a admiração pelo apresentador encontra espaço para seu crescimento profissional, mas também da dimensão das diversas formas de manipulação. É outra performance muito bem desenhada, inteligente e que revela muito sobre o protagonista.</p>
+      <p>Pattinson compreende esse cara de ponta a ponta. É das melhores atuações dele, talhada para a temporada (e parece muito ciente disso), com grandes momentos, num trabalho onde o tempo de compreensão é muito importante para seu desenvolvimento, muito bem definido e defendido. Tem muita garra nessa obstinação a trezentos por hora. Entra fácil em qualquer lista de melhor ator do ano. Meu deus, escrevi para caralho.</p>
+      <p>E é importante observar como a linguagem da televisão é importante para a narrativa. Em como a fotografia abraça o estúdio, captura o veículo. E quando o filme pede (e permite), a estética cinematográfica se impõe lindamente. Vou elaborar melhor futuramente, mas deixo como observação.</p>
+    `
+  },
+  {
+    id: "predators",
+    titulo: "Predators",
+    diretor: "David Osit",
+    ano: 2025,
+    arquivoAno: 2026,
+    imagem: "predators.jpg",
+    texto: `
+      <p>‘Primetime’ já sinaliza algumas engrenagens moralmente questionáveis ao redor das escolhas do apresentador Chris Hansen e sua obstinação em enquadrar criminosos em flagrante. O documentário retorna ao universo de ‘To Catch a Predator' interessado menos em reconstituir a história do programa, mas em investigar a complexa estrutura que existia por trás de sua aparente simplicidade. A televisão produzia semanalmente uma operação infalível: identificar, confrontar, expor e prender. O documentário, porém, parece querer desmontar esse mecanismo, revelando camadas de encenação, preparação e performance para que aquele encontro diante das câmeras produzisse o efeito esperado. É televisão, oras. Mas a qualquer custo?</p>
+      <p>Aqui desloca-se a atenção para quem construía a narrativa. 'Predators' observa os bastidores de um show que precisava transformar situações reais em acontecimentos televisivos e, nesse processo, questiona os limites éticos de quem controla a câmera. Não se trata de suavizar a gravidade das acusações, mas de reconhecer que a forma escolhida para enfrentá-las também produz consequências. O documentário encontra um incômodo nesse espaço delicado entre a necessidade de responsabilizar e o poder de transformar o julgamento em um produto.</p>
+      <p>A lógica do tribunal nunca desapareceu. Ela se potencializou de forma violenta e agressiva. A exposição pública, a investigação conduzida diante de uma câmera e o desejo coletivo de acompanhar a queda de alguém continuam ocupando um espaço central na redes sociais, agora com menos mediação. Então, é interessante como ele divide o documentário e elabora que a permanência de uma determinada maneira de consumir ficou ainda mais exigente. E cruel.</p>
+      <p>Osit constrói, assim, um documentário sobre a permanência de uma determinada maneira de olhar. O público não é apenas testemunha dessas histórias, mas parte fundamental para que elas continuem existindo. Porque há consumo. E o desejo de condenar. É uma reflexão sobre nossa relação com a vigilância, o julgamento imediato e a exposição como forma de vingança. Depois a gente desliga a TV e vai dormir. Antes era só no horário nobre das emissoras. Hoje, em tempo integral.</p>
+    `
+  },
+  {
+    id: "la-bola-negra",
+    titulo: "La Bola Negra",
+    diretor: "Javier Ambrossi, Javier Calvo",
+    ano: 2026,
+    imagem: "la-bola-negra-home.webp",
+    texto: `
+      <p>Há em mim, desde os anos 1990, um pesar profundo sobre o tanto de vidas perdidas pela aids. Provavelmente porque foi a epidemia mais violenta que eu presenciei no início da minha vida jovem, já me compreendendo um cara viado, o Tom Hanks definhando tomando vinho e ouvindo ópera, ganhando um oscar e milhares de pessoas morrendo, tendo suas vidas interrompidas. Gerações de atores, escritores, artistas de inúmeras áreas, cujas contribuições poderiam ser expressivas, plurais, inclusivas para o avanço e a permanência da cultura queer. Eu lamento tanto esse lapso, esse apagar de homens e mulheres, vozes, corpos, ideias, poesia. É importante repetir: a poesia.</p>
+      <p>Aqui, uma epopeia. Literal, esse abraço na palavra escrita, nos grandes feitos heróicos através da história, que insiste em erradicar, enterrar e assassinar a coragem. Existe um peso incomensurável nas coisas que o tempo decide deixar inacabadas. Eis uma tentativa de ecoar e honrar a continuidade dos afetos. Herdar a luta de gerações, muitas delas apagadas porque o amor entre homens era um ato de resistência quase suicida, se não houvesse cuidado e silêncio.</p>
+      <p>A narrativa se divide e se conecta através de três momentos cruciais da história espanhola, acompanhando personagens cujos destinos ecoam uns nos outros. E é delicioso quando os encaixes começam a dar forma e sentido às conexões, que começam 1932, 1937 (durante a Guerra Civil Espanhola) e 2017.</p>
+      <p>Em 1932, o filme captura a fragilidade de uma juventude que ousa sonhar em meio a estruturas sociais rígidas e castradoras, simbolizadas pela metáfora de uma votação secreta que dá nome à obra, onde bastava um único voto com a bola preta para banir a existência de alguém dentro daquele grupo. Anos mais tarde, em 1937, o cenário se corrói pelo fogo cruzado da Guerra Civil, transformando radicalmente a vida de Sebastián, onde o filme lindamente começa. Em 2017, essas histórias retornam, como uma herança familiar que liga os fios, que reconecta e acende todas as luzes sobre o passado. Sobre o amor. Sobre homens que amavam homens, apesar da guerra, dos destroços, dos horrores e corpos empilhados, do desespero e da falta de compreensão do mundo com as diferenças.</p>
+      <p>Sempre houve uma brecha para o amor. Apesar do mundo.</p>
+      <p>É linda demais essa ideia da poesia como herança. Como algo que se resgata para que sobreviva ao tempo, para que não nos deixe esquecer do passado, de todos que vieram antes e lutaram e tentaram resistir aos absurdos do fascismo, autoritarismo, delírios de poder. É linda demais a ideia de exumar essas histórias, na tentaiva de espelhar o passado nos dias de hoje. Ou o contrário. De conectar o tempo através do desenho do desejo homoafetivo através da palavra. De um papelzinho dobrado no bolso. escrito por um homem apaixonado. Por outro homem, desdobrando esse mesmo papel e encontrando, pela primera vez na vida, um poema escrito para ele, sobre eles.</p>
+      <p>Você já se viu diante de palavras que mudaram a sua vida? Que romperam a barreira dos olhos e entraram na circulação e reviraram os sentidos, questionaram os significados, que sopraram a estrutura, que um milhão de coisas minhas que você jamais vai saber, que um milhão de coisas suas que eu jamais vou imaginar?</p>
+      <p>Lorca ficaria feliz, acho. Eu fiquei.</p>
+    `
+  },
+  {
+    id: "soy-mario",
+    titulo: "Soy Mario",
+    diretor: "Sharon Kleinberg",
+    ano: 2026,
+    imagem: "soy-mario.jpg",
+    texto: `
+      <p>É uma dramaturgia que desafia as convenções sociais para construir uma represntação (possível) sobre identidade, masculinidade e o desejo de constituir uma família. Mario, um taxista trans de 40 anos, vê na gravidez inesperada a possibilidade de realizar o sonho de ser pai, mas essa experiência também o coloca diante de contradições que atravessam sua própria percepção de si.</p>
+      <p>A masculinidade não é apenas uma imposição externa, mas também uma construção de um compromisso, que carrega inseguranças e conflitos particulares. A gravidez irrompe seu corpo masculino, reorganizando certezas que pareciam estabelecidas. Sua jornada para pertencer e se estabelecer diante dos colegas de trabalho e do mundo ao seu redor, precisa se reconfigurar, de dentro para fora.</p>
+      <p>"Soy Mario" procura compreender as ambiguidades de um homem que deseja construir sua própria ideia de família, sem abrir mão da identidade que construiu. Sharon Kleinberg conduz a narrativa para um terreno em que afeto, vulnerabilidade e autonomia se tornam elementos fundamentais, sobre a paternidade e modelos familiares legítimos. As concepções rígidas de gênero aparecem aos olhos de sua mãe, em alguns momentos, mas vem dela também a compreensão cheia de afeto. Da irmã e sobrinha. Os laços familiares são uma rede de apoio fundamental na sua trajetória.</p>
+      <p>Tudo funciona ao redor de Oustin de León. É um ator espetacular, que aprofunda, investiga, atento aos detalhes, muito potente nos conflitos e muito suave na sua relação com a paternidade. Que seja o primeiro de muitos protagonistas.</p>
+    `
+  },
+{
+    id: "fjord",
+    titulo: "Fjord",
+    diretor: "Cristian Mungiu",
+    ano: 2026,
+    imagem: "fjord.jpg",
+    texto: `
+      <p>A diferença é apenas a diferença, porra.</p>
+      <p>É um filme que trabalha no limite boa parte dele. Ele opera num terreno instável, desconfortável, inconsistente. O que começa como a história de uma família que tenta reconstruir a vida em uma pequena comunidade norueguesa, logo se revela apto para um conflito mais amplo, envolvendo religião, imigração, educação e os limites da intervenção do Estado.</p>
+      <p>A chegada de um casal conservador e seus cinco filhos a uma pequena comunidade norueguesa coloca em choque diferentes valores, especialmente quando surgem suspeitas sobre a forma como aquelas crianças são criadas. Com a chegada do Conselho Tutelar, há um deslocamento abrupto da certeza. A maneira como tudo é conduzido parece legítima, mas é também impregnada de preconceitos. A escalada da defesa da liberdade religiosa não serve como justificativa para encobrir relações de violência. E os pais reconhecem o fato. Mas as professoras se atém a um único fato isolado, seguindo os protocolos, mas indiferentes às consequências.</p>
+      <p>É desconfortável não conseguir escolher um lado. Cadê o meu direito de julgar impiedosamente? Cristian Mungiu constrói uma história em que as aparências, as crenças e até mesmo as boas intenções mudam de significado o tempo todo. O que não é aceitável duela com o que tem que ser combatido.</p>
+      <p>A paisagem fria e aquelas montanhas enormes que parecem engolir aquela pequena cidade parece ampliar a distância entre as pessoas, entre suas diferenças culturais, religiosas, principalmente em como elas lidam com o cuidado. A intimidade da família passa a pertencer ao olhar da comunidade, das instituições, das convicções.</p>
+      <p>Há afeto e controle, proteção e diferentes tipos de violência, preocupação e preconceito convivendo no mesmo espaço. Num embate silencioso, civilizado. E tem aquela última cena, num sopro de afeto esgarçado, diante da balsa que parte em fuga e que me pula uma pulga interrogação: menino, mas era sobre isso? E tudo se repensa. Renate Reinsve na primeira reunião, sendo informada de tudo. Sebastian Stan num trabalho de contenção dificílimo de manter. Só o reconheci nos créditos.</p>
+    `
+  },
+
+
+  {
+    id: "flesh",
+    titulo: "Flesh & Fuel",
+    diretor: "Pierre le Gall",
+    ano: 2026,
+    imagem: "https://images.mubicdn.net/images/film/470825/cache-1126176-1776107446/image-w1280.jpg?size=800x",
+    texto: `
+    <p>O cinema queer parece estar descobrindo, cada vez mais, o desejo que circula pelas estradas e pelos espaços tradicionalmente associados à masculinidade dos caminhoneiros. Se em 'El Caminho' (David Pablos, 2025) acompanhávamos um gay trambiqueiro em fuga dos homens que enganou, até que o acaso o coloca diante de alguém com quem surge uma química inesperada, 'Flesh &amp; Fuel' amplia esse universo e desloca o interesse do filme para outra dimensão do afeto.</p>
+    
+    <p>Aqui não há um jogo de encenação na manutenção da performance da masculinidade. Ambos, de forma reservada, lidam bem com sua sexualidade. Ela não precisa ser constantemente disfarçada, negada ou omitida: simplesmente existe. E, em momentos pontuais, o filme deixa claro que essa também é uma informação que atravessa suas relações familiares, recebida com naturalidade e carinho. O conflito já foi superado. Embora sejam heteronormativos, solteiros, sempre em movimento, na estrada, buscando prazer nos poucos intervalos, de forma furtiva. Até que cruzam os caminhos. Como transformar atração em vínculo quando a própria vida é organizada pelo trânsito, pela distância e pela necessidade permanente de partir?</p>
+    
+    <p>É curioso e difícil porque revela a solidão de quem conhece tão bem o trajeto. De quem sabe ler mapas, atalhos, estradas. Mas se perde de si mesmo. De quem conhece a responsabilidade, reconhece do que abre mão e parece seguir, enfrentando, porque até aquele momento, estava confortável jogar o jogo. A chegada de Bartosz altera o percurso sem oferecer o gabarito. ‘Por que você fez isso’, ele pergunta e Étienne responde ‘Eu não sei’. Há uma ternura muito particular na tentativa desses dois homens de inventar espaço para o amor. É um lance de romper fronteiras mesmo, por mais ordinário que possa parecer.</p>
+    
+    <p>Eu me lembrei de ‘Plata Quemada’, um dos filmes da minha vida, porque se utiliza da masculinidade para estilhaçar a masculinidade. Ou o que pensamos que seja ela.</p>
+  `
+  },
+
+  {
+    id: "ana",
+    titulo: "Ana, en passant",
+    diretor: "Fernanda Salgado",
+    ano: 2026,
+    imagem: "https://static.mostra.org/_img/_filmes/12048-large.jpg",
+    texto: `
+    <p>Acho bonito que ele parta de uma carta para construir uma reflexão sobre memória, ancestralidade e pertencimento. Depois da morte da avó, Ana chega a Belo Horizonte seguindo pistas deixadas pela família e encontra Alice, uma mulher que não apenas ocupa o apartamento que deveria ser seu, mas também guarda uma semelhança física desconcertante com ela, embaralhando as fronteiras entre identidade, herança e continuidade. É um campo aberto, de indefinição, em que as relações entre passado e presente, lembrança e realidade, identidade e duplicidade permanecem não só abertas, mas em movimento.</p>
+    
+    <p>A experiência afetiva de mulheres negras e suas relações com a memória familiar e as marcas de uma ancestralidade que lhes oferece a geografia e uma força que continua produzindo vínculos no presente. E no futuro.</p>
+    
+    <p>Visualmente, é bacana a combinação de técnicas e fotografias. A rotoscopia convive com desenhos, colagens, recortes e intervenções que conferem às imagens uma beleza artesanal, que parece reproduzir o próprio funcionamento da memória: fragmentos, sobreposições e a transformação do mapa.</p>
+    
+    <p>Muito bonito. E de brinde, Zezé Motta.</p>
+  `
+  },
+
+  {
+    id: "test",
+    titulo: "Test",
+    diretor: "Sam McConnell",
+    ano: 2026,
+    imagem: "https://m.media-amazon.com/images/M/MV5BZDJjMGMyMTQtM2VkNy00NmFhLTgwMzQtYWY2NTIyMTlkMWNkXkEyXkFqcGc@._V1_.jpg",
+    texto: `
+    <p>Há algo especialmente triste em Eddie, o protagonista de Test: ele parece ter aprendido a transformar qualquer angústia em disciplina. Vivendo em uma pequena cidade de Ohio e sob a influência constante de uma mãe nem tão devota e emocionalmente dependente, o jovem encontra no fisiculturismo uma última promessa de futuro. Seu corpo se torna projeto, profissão e quase uma forma de fé. Porém, ele não consegue ganhar as competições locais. O que o qualificaria como profissional e o projetaria.</p>
+    
+    <p>Sam McConnell não demora a mostrar o preço dessa obsessão. A aproximação com o treinador Mike oferece a Eddie uma chance concreta de avançar na carreira, ampliando o universo de possibilidades para as drogas de performance e exigências cada vez pesadas. Ao mesmo tempo, nasce entre os dois uma atração que confronta a educação religiosa e toda a masculinidade construída num ambiente como esses.</p>
+    
+    <p>Não é um filme que compreende na sexualidade algum tipo de libertação. Mas é um filme atado às suas convicções, diante das contradições de um homem em busca da perfeição. Eu ia usar honesto aqui, mas é um conceito bastante flutuante. Ele é um jovem que não se trai diante dos acontecimentos. Mesmo que eles balancem a sua base.</p>
+    
+    <p>Não subverte o tema, ainda mais nos dias de hoje, onde o universo virtual e a exploração do corpos paga as contas e transforma realidades, mas é uma leitura muito potente desse universo. O fisiculturismo é um espaço de exposição e, ao mesmo tempo, de camuflagem. Ele constrói e trabalha o corpo para ser visto, admirado e desejado, mas passa boa parte do tempo tentando esconder o que sente. É uma analise bacana sobre masculinidade: talvez a armadura que alguém constrói para sobreviver seja também aquilo que mais dificulta sua liberdade.</p>
+    
+    <p>Eu amo o final. Entre fé, desejo e ambição, o que poderia ser apenas uma narrativa de superação esportiva ganha outra dimensão: a competição passa a importar menos do que aquilo que Eddie está disposto a sacrificar para chegar até ela. Tammy Blanchard magnífica. E Brock Yurich, espetacular na jornada desse protagonista.</p>
+  `
+  },
+
+];
+
+
+const listas = [
+  {
+    id: "top-10-festival-do-rj-2026",
+    etiqueta: "TOP 10",
+    titulo: "Festival do RJ 2026",
+    subtitulo: "Dez filmes que ficaram comigo.",
+    filmes: [
+      {titulo:"Club Kid", diretor:"Jordan Firstman", imagem:"https://static.filmvandaag.nl/covers/original/151000/151952.jpg?v=2&width=800"},
+      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra", imagem:"la-bola-negra.jpg"},
+      {titulo:"Covarde", diretor:"Lukas Dhont", imagem:"coward.jpg"},
+      {titulo:"Elefantes na Névoa", diretor:"Abinash Bikram Shah", imagem:"https://tr.web.img3.acsta.net/img/55/2b/552b5326c8e9e4719db1c6e1afe8142f.jpg"},
+      {titulo:"Vicentina Pede Desculpas", diretor:"Gabriel Martins", imagem:"https://images.ctfassets.net/4cd45et68cgf/1uIdMmbelcamPBs0JkiD60/d82cd87b283dfb4ee204f0287227bb44/pt_br_vicentina_pede_desculpas_main_festivals_-_journey_4_x_5__v__1080px1350p_rgb_theatricalprepre_1.jpg?w=2000"},
+      {titulo:"Djinn Wedding", diretor:"Ferit Karahan", imagem:"djinn-wedding.jpg"},
+      {titulo:"Rose", diretor:"Markus Schleinzer", imagem:"rose.jpg"},
+      {titulo:"Jim Queen", diretor:"Marco Nguyen, Nicolas Athané", imagem:"https://www.thejokersfilms.com/app/uploads/2025/12/jq_posterweb_BD-scaled.jpg"},
+      {titulo:"Primavera", diretor:"Rostislav Kirpicenko", imagem:"primavera.jpg"},
+      {titulo:"Funk", diretor:"Aly Muritiba", imagem:"funk.png"}
+    ]
+  }
+];
+
+function montarListas(){
+  document.getElementById("listas-grid").innerHTML = listas.map(lista => `
+    <article class="lista-card" onclick="abrirLista('${lista.id}')">
+      <div class="lista-etiqueta">${lista.etiqueta}</div>
+      <h3>${lista.titulo}</h3>
+      <p>${lista.subtitulo}</p>
+      <span class="lista-ver">VER LISTA →</span>
+    </article>
+  `).join("");
+}
+
+function abrirLista(id, atualizarUrl = true){
+  const lista = listas.find(l => l.id === id);
+  if(!lista) return;
+  paginaAnterior = "listas";
+  document.getElementById("lista-titulo").textContent = lista.titulo;
+  document.getElementById("lista-subtitulo").textContent = lista.subtitulo;
+  document.getElementById("lista-ranking").innerHTML = lista.filmes.map((filme, i) => `
+    <article class="item-ranking">
+      <div class="numero-ranking">${String(i+1).padStart(2,"0")}</div>
+      <div class="poster-ranking">${filme.imagem ? `<img src="${filme.imagem}" alt="Pôster de ${filme.titulo}">` : filme.titulo}</div>
+      <div class="ranking-info">
+        <h3 class="${filme.criticaId ? 'link-critica' : ''}" ${filme.criticaId ? `onclick="abrirCritica('${filme.criticaId}')"` : ''}>${filme.titulo}</h3>
+        <p>${filme.diretor}</p>
+        ${filme.criticaId ? '<span class="tem-anotacao">LER ANOTAÇÃO →</span>' : ''}
+      </div>
+    </article>
+  `).join("");
+  mostrarPagina("pagina-lista", false);
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("lista", id);
+    history.pushState({lista:id}, "", url);
+  }
+}
+
+let paginaAnterior = "inicio";
+let filmeAtualId = null;
+
+function cardFilme(filme){
+  return `
+    <article class="filme-card" onclick="abrirCritica('${filme.id}')">
+      <img src="${filme.imagem}" alt="${filme.titulo}">
+      <div class="filme-info">
+        <h3>${filme.titulo}</h3>
+        <p class="diretor">${filme.diretor} | ${filme.ano}</p>
+        <span class="ler-critica">LER →</span>
+      </div>
+    </article>
+  `;
+}
+
+function montarInicio(){
+  // Sempre pega os 6 filmes mais recentes da lista.
+  document.getElementById("inicio-grid").innerHTML =
+    filmes.slice(0, 8).map(cardFilme).join("");
+}
+
+
+function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
+  const campo = document.getElementById("campo-busca");
+  const termo = termoBusca !== null
+    ? termoBusca.toLowerCase().trim()
+    : (campo ? campo.value.toLowerCase().trim() : "");
+
+  const anosUnicos = [...new Set(filmes.map(f => f.arquivoAno || f.ano))].sort((a,b)=>b-a);
+
+  document.getElementById("anos").innerHTML =
+    `<button class="ano-btn ${anoSelecionado==="Todos"?"ativo":""}" onclick="montarArquivo('Todos')">Todos</button>` +
+    anosUnicos.map(ano =>
+      `<button class="ano-btn ${anoSelecionado===ano?"ativo":""}" onclick="montarArquivo(${ano})">${ano}</button>`
+    ).join("");
+
+  let lista = filmes.filter(filme => {
+    const correspondeAno = anoSelecionado === "Todos" || (filme.arquivoAno || filme.ano) === anoSelecionado;
+    const textoPesquisavel = `${filme.titulo} ${filme.diretor} ${filme.ano}`.toLowerCase();
+    const correspondeBusca = !termo || textoPesquisavel.includes(termo);
+    return correspondeAno && correspondeBusca;
+  });
+
+  const grupos = {};
+  lista.forEach(filme => {
+    const anoArquivo = filme.arquivoAno || filme.ano;
+    if(!grupos[anoArquivo]) grupos[anoArquivo] = [];
+    grupos[anoArquivo].push(filme);
+  });
+
+  if(lista.length === 0){
+    document.getElementById("arquivo-lista").innerHTML =
+      `<p class="subtitulo-pagina" style="margin-top:35px">Nenhum filme encontrado.</p>`;
+    return;
+  }
+
+  document.getElementById("arquivo-lista").innerHTML =
+    Object.keys(grupos).sort((a,b)=>b-a).map(ano => `
+      <div class="arquivo-ano">
+        <h2>${ano}</h2>
+        ${grupos[ano].map(filme => `
+          <div class="arquivo-item" onclick="abrirCritica('${filme.id}')">
+            <img src="${filme.imagem}" alt="${filme.titulo}">
+            <div>
+              <h3>${filme.titulo}</h3>
+              <p>${filme.diretor} | ${filme.ano}</p>
+            </div>
+            <span class="seta">→</span>
+          </div>
+        `).join("")}
+      </div>
+    `).join("");
+}
+
+function buscarFilmes(){
+  const anosAtivos = document.querySelector(".ano-btn.ativo");
+  const anoSelecionado = anosAtivos && anosAtivos.textContent !== "Todos"
+    ? Number(anosAtivos.textContent)
+    : "Todos";
+
+  montarArquivo(anoSelecionado);
+}
+
+function mostrarPagina(nome, atualizarUrl = true){
+  document.querySelectorAll(".pagina").forEach(p => p.classList.remove("ativa"));
+  document.getElementById(nome).classList.add("ativa");
+
+  document.querySelectorAll("nav a").forEach(a => a.classList.remove("ativo"));
+  const menu = document.getElementById("menu-" + nome);
+  if(menu) menu.classList.add("ativo");
+
+  if(atualizarUrl && nome !== "pagina-critica"){
+    const urlLimpa = window.location.pathname;
+    history.pushState({pagina:nome}, "", urlLimpa);
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function abrirCritica(id, atualizarUrl = true){
+  const filme = filmes.find(f => f.id === id);
+  if(!filme) return;
+
+  const paginaAtual = document.querySelector(".pagina.ativa");
+  if(paginaAtual && paginaAtual.id !== "pagina-critica"){
+    paginaAnterior = paginaAtual.id;
+  }
+
+  filmeAtualId = id;
+
+  document.getElementById("critica-titulo").textContent = filme.titulo;
+  document.getElementById("critica-dados").textContent =
+    `${filme.diretor} | ${filme.ano}`;
+  document.getElementById("critica-imagem").src = filme.imagem;
+  document.getElementById("critica-imagem").alt = filme.titulo;
+  document.getElementById("critica-texto").innerHTML = filme.texto;
+
+  const indiceAtual = filmes.findIndex(item => item.id === filme.id);
+  const botaoProximo = document.querySelector('[onclick="proximaCritica()"]');
+
+  if(botaoProximo){
+    botaoProximo.style.display =
+      indiceAtual >= filmes.length - 1 ? "none" : "";
+  }
+
+  mostrarPagina("pagina-critica", false);
+
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("filme", id);
+    history.pushState({filme:id}, "", url);
+  }
+}
+
+function voltarPagina(){
+  mostrarPagina(paginaAnterior);
+}
+
+function proximaCritica(){
+  let indice = filmes.findIndex(filme => filme.id === filmeAtualId);
+
+  if(indice === -1 || indice >= filmes.length - 1){
+    return;
+  }
+
+  abrirCritica(filmes[indice + 1].id);
+}
+
+function carregarPeloEndereco(){
+  const parametros = new URLSearchParams(window.location.search);
+  const filmeId = parametros.get("filme");
+  const listaId = parametros.get("lista");
+
+  if(filmeId && filmes.some(filme => filme.id === filmeId)){
+    abrirCritica(filmeId, false);
+  }else if(listaId && listas.some(lista => lista.id === listaId)){
+    abrirLista(listaId, false);
+  }else{
+    mostrarPagina("inicio", false);
+  }
+}
+
+window.addEventListener("popstate", carregarPeloEndereco);
+
+montarInicio();
+montarArquivo();
+montarListas();
+carregarPeloEndereco();
+
+</script>
+</body>
+</html>
