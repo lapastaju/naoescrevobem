@@ -6,7 +6,7 @@
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&display=swap");
 :root{
   --bg:#070707; --panel:#111; --yellow:#f2cf00;
   --white:#f5f5f0; --gray:#aaa; --line:#2a2a2a;
@@ -18,12 +18,12 @@ a{color:inherit;text-decoration:none}
 button{font:inherit}
 
 header{background:#050505;border-bottom:3px solid var(--yellow)}
-.header-inner{max-width:1400px;margin:auto;min-height:155px;padding:20px 38px;display:flex;align-items:center;gap:24px}
-.rotoscopia{width:145px;height:112px;object-fit:contain;object-position:center;filter:none;mix-blend-mode:normal;flex:0 0 auto}
-.marca{flex:0 1 auto;min-width:0}
-.marca h1{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.25rem,3vw,3.05rem);font-weight:600;letter-spacing:.8px;line-height:.95;white-space:nowrap;text-transform:uppercase}
+.header-inner{max-width:1200px;margin:auto;min-height:155px;padding:20px 30px;display:flex;align-items:center;gap:20px}
+.rotoscopia{width:125px;height:100px;object-fit:contain;object-position:center;filter:none;mix-blend-mode:normal;flex:0 0 auto}
+.marca{flex:1;min-width:0}
+.marca h1{color:#d5a43a;font-family:"Cinzel",Georgia,"Times New Roman",serif;font-size:clamp(2.15rem,4.05vw,3.85rem);font-weight:700;letter-spacing:-.7px;line-height:1;white-space:nowrap;text-transform:uppercase;text-shadow:0 1px 0 rgba(255,220,120,.12)}
 .marca p{margin-top:10px;color:#f1ede3;font-family:"Courier New",monospace;font-size:clamp(.78rem,1.35vw,1.05rem);letter-spacing:1px}
-nav{margin-left:auto;display:flex;align-items:center;gap:0;font-family:Georgia,"Times New Roman",serif;font-size:.84rem;font-weight:bold;text-transform:uppercase;white-space:nowrap}
+nav{display:flex;align-items:center;gap:0;font-family:Georgia,"Times New Roman",serif;font-size:.92rem;font-weight:bold;text-transform:uppercase;white-space:nowrap}
 nav a{cursor:pointer;padding:0 17px;border-left:1px solid var(--yellow)}
 nav a:first-child{border-left:0}
 nav a:hover,nav a.ativo{color:var(--yellow)}
@@ -33,8 +33,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .pagina.ativa{display:block}
 @keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.titulo-pagina{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.75rem,2.35vw,2.45rem);font-weight:600;letter-spacing:.8px;line-height:.95;margin-bottom:6px;text-transform:uppercase}
-#inicio .titulo-pagina{margin-bottom:28px}
+.titulo-pagina{color:var(--yellow);font-family:Arial,sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1;margin-bottom:6px}
 .subtitulo-pagina{font-family:"Courier New",monospace;margin-bottom:35px}
 .grid-filmes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .filme-card{background:var(--panel);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden;cursor:pointer;transition:.2s}
@@ -45,10 +44,13 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .diretor{font-family:"Courier New",monospace;font-size:.8rem;margin-bottom:20px}
 .ler-critica{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:.9rem}
 
-.em-breve{margin-top:50px;padding-top:35px;border-top:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:35px}
-.poster-breve{width:145px;height:210px;object-fit:cover;border:2px solid var(--white)}
-.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:6px;font-size:2.3rem}
-.linha-amarela{width:110px;height:4px;background:var(--yellow);margin:12px 0 18px}
+.em-breve{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:22px}
+.breve-texto{display:flex;flex-direction:column;align-items:flex-start}
+.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:4px;font-size:1.45rem;line-height:1;margin:0}
+.linha-amarela{width:72px;height:3px;background:var(--yellow);margin:10px 0 0}
+.breve-banners{display:flex;align-items:center;gap:14px}
+.banner-breve{display:block;width:180px;height:auto;max-height:102px;object-fit:contain;border:0}
+@media(max-width:700px){.em-breve{align-items:flex-start;flex-direction:column;gap:18px}.breve-banners{gap:10px;flex-wrap:wrap}.banner-breve{width:min(42vw,180px)}}
 .botao{display:inline-block;padding:12px 24px;border:2px solid var(--yellow);color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;text-transform:uppercase;cursor:pointer;transition:.2s}
 .botao:hover{background:var(--yellow);color:#000}
 .centro{text-align:center;margin-top:42px}
@@ -127,9 +129,12 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 }
 
 
-/* Respiro entre EM DESTAQUE e os filmes, igual ao espaço após a linha antes de EM BREVE */
-#inicio .titulo-pagina{
-  margin-bottom:35px;
+/* Respiro abaixo de Em Destaque */
+#destaque .titulo-secao,
+.destaque .titulo-secao,
+#destaque h2,
+.destaque h2{
+  margin-bottom:48px;
 }
 
 
@@ -165,19 +170,19 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 <header>
   <div class="header-inner">
     <img class="rotoscopia"
-      src="camera-header-meio-termo.png"
+      src="camera-header-suave.png"
       alt="Câmera cinematográfica">
 
     <div class="marca">
-      <h1>NÃO ESCREVO BEM</h1>
+      <h1>Não Escrevo Bem</h1>
       <p>Mas continuo escrevendo.</p>
     </div>
 
     <nav>
       <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
-      <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">ARQUIVO</a>
-      <a onclick="mostrarPagina('listas')" id="menu-listas">LISTAS</a>
-      <a onclick="mostrarPagina('sobre')" id="menu-sobre">SOBRE</a>
+      <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">Arquivo</a>
+      <a onclick="mostrarPagina('listas')" id="menu-listas">Listas</a>
+      <a onclick="mostrarPagina('sobre')" id="menu-sobre">Sobre</a>
     </nav>
   </div>
 </header>
@@ -189,13 +194,17 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   <div id="inicio-grid" class="grid-filmes"></div>
 
   <div class="em-breve">
-    <!-- TROQUE O PÔSTER E O TEXTO AQUI -->
-    <img class="poster-breve"
-      src="eu-vou-ter-saudades-de-voce.jpg"
-      alt="Eu Vou Ter Saudades de Você — Em breve">
     <div class="breve-texto">
       <h2>EM BREVE</h2>
       <div class="linha-amarela"></div>
+    </div>
+    <div class="breve-banners">
+      <img class="banner-breve"
+        src="coward-sem-barras.jpg"
+        alt="Coward — Em breve">
+      <img class="banner-breve"
+        src="eu-vou-ter-saudades-banner.jpg"
+        alt="Eu Vou Ter Saudades de Você — Em breve">
     </div>
   </div>
 
@@ -206,7 +215,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 <section id="arquivo" class="pagina">
-  <h2 class="titulo-pagina">ARQUIVO</h2>
+  <h2 class="titulo-pagina">Arquivo</h2>
   <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
 
   <div class="busca-arquivo">
@@ -225,7 +234,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 <section id="listas" class="pagina">
-  <h2 class="titulo-pagina">LISTAS</h2>
+  <h2 class="titulo-pagina">Listas</h2>
   <p class="subtitulo-pagina">Rankings, obsessões e filmes que continuam comigo.</p>
   <p class="lista-homenagem">Tudo por causa do <a href="https://filmesdochico.com.br/" target="_blank" rel="noopener noreferrer">Chico Fireman</a>.</p>
   <div id="listas-grid" class="lista-destaque"></div>
@@ -244,7 +253,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 </section>
 
 <section id="sobre" class="pagina">
-  <h2 class="titulo-pagina">SOBRE</h2>
+  <h2 class="titulo-pagina">Sobre</h2>
   <div class="sobre-texto">
     <p>Lá em casa sempre teve cinema. Quando éramos crianças, eu me lembro de assistir Os Trapalhões, mas é uma lembrança vaga de correria, pipoca e pouca atenção. Um pouco mais tarde, papai me carregava para os saudosos cinemas de rua do Méier e da Tijuca. Curtindo a vida adoidado, Os Goonies, De volta para o futuro, A pequena loja dos horrores, E.T., entre tantos outros, mapeou o final da minha infância e inseriu definitivamente os filmes na minha rotina.</p>
 
@@ -307,43 +316,11 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 const filmes = [
   {
-    id: "primetime",
-    titulo: "Primetime",
-    diretor: "Lance Oppenheim",
-    ano: 2026,
-    imagem: "primetime.jpg",
-    texto: `
-      <p>“Se você soubesse quem você é.<br>Até onde vai a sua fé<br>O que você faria?<br>Pagaria pra ver?”</p>
-      <p>Em algum momento da internet, há alguns anos, passou por mim um ou outro corte desse programa e eu bloqueei. Me constrangia na abordagem. Me dava ódio/nojo dos homens, pela burrice, pela falta de noção, pela ausência completa de civilidade. Vendo o filme, me veio rapidamente a associação e eu pressenti que ia ser uma experiência desconfortável.</p>
-      <p>A televisão, pós Big Brother, com carta branca para explorar os limites do sensacionalismo, compreende que não precisa inventar monstros: basta descobrir como iluminá-los. ‘To catch a predator’ nasce de uma promessa, simples, de expor criminosos, mas a fronteira entre ‘serviço público’, vingança e entretenimento se torna difícil de definir. É um show de horrores que transforma crime, medo e humilhação em audiência. Jornalismo? Entretenimento?</p>
-      <p>O formato do programa obedecia a um roteiro bastante previsível: diante dos suspeitos, o apresentador Chris Hansen (Pattisnon com sangue nos olhos) recuperava e lia integralmente as mensagens de conteúdo sexual trocadas pela internet, intercalando a exposição com comentários, notas de ironia, provocações. Antes de sua entrada em cena, porém, os homens eram conduzidos a situações cuidadosamente preparadas. Sem perceber que estavam sendo gravados, muitos eram estimulados pelos atores que assumiam falsas identidades a avançar nas conversas. Assim, quando Hansen finalmente surgia, o constrangimento já estava instalado e a armadilha televisiva pronta para ser transformada em espetáculo.</p>
-      <p>É um momento de popularidade, finalmente para o apresentador. Ele ganha o horário principal da grade da emissora. E esse homem se perde na persona de justiceiro, progressivamente, contaminado pela própria imagem que precisa sustentar diante das câmeras. Mas não dá para carregar a bandeja da moral e bons costumes quando o teto é de vidro. Essa escalada desse cara, essa ambição descontrolada, coloca ele num lugar de predador tão voraz quando os que ele instiga. E paga-se um preço.</p>
-      <p>Merrit Wever, por quem sou apaixonado, faz a produtora. Ela é a rede de segurança da equipe, embora compreenda os mecanismos de como funciona seu programa, de como consegue administrar o ego do apresentador, do quanto o horror da humanidade é necessário para que ela coloque o programa no ar. Sua última fala é uma observação cruel sobre o seu ofício e arrisco que ela funciona como uma rede elástica, que não vê problema moral algum em extrapolar os limites, mas funciona como contenção e suporte incondicional ao protagonista. Puta performance.</p>
-      <p>Skyler Gisondo faz Dan, o jovem ator que cai de paraquedas no programa, enxergando naquela oportunidade uma porta de entrada para a carreira artística, mas aos poucos percebe que a engrenagem é bastante perversa. É admirável como ele constrói a transição do entusiasmo para compreensões muito duras sobre seu trabalho. De como a admiração pelo apresentador encontra espaço para seu crescimento profissional, mas também da dimensão das diversas formas de manipulação. É outra performance muito bem desenhada, inteligente e que revela muito sobre o protagonista.</p>
-      <p>Pattinson compreende esse cara de ponta a ponta. É das melhores atuações dele, talhada para a temporada (e parece muito ciente disso), com grandes momentos, num trabalho onde o tempo de compreensão é muito importante para seu desenvolvimento, muito bem definido e defendido. Tem muita garra nessa obstinação a trezentos por hora. Entra fácil em qualquer lista de melhor ator do ano. Meu deus, escrevi para caralho.</p>
-      <p>E é importante observar como a linguagem da televisão é importante para a narrativa. Em como a fotografia abraça o estúdio, captura o veículo. E quando o filme pede (e permite), a estética cinematográfica se impõe lindamente. Vou elaborar melhor futuramente, mas deixo como observação.</p>
-    `
-  },
-  {
-    id: "predators",
-    titulo: "Predators",
-    diretor: "David Osit",
-    ano: 2025,
-    arquivoAno: 2026,
-    imagem: "predators.jpg",
-    texto: `
-      <p>‘Primetime’ já sinaliza algumas engrenagens moralmente questionáveis ao redor das escolhas do apresentador Chris Hansen e sua obstinação em enquadrar criminosos em flagrante. O documentário retorna ao universo de ‘To Catch a Predator' interessado menos em reconstituir a história do programa, mas em investigar a complexa estrutura que existia por trás de sua aparente simplicidade. A televisão produzia semanalmente uma operação infalível: identificar, confrontar, expor e prender. O documentário, porém, parece querer desmontar esse mecanismo, revelando camadas de encenação, preparação e performance para que aquele encontro diante das câmeras produzisse o efeito esperado. É televisão, oras. Mas a qualquer custo?</p>
-      <p>Aqui desloca-se a atenção para quem construía a narrativa. 'Predators' observa os bastidores de um show que precisava transformar situações reais em acontecimentos televisivos e, nesse processo, questiona os limites éticos de quem controla a câmera. Não se trata de suavizar a gravidade das acusações, mas de reconhecer que a forma escolhida para enfrentá-las também produz consequências. O documentário encontra um incômodo nesse espaço delicado entre a necessidade de responsabilizar e o poder de transformar o julgamento em um produto.</p>
-      <p>A lógica do tribunal nunca desapareceu. Ela se potencializou de forma violenta e agressiva. A exposição pública, a investigação conduzida diante de uma câmera e o desejo coletivo de acompanhar a queda de alguém continuam ocupando um espaço central na redes sociais, agora com menos mediação. Então, é interessante como ele divide o documentário e elabora que a permanência de uma determinada maneira de consumir ficou ainda mais exigente. E cruel.</p>
-      <p>Osit constrói, assim, um documentário sobre a permanência de uma determinada maneira de olhar. O público não é apenas testemunha dessas histórias, mas parte fundamental para que elas continuem existindo. Porque há consumo. E o desejo de condenar. É uma reflexão sobre nossa relação com a vigilância, o julgamento imediato e a exposição como forma de vingança. Depois a gente desliga a TV e vai dormir. Antes era só no horário nobre das emissoras. Hoje, em tempo integral.</p>
-    `
-  },
-  {
     id: "la-bola-negra",
     titulo: "La Bola Negra",
     diretor: "Javier Ambrossi, Javier Calvo",
     ano: 2026,
-    imagem: "la-bola-negra-home.webp",
+    imagem: "la-bola-negra.webp",
     texto: `
       <p>Há em mim, desde os anos 1990, um pesar profundo sobre o tanto de vidas perdidas pela aids. Provavelmente porque foi a epidemia mais violenta que eu presenciei no início da minha vida jovem, já me compreendendo um cara viado, o Tom Hanks definhando tomando vinho e ouvindo ópera, ganhando um oscar e milhares de pessoas morrendo, tendo suas vidas interrompidas. Gerações de atores, escritores, artistas de inúmeras áreas, cujas contribuições poderiam ser expressivas, plurais, inclusivas para o avanço e a permanência da cultura queer. Eu lamento tanto esse lapso, esse apagar de homens e mulheres, vozes, corpos, ideias, poesia. É importante repetir: a poesia.</p>
       <p>Aqui, uma epopeia. Literal, esse abraço na palavra escrita, nos grandes feitos heróicos através da história, que insiste em erradicar, enterrar e assassinar a coragem. Existe um peso incomensurável nas coisas que o tempo decide deixar inacabadas. Eis uma tentativa de ecoar e honrar a continuidade dos afetos. Herdar a luta de gerações, muitas delas apagadas porque o amor entre homens era um ato de resistência quase suicida, se não houvesse cuidado e silêncio.</p>
@@ -449,12 +426,12 @@ const listas = [
     subtitulo: "Dez filmes que ficaram comigo.",
     filmes: [
       {titulo:"Club Kid", diretor:"Jordan Firstman", imagem:"https://static.filmvandaag.nl/covers/original/151000/151952.jpg?v=2&width=800"},
-      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra", imagem:"la-bola-negra.jpg"},
+      {titulo:"La Bola Negra", diretor:"Javier Ambrossi, Javier Calvo", criticaId:"la-bola-negra", imagem:"la-bola-negra.webp"},
       {titulo:"Covarde", diretor:"Lukas Dhont", imagem:"coward.jpg"},
       {titulo:"Elefantes na Névoa", diretor:"Abinash Bikram Shah", imagem:"https://tr.web.img3.acsta.net/img/55/2b/552b5326c8e9e4719db1c6e1afe8142f.jpg"},
       {titulo:"Vicentina Pede Desculpas", diretor:"Gabriel Martins", imagem:"https://images.ctfassets.net/4cd45et68cgf/1uIdMmbelcamPBs0JkiD60/d82cd87b283dfb4ee204f0287227bb44/pt_br_vicentina_pede_desculpas_main_festivals_-_journey_4_x_5__v__1080px1350p_rgb_theatricalprepre_1.jpg?w=2000"},
       {titulo:"Djinn Wedding", diretor:"Ferit Karahan", imagem:"djinn-wedding.jpg"},
-      {titulo:"Rose", diretor:"Markus Schleinzer", imagem:"rose.jpg"},
+      {titulo:"Rose", diretor:"Markus Schleinzer", imagem:"https://websitedownloadspiffl.s3.amazonaws.com/film_assets/156_ROSE/003_SocialMedia/Carousel_press/Jetzt/ROSE_carousel_press_1_jetzt_4x5_1.png"},
       {titulo:"Jim Queen", diretor:"Marco Nguyen, Nicolas Athané", imagem:"https://www.thejokersfilms.com/app/uploads/2025/12/jq_posterweb_BD-scaled.jpg"},
       {titulo:"Primavera", diretor:"Rostislav Kirpicenko", imagem:"primavera.jpg"},
       {titulo:"Funk", diretor:"Aly Muritiba", imagem:"funk.png"}
@@ -518,7 +495,7 @@ function cardFilme(filme){
 function montarInicio(){
   // Sempre pega os 6 filmes mais recentes da lista.
   document.getElementById("inicio-grid").innerHTML =
-    filmes.slice(0, 8).map(cardFilme).join("");
+    filmes.slice(0, 6).map(cardFilme).join("");
 }
 
 
@@ -528,7 +505,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
     ? termoBusca.toLowerCase().trim()
     : (campo ? campo.value.toLowerCase().trim() : "");
 
-  const anosUnicos = [...new Set(filmes.map(f => f.arquivoAno || f.ano))].sort((a,b)=>b-a);
+  const anosUnicos = [...new Set(filmes.map(f => f.ano))].sort((a,b)=>b-a);
 
   document.getElementById("anos").innerHTML =
     `<button class="ano-btn ${anoSelecionado==="Todos"?"ativo":""}" onclick="montarArquivo('Todos')">Todos</button>` +
@@ -537,7 +514,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
     ).join("");
 
   let lista = filmes.filter(filme => {
-    const correspondeAno = anoSelecionado === "Todos" || (filme.arquivoAno || filme.ano) === anoSelecionado;
+    const correspondeAno = anoSelecionado === "Todos" || filme.ano === anoSelecionado;
     const textoPesquisavel = `${filme.titulo} ${filme.diretor} ${filme.ano}`.toLowerCase();
     const correspondeBusca = !termo || textoPesquisavel.includes(termo);
     return correspondeAno && correspondeBusca;
@@ -545,9 +522,8 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
 
   const grupos = {};
   lista.forEach(filme => {
-    const anoArquivo = filme.arquivoAno || filme.ano;
-    if(!grupos[anoArquivo]) grupos[anoArquivo] = [];
-    grupos[anoArquivo].push(filme);
+    if(!grupos[filme.ano]) grupos[filme.ano] = [];
+    grupos[filme.ano].push(filme);
   });
 
   if(lista.length === 0){
