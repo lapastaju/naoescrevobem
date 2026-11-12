@@ -191,6 +191,11 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   .minimo-destaque{font-size:1.05rem}
 }
 
+
+/* Ajuste exclusivo do título Festival do RJ 2026: mesmo padrão visual dos demais títulos */
+.lista-card .lista-titulo-festival{font-size:1.35rem!important;line-height:1.1}
+#pagina-lista .titulo-lista-festival{font-size:clamp(1.6rem,2.2vw,2.2rem)!important;line-height:1.08}
+
 </style>
 </head>
 
@@ -600,7 +605,7 @@ function montarListas(){
   document.getElementById("listas-grid").innerHTML = listas.map(lista => `
     <article class="lista-card" onclick="abrirLista('${lista.id}')">
       <div class="lista-etiqueta">${lista.etiqueta}</div>
-      <h3>${lista.titulo}</h3>
+      <h3 class="${lista.titulo === 'Festival do RJ 2026' ? 'lista-titulo-festival' : ''}">${lista.titulo}</h3>
       <p>${lista.subtitulo}</p>
       <span class="lista-ver">VER LISTA →</span>
     </article>
@@ -612,6 +617,7 @@ function abrirLista(id, atualizarUrl = true){
   if(!lista) return;
   paginaAnterior = "listas";
   document.getElementById("lista-titulo").textContent = lista.titulo;
+  document.getElementById("lista-titulo").classList.toggle("titulo-lista-festival", lista.titulo === "Festival do RJ 2026");
   document.getElementById("lista-subtitulo").textContent = lista.subtitulo;
   document.getElementById("lista-ranking").innerHTML = lista.filmes.map((filme, i) => `
     <article class="item-ranking">
