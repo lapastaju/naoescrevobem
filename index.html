@@ -45,9 +45,10 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .diretor{font-family:"Courier New",monospace;font-size:.8rem;margin-bottom:20px}
 .ler-critica{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:.9rem}
 
-.em-breve{margin-top:50px;padding-top:35px;border-top:1px solid var(--line);display:flex;justify-content:center;align-items:center;gap:35px}
-.poster-breve{width:145px;height:210px;object-fit:cover;border:2px solid var(--white)}
-.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:6px;font-size:2.3rem}
+.em-breve{margin-top:50px;padding-top:35px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:4px;font-size:1.25rem;margin:0}
+.banners-breve{display:flex;gap:16px;align-items:center}
+.banner-breve{width:180px;height:auto;display:block;object-fit:contain}
 .linha-amarela{width:110px;height:4px;background:var(--yellow);margin:12px 0 18px}
 .botao{display:inline-block;padding:12px 24px;border:2px solid var(--yellow);color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;text-transform:uppercase;cursor:pointer;transition:.2s}
 .botao:hover{background:var(--yellow);color:#000}
@@ -96,8 +97,10 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   nav a{padding:0 8px}
   main{padding:30px 18px 50px}
   .grid-filmes{grid-template-columns:1fr}
-  .em-breve{gap:20px}
-  .breve-texto h2{font-size:1.7rem;letter-spacing:4px}
+  .em-breve{gap:12px}
+  .breve-texto h2{font-size:1.05rem;letter-spacing:3px}
+  .banners-breve{gap:10px;flex-wrap:wrap}
+  .banner-breve{width:150px}
   .arquivo-item{grid-template-columns:105px 1fr auto;gap:12px}
   .arquivo-item img{width:105px;height:80px}
   .arquivo-item h3{font-size:1rem}
@@ -189,13 +192,17 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
   <div id="inicio-grid" class="grid-filmes"></div>
 
   <div class="em-breve">
-    <!-- TROQUE O PÔSTER E O TEXTO AQUI -->
-    <img class="poster-breve"
-      src="eu-vou-ter-saudades-de-voce.jpg"
-      alt="Eu Vou Ter Saudades de Você — Em breve">
     <div class="breve-texto">
       <h2>EM BREVE</h2>
       <div class="linha-amarela"></div>
+    </div>
+    <div class="banners-breve">
+      <img class="banner-breve"
+        src="coward-sem-barras.jpg"
+        alt="Coward — Em breve">
+      <img class="banner-breve"
+        src="eu-vou-ter-saudades-banner.jpg"
+        alt="Eu Vou Ter Saudades de Você — Em breve">
     </div>
   </div>
 
