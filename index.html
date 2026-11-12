@@ -6,6 +6,7 @@
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
 :root{
   --bg:#070707; --panel:#111; --yellow:#f2cf00;
   --white:#f5f5f0; --gray:#aaa; --line:#2a2a2a;
@@ -20,7 +21,7 @@ header{background:#050505;border-bottom:3px solid var(--yellow)}
 .header-inner{max-width:1400px;margin:auto;min-height:155px;padding:20px 38px;display:flex;align-items:center;gap:24px}
 .rotoscopia{width:145px;height:112px;object-fit:contain;object-position:center;filter:none;mix-blend-mode:normal;flex:0 0 auto}
 .marca{flex:0 1 auto;min-width:0}
-.marca h1{color:var(--yellow);font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.45rem,3.3vw,3.35rem);font-weight:bold;letter-spacing:-.6px;line-height:.95;white-space:nowrap;text-transform:uppercase}
+.marca h1{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.25rem,3vw,3.05rem);font-weight:600;letter-spacing:.8px;line-height:.95;white-space:nowrap;text-transform:uppercase}
 .marca p{margin-top:10px;color:#f1ede3;font-family:"Courier New",monospace;font-size:clamp(.78rem,1.35vw,1.05rem);letter-spacing:1px}
 nav{margin-left:auto;display:flex;align-items:center;gap:0;font-family:Georgia,"Times New Roman",serif;font-size:.92rem;font-weight:bold;text-transform:uppercase;white-space:nowrap}
 nav a{cursor:pointer;padding:0 17px;border-left:1px solid var(--yellow)}
@@ -32,7 +33,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .pagina.ativa{display:block}
 @keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.titulo-pagina{color:var(--yellow);font-family:Arial,sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1;margin-bottom:6px}
+.titulo-pagina{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2rem,3vw,3.05rem);font-weight:600;letter-spacing:.8px;line-height:.95;margin-bottom:6px;text-transform:uppercase}
 .subtitulo-pagina{font-family:"Courier New",monospace;margin-bottom:35px}
 .grid-filmes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .filme-card{background:var(--panel);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden;cursor:pointer;transition:.2s}
@@ -176,9 +177,9 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
     <nav>
       <a onclick="mostrarPagina('inicio')" id="menu-inicio">Início</a>
-      <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">Arquivo</a>
-      <a onclick="mostrarPagina('listas')" id="menu-listas">Listas</a>
-      <a onclick="mostrarPagina('sobre')" id="menu-sobre">Sobre</a>
+      <a onclick="mostrarPagina('arquivo')" id="menu-arquivo">ARQUIVO</a>
+      <a onclick="mostrarPagina('listas')" id="menu-listas">LISTAS</a>
+      <a onclick="mostrarPagina('sobre')" id="menu-sobre">SOBRE</a>
     </nav>
   </div>
 </header>
@@ -207,7 +208,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 <section id="arquivo" class="pagina">
-  <h2 class="titulo-pagina">Arquivo</h2>
+  <h2 class="titulo-pagina">ARQUIVO</h2>
   <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
 
   <div class="busca-arquivo">
@@ -226,7 +227,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 <section id="listas" class="pagina">
-  <h2 class="titulo-pagina">Listas</h2>
+  <h2 class="titulo-pagina">LISTAS</h2>
   <p class="subtitulo-pagina">Rankings, obsessões e filmes que continuam comigo.</p>
   <p class="lista-homenagem">Tudo por causa do <a href="https://filmesdochico.com.br/" target="_blank" rel="noopener noreferrer">Chico Fireman</a>.</p>
   <div id="listas-grid" class="lista-destaque"></div>
@@ -245,7 +246,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 </section>
 
 <section id="sobre" class="pagina">
-  <h2 class="titulo-pagina">Sobre</h2>
+  <h2 class="titulo-pagina">SOBRE</h2>
   <div class="sobre-texto">
     <p>Lá em casa sempre teve cinema. Quando éramos crianças, eu me lembro de assistir Os Trapalhões, mas é uma lembrança vaga de correria, pipoca e pouca atenção. Um pouco mais tarde, papai me carregava para os saudosos cinemas de rua do Méier e da Tijuca. Curtindo a vida adoidado, Os Goonies, De volta para o futuro, A pequena loja dos horrores, E.T., entre tantos outros, mapeou o final da minha infância e inseriu definitivamente os filmes na minha rotina.</p>
 
