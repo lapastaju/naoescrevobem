@@ -25,7 +25,9 @@ header{background:#050505;border-bottom:3px solid var(--yellow)}
 .marca p{margin-top:10px;color:#f1ede3;font-family:"Courier New",monospace;font-size:clamp(.78rem,1.35vw,1.05rem);letter-spacing:1px}
 nav{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:Georgia,"Times New Roman",serif;font-size:.84rem;font-weight:bold;text-transform:uppercase;white-space:nowrap}
 .menu-principal{display:flex;align-items:center}
-.menu-secundario{width:100%;text-align:center}
+.menu-secundario{width:100%;display:flex;justify-content:center;align-items:center;gap:17px;text-align:center}
+.menu-secundario a{white-space:nowrap}
+.menu-separador{color:var(--yellow)}
 nav a{cursor:pointer;padding:0 17px;border-left:1px solid var(--yellow)}
 .menu-principal a:first-child{border-left:0}
 .menu-secundario a{border-left:0;padding:0}
@@ -166,11 +168,13 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 
 /* MÍNIMOS ÓBVIOS */
-#pagina-minimo .titulo-critica{font-size:clamp(1.8rem,4vw,3rem)}
+#pagina-minimo .titulo-critica,
+#pagina-midia-fisica .titulo-critica,
+#pagina-nostalgia .titulo-critica{font-size:clamp(1.8rem,4vw,3rem)}
 .minimos-busca{max-width:900px;margin:28px auto 18px}
-#busca-minimos{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:12px 0;color:var(--white);font:inherit;outline:none}
-#busca-minimos::placeholder{color:var(--white);opacity:.7}
-#busca-minimos:focus{border-bottom-color:var(--yellow)}
+#busca-minimos,#busca-midia-fisica,#busca-nostalgia{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:12px 0;color:var(--white);font:inherit;outline:none}
+#busca-minimos::placeholder,#busca-midia-fisica::placeholder,#busca-nostalgia::placeholder{color:var(--white);opacity:.7}
+#busca-minimos:focus,#busca-midia-fisica:focus,#busca-nostalgia:focus{border-bottom-color:var(--yellow)}
 .minimos-arquivo{max-width:900px;margin:10px auto 0;border-top:1px solid var(--line)}
 .minimo-item{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);cursor:pointer}
 .minimo-item h3{color:var(--yellow);font-family:Arial,sans-serif;font-size:1.05rem;line-height:1.2}
@@ -212,6 +216,10 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
       </div>
       <div class="menu-secundario">
         <a onclick="mostrarPagina('minimos-obvios')" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
+        <span class="menu-separador">|</span>
+        <a onclick="mostrarPagina('midia-fisica')" id="menu-midia-fisica">MÍDIA FÍSICA</a>
+        <span class="menu-separador">|</span>
+        <a onclick="mostrarPagina('nostalgia')" id="menu-nostalgia">NOSTALGIA</a>
       </div>
     </nav>
   </div>
@@ -265,7 +273,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <section id="minimos-obvios" class="pagina">
   <h2 class="titulo-pagina">MÍNIMOS ÓBVIOS</h2>
-  <p class="subtitulo-pagina">Revisitando o material do meu antigo espaço.</p>
+  <p class="subtitulo-pagina">Revisitando meus contos do antigo blog, que durou de 2007 a 2017.</p>
 
   <div class="minimos-busca">
     <input type="text" id="busca-minimos" placeholder="BUSCAR" oninput="filtrarMinimos()">
@@ -276,6 +284,60 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
       <h3>O CÉU DE SUELY</h3>
       <span class="ler-minimo">LER →</span>
     </a>
+  </div>
+</section>
+
+<section id="midia-fisica" class="pagina">
+  <h2 class="titulo-pagina">MÍDIA FÍSICA</h2>
+  <p class="subtitulo-pagina">Textos sobre os filmes da minha coleção.</p>
+
+  <div class="minimos-busca">
+    <input type="text" id="busca-midia-fisica" placeholder="BUSCAR" oninput="filtrarMidiaFisica()">
+  </div>
+
+  <div class="minimos-arquivo">
+    <a class="minimo-item" onclick="abrirMidiaFisica('em-breve-midia')">
+      <h3>EM BREVE</h3>
+      <span class="ler-minimo">LER →</span>
+    </a>
+  </div>
+</section>
+
+<section id="nostalgia" class="pagina">
+  <h2 class="titulo-pagina">NOSTALGIA</h2>
+  <p class="subtitulo-pagina">O que ficou do que passou.</p>
+
+  <div class="minimos-busca">
+    <input type="text" id="busca-nostalgia" placeholder="BUSCAR" oninput="filtrarNostalgia()">
+  </div>
+
+  <div class="minimos-arquivo">
+    <a class="minimo-item" onclick="abrirNostalgia('em-breve-nostalgia')">
+      <h3>EM BREVE</h3>
+      <span class="ler-minimo">LER →</span>
+    </a>
+  </div>
+</section>
+
+<section id="pagina-midia-fisica" class="pagina">
+  <div class="critica-conteudo">
+    <div class="tipo">MÍDIA FÍSICA</div>
+    <h2 id="midia-fisica-titulo" class="titulo-critica"></h2>
+    <div id="midia-fisica-texto" class="texto-critica"></div>
+    <div class="navegacao-critica">
+      <a class="botao" onclick="voltarMidiaFisica()">← VOLTAR</a>
+    </div>
+  </div>
+</section>
+
+<section id="pagina-nostalgia" class="pagina">
+  <div class="critica-conteudo">
+    <div class="tipo">NOSTALGIA</div>
+    <h2 id="nostalgia-titulo" class="titulo-critica"></h2>
+    <div id="nostalgia-texto" class="texto-critica"></div>
+    <div class="navegacao-critica">
+      <a class="botao" onclick="voltarNostalgia()">← VOLTAR</a>
+    </div>
   </div>
 </section>
 
@@ -712,6 +774,76 @@ function filtrarMinimos(){
   });
 }
 
+const midiasFisicas = [
+  {
+    id: "em-breve-midia",
+    titulo: "EM BREVE",
+    texto: `<p>O primeiro item da coleção será publicado em breve.</p>`
+  }
+];
+
+const nostalgias = [
+  {
+    id: "em-breve-nostalgia",
+    titulo: "EM BREVE",
+    texto: `<p>O primeiro filme desta seção será publicado em breve.</p>`
+  }
+];
+
+function abrirMidiaFisica(id, atualizarUrl = true){
+  const item = midiasFisicas.find(item => item.id === id);
+  if(!item) return;
+
+  document.getElementById("midia-fisica-titulo").textContent = item.titulo;
+  document.getElementById("midia-fisica-texto").innerHTML = item.texto;
+  mostrarPagina("pagina-midia-fisica", false);
+
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("midia", id);
+    history.pushState({midia:id}, "", url);
+  }
+}
+
+function voltarMidiaFisica(){
+  mostrarPagina("midia-fisica");
+}
+
+function abrirNostalgia(id, atualizarUrl = true){
+  const item = nostalgias.find(item => item.id === id);
+  if(!item) return;
+
+  document.getElementById("nostalgia-titulo").textContent = item.titulo;
+  document.getElementById("nostalgia-texto").innerHTML = item.texto;
+  mostrarPagina("pagina-nostalgia", false);
+
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("nostalgia", id);
+    history.pushState({nostalgia:id}, "", url);
+  }
+}
+
+function voltarNostalgia(){
+  mostrarPagina("nostalgia");
+}
+
+function filtrarMidiaFisica(){
+  const termo = document.getElementById("busca-midia-fisica").value.toLowerCase().trim();
+  document.querySelectorAll("#midia-fisica .minimo-item").forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(termo) ? "" : "none";
+  });
+}
+
+function filtrarNostalgia(){
+  const termo = document.getElementById("busca-nostalgia").value.toLowerCase().trim();
+  document.querySelectorAll("#nostalgia .minimo-item").forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(termo) ? "" : "none";
+  });
+}
+
 function mostrarPagina(nome, atualizarUrl = true){
   document.querySelectorAll(".pagina").forEach(p => p.classList.remove("ativa"));
   document.getElementById(nome).classList.add("ativa");
@@ -783,6 +915,8 @@ function carregarPeloEndereco(){
   const filmeId = parametros.get("filme");
   const listaId = parametros.get("lista");
   const minimoId = parametros.get("minimo");
+  const midiaId = parametros.get("midia");
+  const nostalgiaId = parametros.get("nostalgia");
 
   if(filmeId && filmes.some(filme => filme.id === filmeId)){
     abrirCritica(filmeId, false);
@@ -790,6 +924,10 @@ function carregarPeloEndereco(){
     abrirLista(listaId, false);
   }else if(minimoId && minimosObvios.some(item => item.id === minimoId)){
     abrirMinimo(minimoId, false);
+  }else if(midiaId && midiasFisicas.some(item => item.id === midiaId)){
+    abrirMidiaFisica(midiaId, false);
+  }else if(nostalgiaId && nostalgias.some(item => item.id === nostalgiaId)){
+    abrirNostalgia(nostalgiaId, false);
   }else{
     mostrarPagina("inicio", false);
   }
