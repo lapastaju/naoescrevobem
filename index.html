@@ -34,6 +34,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 @keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .titulo-pagina{color:var(--yellow);font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2rem,3vw,3.05rem);font-weight:600;letter-spacing:.8px;line-height:.95;margin-bottom:6px;text-transform:uppercase}
+#inicio .titulo-pagina{margin-bottom:28px}
 .subtitulo-pagina{font-family:"Courier New",monospace;margin-bottom:35px}
 .grid-filmes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .filme-card{background:var(--panel);display:grid;grid-template-columns:1fr 1fr;min-height:280px;overflow:hidden;cursor:pointer;transition:.2s}
@@ -126,12 +127,9 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 }
 
 
-/* Respiro abaixo de Em Destaque */
-#destaque .titulo-secao,
-.destaque .titulo-secao,
-#destaque h2,
-.destaque h2{
-  margin-bottom:48px;
+/* Respiro entre EM DESTAQUE e os filmes, igual ao espaço após a linha antes de EM BREVE */
+#inicio .titulo-pagina{
+  margin-bottom:35px;
 }
 
 
