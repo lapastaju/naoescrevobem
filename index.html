@@ -8,7 +8,7 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
 :root{
-  --bg:#070707; --panel:#111; --yellow:#f2cf00;
+  --bg:#070707; --panel:#111; --yellow:#D4A122;
   --white:#f5f5f0; --gray:#aaa; --line:#2a2a2a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -196,6 +196,107 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 .lista-card .lista-titulo-festival{font-size:1.35rem!important;line-height:1.1}
 #pagina-lista .titulo-lista-festival{font-size:clamp(1.6rem,2.2vw,2.2rem)!important;line-height:1.08}
 
+
+/* PRÉVIA VISUAL: novo cabeçalho e faixa de navegação */
+header{
+  background:#050505;
+  border-bottom:0;
+}
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  min-height:155px;
+  padding:20px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.brand-central{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+}
+.rotoscopia{
+  width:195px;
+  height:112px;
+  object-fit:contain;
+  object-position:center;
+  filter:none;
+  mix-blend-mode:normal;
+  flex:0 0 auto;
+}
+.marca{
+  flex:0 1 auto;
+  min-width:0;
+}
+.menu-faixa{
+  width:100%;
+  background:#D4A122;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+}
+.menu-faixa nav{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:0 30px;
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.84rem;
+  font-weight:bold;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.menu-faixa .menu-principal{
+  width:100%;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0;
+}
+.menu-faixa .menu-principal a{
+  color:#070707;
+  padding:0;
+  border:0;
+  white-space:nowrap;
+  font-weight:700;
+  letter-spacing:.025em;
+  text-transform:uppercase;
+}
+.menu-faixa .menu-principal a:hover,
+.menu-faixa .menu-principal a.ativo{
+  color:#070707;
+  opacity:.68;
+}
+@media(max-width:800px){
+  .header-inner{min-height:auto;padding:18px 20px}
+  .brand-central{gap:14px}
+  .menu-faixa{overflow-x:auto}
+  .menu-faixa nav{min-width:760px;padding:0 20px}
+}
+
+
+/* PRÉVIA: todos os textos clicáveis ficam brancos ao passar o cursor */
+a:hover,
+a:focus,
+a:focus-visible{
+  color:#ffffff !important;
+}
+
+
+
+
+/* Correção visual: INÍCIO com a mesma cor preta dos demais links */
+.menu-faixa .menu-principal #menu-inicio,
+.menu-faixa .menu-principal #menu-inicio:visited,
+.menu-faixa .menu-principal #menu-inicio:active{
+  color:#070707 !important;
+  opacity:1 !important;
+}
+
 </style>
   <meta name="disfora-site-verification" content="bfd05613769b1341d60fe7afbf3e0fde">
   <script src="https://disfora.com/public/disfora.js" async></script>
@@ -210,28 +311,28 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 
 <header>
   <div class="header-inner">
-    <img class="rotoscopia"
-      src="camera-header-meio-termo.png"
-      alt="Câmera cinematográfica">
+    <div class="brand-central">
+      <img class="rotoscopia"
+        src="camera-header-meio-termo.png"
+        alt="Câmera cinematográfica">
 
-    <div class="marca">
-      <h1>NÃO ESCREVO BEM</h1>
-      <p>Mas continuo escrevendo.</p>
+      <div class="marca">
+        <h1>NÃO ESCREVO BEM</h1>
+        <p>Mas continuo escrevendo.</p>
+      </div>
     </div>
+  </div>
 
+  <div class="menu-faixa">
     <nav>
       <div class="menu-principal">
-        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">Início</a>
+        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">INÍCIO</a>
         <a href="#arquivo" onclick="mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
         <a href="#listas" onclick="mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
-        <a href="#sobre" onclick="mostrarPagina('sobre'); return false;" id="menu-sobre">SOBRE</a>
-      </div>
-      <div class="menu-secundario">
         <a href="#minimos-obvios" onclick="mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
-        <span class="menu-separador">|</span>
         <a href="#midia-fisica" onclick="mostrarPagina('midia-fisica'); return false;" id="menu-midia-fisica">MÍDIA FÍSICA</a>
-        <span class="menu-separador">|</span>
         <a href="#nostalgia" onclick="mostrarPagina('nostalgia'); return false;" id="menu-nostalgia">NOSTALGIA</a>
+        <a href="#sobre" onclick="mostrarPagina('sobre'); return false;" id="menu-sobre">SOBRE</a>
       </div>
     </nav>
   </div>
