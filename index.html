@@ -311,6 +311,23 @@ a:focus-visible{
   box-sizing:border-box;
 }
 
+
+/* Apenas para garantir que DESTAQUE tenha o mesmo hover branco dos demais links */
+#menu-inicio:hover,
+#menu-inicio:focus,
+#menu-inicio:focus-visible{
+  color:#ffffff !important;
+}
+
+
+/* Correção: DESTAQUE usa exatamente o mesmo hover branco dos demais links */
+.menu-faixa .menu-principal #menu-inicio:hover,
+.menu-faixa .menu-principal #menu-inicio:focus,
+.menu-faixa .menu-principal #menu-inicio:focus-visible{
+  color:#ffffff !important;
+  opacity:1 !important;
+}
+
 </style>
 </head>
 
@@ -333,7 +350,7 @@ a:focus-visible{
   <div class="menu-faixa">
     <nav>
       <div class="menu-principal">
-        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">INÍCIO</a>
+        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">DESTAQUE</a>
         <a href="#arquivo" onclick="mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
         <a href="#listas" onclick="mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
         <a href="#minimos-obvios" onclick="mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
@@ -832,6 +849,10 @@ function abrirLista(id, atualizarUrl = true){
   }
 }
 
+function voltarLista(){
+  mostrarPagina("listas");
+}
+
 let paginaAnterior = "inicio";
 let filmeAtualId = null;
 
@@ -1098,7 +1119,13 @@ function abrirCritica(id, atualizarUrl = true){
 }
 
 function voltarPagina(){
-  mostrarPagina(paginaAnterior);
+  const indice = filmes.findIndex(filme => filme.id === filmeAtualId);
+
+  if(indice > 0){
+    abrirCritica(filmes[indice - 1].id);
+  }else{
+    mostrarPagina(paginaAnterior || "inicio");
+  }
 }
 
 function proximaCritica(){
