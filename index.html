@@ -143,7 +143,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 .lista-homenagem a{color:var(--gray);text-decoration:none;border-bottom:1px solid var(--yellow)}
 .lista-homenagem a:hover{color:var(--yellow)}
 .lista-destaque{max-width:900px;margin:10px auto 0}
-.lista-card{background:var(--panel);border-left:5px solid var(--yellow);padding:32px;cursor:pointer;transition:.2s}
+.lista-card{background:var(--panel);border-left:5px solid var(--yellow);padding:32px;min-height:266px;box-sizing:border-box;cursor:pointer;transition:.2s}
 .lista-card:hover{transform:translateY(-3px)}
 .lista-card .lista-etiqueta{font-family:Arial,sans-serif;letter-spacing:4px;color:var(--yellow);font-size:.8rem;font-weight:bold}
 .lista-card h3{font-family:Arial,sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;margin:12px 0}
@@ -811,6 +811,24 @@ const filmes = [
 
 const listas = [
   {
+    id: "isso-nao-e-um-top",
+    etiqueta: "Isso não é um top",
+    titulo: "Filmes LGBTQIAPN+ | Parte 1",
+    subtitulo: "Dez filmes que sempre vou rever.",
+    filmes: [
+      {titulo:"Felizes Juntos", diretor:"Wong Kar-Wai", imagem:"felizes-juntos.webp"},
+      {titulo:"A Rainha Diaba", diretor:"Antonio Carlos da Fontoura", imagem:"a-rainha-diaba.jfif"},
+      {titulo:"Os Rapazes da Banda", diretor:"William Friedkin", imagem:"os-rapazes-da-banda.jfif"},
+      {titulo:"Deserto Particular", diretor:"Aly Muritiba", imagem:"deserto-particular.webp"},
+      {titulo:"120 Batimentos por Minuto", diretor:"Robin Campillo", imagem:"120-batimentos-por-minuto.jpg"},
+      {titulo:"Great Freedom", diretor:"Sebastian Meise", imagem:"great-freedom.jpg"},
+      {titulo:"Moonligh", diretor:"Barry Jenkins", imagem:"moonlight.jpg"},
+      {titulo:"Querelle", diretor:"Rainer Werner Fassbinder", imagem:"querelle.jpg"},
+      {titulo:"Conquistar, Amar e Viver Intensamente", diretor:"Christophe Honoré", imagem:"conquistar-amar-e-viver-intensamente.jpg"},
+      {titulo:"Pillion", diretor:"Harry Lighton", imagem:"pillion.jfif"}
+    ]
+  },
+  {
     id: "top-10-festival-do-rj-2026",
     etiqueta: "TOP 10",
     titulo: "Festival do RJ 2026",
@@ -834,7 +852,7 @@ function montarListas(){
   document.getElementById("listas-grid").innerHTML = listas.map(lista => `
     <article class="lista-card" onclick="abrirLista('${lista.id}')">
       <div class="lista-etiqueta">${lista.etiqueta}</div>
-      <h3 class="${lista.titulo === 'Festival do RJ 2026' ? 'lista-titulo-festival' : ''}">${lista.titulo}</h3>
+      <h3 class="lista-titulo-festival">${lista.titulo}</h3>
       <p>${lista.subtitulo}</p>
       <span class="lista-ver">VER LISTA →</span>
     </article>
@@ -846,7 +864,7 @@ function abrirLista(id, atualizarUrl = true){
   if(!lista) return;
   paginaAnterior = "listas";
   document.getElementById("lista-titulo").textContent = lista.titulo;
-  document.getElementById("lista-titulo").classList.toggle("titulo-lista-festival", lista.titulo === "Festival do RJ 2026");
+  document.getElementById("lista-titulo").classList.add("titulo-lista-festival");
   document.getElementById("lista-subtitulo").textContent = lista.subtitulo;
   document.getElementById("lista-ranking").innerHTML = lista.filmes.map((filme, i) => `
     <article class="item-ranking">
