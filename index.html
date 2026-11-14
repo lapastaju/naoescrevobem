@@ -51,10 +51,6 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .diretor{font-family:"Courier New",monospace;font-size:.8rem;margin-bottom:20px}
 .ler-critica{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:.9rem}
 
-.em-breve{margin-top:50px;padding-top:35px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.breve-texto h2{font-family:Arial,sans-serif;letter-spacing:4px;font-size:1.25rem;margin:0}
-.banners-breve{display:flex;gap:16px;align-items:center}
-.banner-breve{width:180px;height:auto;display:block;object-fit:contain}
 .linha-amarela{width:110px;height:4px;background:var(--yellow);margin:12px 0 18px}
 .botao{display:inline-block;padding:12px 24px;border:2px solid var(--yellow);color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;text-transform:uppercase;cursor:pointer;transition:.2s}
 .botao:hover{background:var(--yellow);color:#000}
@@ -379,27 +375,6 @@ a:focus-visible{
   <h2 class="titulo-pagina">Em destaque</h2>
   <div id="inicio-grid" class="grid-filmes"></div>
 
-  <div class="em-breve">
-    <div class="breve-texto">
-      <h2>EM BREVE</h2>
-      <div class="linha-amarela"></div>
-    </div>
-    <div class="banners-breve">
-      <div class="banner-breve-item">
-        <img class="banner-breve"
-          src="contos-paralelos.webp"
-          alt="Histórias Paralelas — Em breve">
-        <div class="titulo-breve">CONTOS PARALELOS</div>
-      </div>
-      <div class="banner-breve-item">
-        <img class="banner-breve"
-          src="tudo-pode-ser-visto.jpg"
-          alt="Tudo Pode Ser Visto — Em breve">
-        <div class="titulo-breve">TUDO PODE SER VISTO</div>
-      </div>
-    </div>
-  </div>
-
   <div class="centro">
   </div>
 </section>
@@ -617,6 +592,28 @@ a:focus-visible{
 
 const filmes = [
   {
+    id: "pequenas-tragedias",
+    titulo: "Pequenas Tragédias",
+    diretor: "Daniel Nolasco",
+    ano: 2026,
+    imagem: "pequenas-tragedias.jpg",
+    texto: `
+      <p>‘O amor é tão longe’.</p>
+
+      <p>Daniel Nolasco olha para Catalão, sua cidade natal no interior de Goiás, sem transformar a memória em nostalgia. O que emerge desse retorno é um retrato atravessado pela homofobia, pelas violências cotidianas e pelas pequenas crueldades que, somadas, determinam destinos. É um registro íntimo, que se utiliza da criatividade para driblar o orçamento, profundamente particular e espertamente antenado na recriação dos fatos porque há muita beleza em como ele transforma o passado numa consagração com as suas feridas, suas dores profundas, a saudade.</p>
+
+      <p>É bem humorado, se utiliza da beleza dos atores com propósito, compreendendo que parte do público alvo, vai encontrar na liberdade e sinceridade com que parece se dirigir a ele (e a narração ajuda muito nessa observação), nos recados dados. É impossível não se relacionar, em alguma escala, com a cidade. Em como ela pode maltratar. Apontar os dedos. Jogar um jogo difícil de permanecer sem desertar. Ou nos amigos da nossa infância. Em quem se foi. Quem sumiu pelo mundo. Quem permaneceu. No quanto a nossa relação com quem nós fomos lá no início, perdeu, ganhou, deixou coisas pelo caminho. No quanto a vida gira. E o quanto é importante que a gente faça ela girar. Enquanto jovens viados, adultos viados, velhos viados.</p>
+
+      <p>Eu amo a encenação. Eu acho profundamente bonito. É um filme que fisga em momentos que eu jamais poderia imaginar. Que trata a beleza como beleza, corpos lindos como corpos lindos, gente ruim como gente ruim. Traumas indeléveis que só o tempo pode apaziguar. Lembranças tortas que merecem a chance de virar outra coisa. Se perdoar é uma forma corajosa de deixar a bagagem mais leve. E isso não abrange quem nos fez mal porque vão continuar fazendo, isso aqui não tem mais jeito. O lance é olhar para dentro e estender o tapete para que a gente tenha algum conforto.</p>
+
+      <p>Não sei se a palavra reconciliação consegue abraçar tudo o que eu gostaria de dizer.</p>
+
+      <p>Mas o coração acelerou como há muito tempo o cinema não faz. O universo parou por uns segundos. A testa suou. Primeiro respiro fundo. Soltei. A sensação de olhar para a tela em branco e me desafiar. Não é complexo. Não é um capítulo de uma novela. Não há nada extraordinário no cotidiano de um cara viado. Tem mais pau e bunda? Tem. E é simples o jogo. Tem suas regras, seus signos e praticidade. Há prazer, mas há também dor. Segundo respiro fundo, que porra de terapia respiratória é essa, rapaz? Desnudar-me. Desinibir-me. Me colocar em teste. Desprotegido. E por mais que eu investigue, por mais que eu tente tornar o ato/exercício o mais interessante, escrever sobre essas tragédias pequenas do Daniel, me coloca em exposição, diante das minhas. Por isso o ponto final.</p>
+
+      <p>Programação do Festival do Rio | Festival Mix Brasil</p>
+    `
+  },
+  {
     id: "covarde",
     titulo: "Covarde",
     diretor: "Lukas Dhont",
@@ -722,7 +719,7 @@ const filmes = [
       <p>"Soy Mario" procura compreender as ambiguidades de um homem que deseja construir sua própria ideia de família, sem abrir mão da identidade que construiu. Sharon Kleinberg conduz a narrativa para um terreno em que afeto, vulnerabilidade e autonomia se tornam elementos fundamentais, sobre a paternidade e modelos familiares legítimos. As concepções rígidas de gênero aparecem aos olhos de sua mãe, em alguns momentos, mas vem dela também a compreensão cheia de afeto. Da irmã e sobrinha. Os laços familiares são uma rede de apoio fundamental na sua trajetória.</p>
       <p>Tudo funciona ao redor de Oustin de León. É um ator espetacular, que aprofunda, investiga, atento aos detalhes, muito potente nos conflitos e muito suave na sua relação com a paternidade. Que seja o primeiro de muitos protagonistas.</p>
 
-      <p>Programação do Festival MixBrasil.</p>
+      <p>Programação do Festival do Rio | Festival Mix Brasil.</p>
     `
   },
 {
@@ -744,24 +741,7 @@ const filmes = [
   },
 
 
-  {
-    id: "flesh",
-    titulo: "Flesh & Fuel",
-    diretor: "Pierre le Gall",
-    ano: 2026,
-    imagem: "https://images.mubicdn.net/images/film/470825/cache-1126176-1776107446/image-w1280.jpg?size=800x",
-    texto: `
-    <p>O cinema queer parece estar descobrindo, cada vez mais, o desejo que circula pelas estradas e pelos espaços tradicionalmente associados à masculinidade dos caminhoneiros. Se em 'El Caminho' (David Pablos, 2025) acompanhávamos um gay trambiqueiro em fuga dos homens que enganou, até que o acaso o coloca diante de alguém com quem surge uma química inesperada, 'Flesh &amp; Fuel' amplia esse universo e desloca o interesse do filme para outra dimensão do afeto.</p>
-    
-    <p>Aqui não há um jogo de encenação na manutenção da performance da masculinidade. Ambos, de forma reservada, lidam bem com sua sexualidade. Ela não precisa ser constantemente disfarçada, negada ou omitida: simplesmente existe. E, em momentos pontuais, o filme deixa claro que essa também é uma informação que atravessa suas relações familiares, recebida com naturalidade e carinho. O conflito já foi superado. Embora sejam heteronormativos, solteiros, sempre em movimento, na estrada, buscando prazer nos poucos intervalos, de forma furtiva. Até que cruzam os caminhos. Como transformar atração em vínculo quando a própria vida é organizada pelo trânsito, pela distância e pela necessidade permanente de partir?</p>
-    
-    <p>É curioso e difícil porque revela a solidão de quem conhece tão bem o trajeto. De quem sabe ler mapas, atalhos, estradas. Mas se perde de si mesmo. De quem conhece a responsabilidade, reconhece do que abre mão e parece seguir, enfrentando, porque até aquele momento, estava confortável jogar o jogo. A chegada de Bartosz altera o percurso sem oferecer o gabarito. ‘Por que você fez isso’, ele pergunta e Étienne responde ‘Eu não sei’. Há uma ternura muito particular na tentativa desses dois homens de inventar espaço para o amor. É um lance de romper fronteiras mesmo, por mais ordinário que possa parecer.</p>
-    
-    <p>Eu me lembrei de ‘Plata Quemada’, um dos filmes da minha vida, porque se utiliza da masculinidade para estilhaçar a masculinidade. Ou o que pensamos que seja ela.</p>
 
-      <p>Programação do Festival MixBrasil.</p>
-    `
-  },
 
   {
     id: "test",
@@ -799,6 +779,24 @@ const filmes = [
     <p>Muito bonito. E de brinde, Zezé Motta.</p>
 
       <p>Em circuito.</p>
+    `
+  },
+  {
+    id: "flesh",
+    titulo: "Flesh & Fuel",
+    diretor: "Pierre le Gall",
+    ano: 2026,
+    imagem: "https://images.mubicdn.net/images/film/470825/cache-1126176-1776107446/image-w1280.jpg?size=800x",
+    texto: `
+    <p>O cinema queer parece estar descobrindo, cada vez mais, o desejo que circula pelas estradas e pelos espaços tradicionalmente associados à masculinidade dos caminhoneiros. Se em 'El Caminho' (David Pablos, 2025) acompanhávamos um gay trambiqueiro em fuga dos homens que enganou, até que o acaso o coloca diante de alguém com quem surge uma química inesperada, 'Flesh &amp; Fuel' amplia esse universo e desloca o interesse do filme para outra dimensão do afeto.</p>
+    
+    <p>Aqui não há um jogo de encenação na manutenção da performance da masculinidade. Ambos, de forma reservada, lidam bem com sua sexualidade. Ela não precisa ser constantemente disfarçada, negada ou omitida: simplesmente existe. E, em momentos pontuais, o filme deixa claro que essa também é uma informação que atravessa suas relações familiares, recebida com naturalidade e carinho. O conflito já foi superado. Embora sejam heteronormativos, solteiros, sempre em movimento, na estrada, buscando prazer nos poucos intervalos, de forma furtiva. Até que cruzam os caminhos. Como transformar atração em vínculo quando a própria vida é organizada pelo trânsito, pela distância e pela necessidade permanente de partir?</p>
+    
+    <p>É curioso e difícil porque revela a solidão de quem conhece tão bem o trajeto. De quem sabe ler mapas, atalhos, estradas. Mas se perde de si mesmo. De quem conhece a responsabilidade, reconhece do que abre mão e parece seguir, enfrentando, porque até aquele momento, estava confortável jogar o jogo. A chegada de Bartosz altera o percurso sem oferecer o gabarito. ‘Por que você fez isso’, ele pergunta e Étienne responde ‘Eu não sei’. Há uma ternura muito particular na tentativa desses dois homens de inventar espaço para o amor. É um lance de romper fronteiras mesmo, por mais ordinário que possa parecer.</p>
+    
+    <p>Eu me lembrei de ‘Plata Quemada’, um dos filmes da minha vida, porque se utiliza da masculinidade para estilhaçar a masculinidade. Ou o que pensamos que seja ela.</p>
+
+      <p>Programação do Festival MixBrasil.</p>
     `
   },
 
