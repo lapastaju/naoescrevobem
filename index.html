@@ -328,6 +328,17 @@ a:focus-visible{
   opacity:1 !important;
 }
 
+
+/* EM BREVE — alteração exclusiva desta área */
+.em-breve{align-items:center;gap:18px}
+.em-breve .breve-texto{text-align:center}
+.em-breve .linha-amarela{margin-left:auto;margin-right:auto}
+.em-breve .banners-breve{gap:34px;justify-content:center;align-items:flex-start}
+.em-breve .banner-breve-item{width:150px;text-align:center}
+.em-breve .banner-breve{width:150px;height:150px;object-fit:cover;display:block;border:3px solid #D4A122;box-sizing:border-box}
+.em-breve .titulo-breve{margin-top:18px;color:#fff;font-family:Arial,sans-serif;font-size:.78rem;font-weight:bold;line-height:1.25;letter-spacing:.8px;text-align:center}
+@media(max-width:800px){.em-breve .banners-breve{gap:24px}.em-breve .banner-breve-item{width:130px}.em-breve .banner-breve{width:130px;height:130px}.em-breve .titulo-breve{margin-top:14px;font-size:.7rem}}
+
 </style>
 </head>
 
@@ -374,12 +385,18 @@ a:focus-visible{
       <div class="linha-amarela"></div>
     </div>
     <div class="banners-breve">
-      <img class="banner-breve"
-        src="contos-paralelos.jpg"
-        alt="Contos Paralelos — Em breve">
-      <img class="banner-breve"
-        src="ycse_horizontal.large.jpeg"
-        alt="You Can See Everything — Em breve">
+      <div class="banner-breve-item">
+        <img class="banner-breve"
+          src="contos-paralelos.jpg"
+          alt="Histórias Paralelas — Em breve">
+        <div class="titulo-breve">HISTÓRIAS PARALELAS</div>
+      </div>
+      <div class="banner-breve-item">
+        <img class="banner-breve"
+          src="ycse_horizontal.large.jpeg"
+          alt="Tudo Pode Ser Visto — Em breve">
+        <div class="titulo-breve">TUDO PODE SER VISTO</div>
+      </div>
     </div>
   </div>
 
