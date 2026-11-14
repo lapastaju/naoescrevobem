@@ -142,13 +142,17 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 .lista-homenagem{max-width:900px;margin:-8px auto 30px;font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray);font-style:italic}
 .lista-homenagem a{color:var(--gray);text-decoration:none;border-bottom:1px solid var(--yellow)}
 .lista-homenagem a:hover{color:var(--yellow)}
-.lista-destaque{max-width:900px;margin:10px auto 0}
-.lista-card{background:var(--panel);border-left:5px solid var(--yellow);padding:32px;min-height:266px;box-sizing:border-box;cursor:pointer;transition:.2s}
-.lista-card:hover{transform:translateY(-3px)}
-.lista-card .lista-etiqueta{font-family:Arial,sans-serif;letter-spacing:4px;color:var(--yellow);font-size:.8rem;font-weight:bold}
-.lista-card h3{font-family:Arial,sans-serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1;margin:12px 0}
-.lista-card p{font-family:"Courier New",monospace;color:var(--gray)}
-.lista-ver{display:inline-block;margin-top:22px;color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold}
+.busca-listas{margin:28px 0 22px}
+.busca-listas input{width:100%;background:#0d0d0d;color:var(--white);border:1px solid var(--yellow);padding:15px 18px;font-family:"Courier New",monospace;font-size:1rem;outline:none}
+.busca-listas input:focus{box-shadow:0 0 0 2px rgba(242,207,0,.18)}
+.busca-listas input::placeholder{color:#888}
+.lista-destaque{max-width:900px;margin:0 auto;border-top:1px solid var(--yellow)}
+.lista-card{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:transparent;border-bottom:1px solid var(--yellow);padding:18px 0;box-sizing:border-box;cursor:pointer;transition:.2s}
+.lista-card:hover{background:rgba(242,207,0,.04)}
+.lista-card .lista-etiqueta{font-family:Arial,sans-serif;letter-spacing:3px;color:var(--yellow);font-size:.72rem;font-weight:bold;margin-bottom:7px}
+.lista-card h3{font-family:Arial,sans-serif;font-size:1.3rem;line-height:1.1;margin:0 0 7px;color:var(--yellow)}
+.lista-card p{font-family:"Courier New",monospace;font-size:.8rem;color:var(--gray);margin:0}
+.lista-ver{color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;font-size:2rem;line-height:1}
 .lista-conteudo{max-width:900px;margin:auto}
 .lista-intro{font-family:"Courier New",monospace;color:var(--gray);margin-bottom:38px}
 .ranking-lista{border-top:1px solid var(--line)}
@@ -160,7 +164,7 @@ footer{border-top:1px solid var(--line);padding:30px;text-align:center}
 .ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)}
 .ranking-info p{font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray)}
 .ranking-info .tem-anotacao{display:inline-block;margin-top:10px;color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold}
-@media(max-width:600px){.item-ranking{grid-template-columns:46px 64px 1fr;gap:13px}.poster-ranking{width:64px;height:92px}.numero-ranking{font-size:1.5rem}.ranking-info h3{font-size:1.18rem}.lista-card{padding:24px}}
+@media(max-width:600px){.item-ranking{grid-template-columns:46px 64px 1fr;gap:13px}.poster-ranking{width:64px;height:92px}.numero-ranking{font-size:1.5rem}.ranking-info h3{font-size:1.18rem}.lista-card{gap:14px;padding:16px 0}.lista-card h3{font-size:1.08rem}.lista-ver{font-size:1.6rem}}
 
 
 /* MÍNIMOS ÓBVIOS */
@@ -486,6 +490,11 @@ a:focus-visible{
   <h2 class="titulo-pagina">LISTAS</h2>
   <p class="subtitulo-pagina">Rankings, obsessões e filmes que continuam comigo.</p>
   <p class="lista-homenagem">Tudo por causa do <a href="https://filmesdochico.com.br/" target="_blank" rel="noopener noreferrer">Chico Fireman</a>.</p>
+
+  <div class="busca-listas">
+    <input type="search" id="campo-busca-listas" placeholder="Buscar lista..." oninput="buscarListas()" autocomplete="off">
+  </div>
+
   <div id="listas-grid" class="lista-destaque"></div>
 </section>
 
@@ -848,15 +857,24 @@ const listas = [
   }
 ];
 
-function montarListas(){
-  document.getElementById("listas-grid").innerHTML = listas.map(lista => `
+function montarListas(filtro = ""){
+  const termo = filtro.trim().toLowerCase();
+  const listasFiltradas = listas.filter(lista => `${lista.etiqueta} ${lista.titulo} ${lista.subtitulo}`.toLowerCase().includes(termo));
+
+  document.getElementById("listas-grid").innerHTML = listasFiltradas.length ? listasFiltradas.map(lista => `
     <article class="lista-card" onclick="abrirLista('${lista.id}')">
-      <div class="lista-etiqueta">${lista.etiqueta}</div>
-      <h3 class="lista-titulo-festival">${lista.titulo}</h3>
-      <p>${lista.subtitulo}</p>
-      <span class="lista-ver">VER LISTA →</span>
+      <div>
+        <div class="lista-etiqueta">${lista.etiqueta}</div>
+        <h3 class="lista-titulo-festival">${lista.titulo}</h3>
+        <p>${lista.subtitulo}</p>
+      </div>
+      <span class="lista-ver">→</span>
     </article>
-  `).join("");
+  `).join("") : `<p class="subtitulo-pagina" style="margin-top:25px">Nenhuma lista encontrada.</p>`;
+}
+
+function buscarListas(){
+  montarListas(document.getElementById("campo-busca-listas").value);
 }
 
 function abrirLista(id, atualizarUrl = true){
