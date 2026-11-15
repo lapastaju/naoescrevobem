@@ -803,6 +803,8 @@ const filmes = [
   },
   {
     id: "flesh",
+    arquivado: true,
+    ordemArquivo: 2,
     titulo: "Flesh & Fuel",
     diretor: "Pierre le Gall",
     ano: 2026,
@@ -822,6 +824,8 @@ const filmes = [
 
 {
     id: "fjord",
+    arquivado: true,
+    ordemArquivo: 1,
     titulo: "Fjord",
     diretor: "Cristian Mungiu",
     ano: 2026,
@@ -962,7 +966,12 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
     ? termoBusca.toLowerCase().trim()
     : (campo ? campo.value.toLowerCase().trim() : "");
 
-  const anosUnicos = [...new Set(filmes.map(f => f.arquivoAno || f.ano))].sort((a,b)=>b-a);
+  // O arquivo mostra somente filmes que já saíram do EM DESTAQUE.
+  const filmesArquivados = filmes
+    .filter(f => f.arquivado === true)
+    .sort((a,b) => (a.ordemArquivo || 9999) - (b.ordemArquivo || 9999));
+
+  const anosUnicos = [...new Set(filmesArquivados.map(f => f.arquivoAno || f.ano))].sort((a,b)=>b-a);
 
   document.getElementById("anos").innerHTML =
     `<button class="ano-btn ${anoSelecionado==="Todos"?"ativo":""}" onclick="montarArquivo('Todos')">Todos</button>` +
@@ -970,7 +979,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
       `<button class="ano-btn ${anoSelecionado===ano?"ativo":""}" onclick="montarArquivo(${ano})">${ano}</button>`
     ).join("");
 
-  let lista = filmes.filter(filme => {
+  let lista = filmesArquivados.filter(filme => {
     const correspondeAno = anoSelecionado === "Todos" || (filme.arquivoAno || filme.ano) === anoSelecionado;
     const textoPesquisavel = `${filme.titulo} ${filme.diretor} ${filme.ano}`.toLowerCase();
     const correspondeBusca = !termo || textoPesquisavel.includes(termo);
