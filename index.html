@@ -32,6 +32,13 @@ nav a{cursor:pointer;padding:0 17px;border-left:1px solid var(--yellow)}
 .menu-principal a:first-child{border-left:0}
 .menu-secundario a{border-left:0;padding:0}
 nav a:hover,nav a.ativo{color:var(--yellow)}
+.menu-principal .menu-destaque{position:relative;border-left:0;padding:0 17px}
+.menu-principal .menu-destaque>a{display:block;border-left:0;padding:0}
+.submenu-origens{display:none;position:absolute;top:100%;left:0;min-width:155px;padding:9px 0;background:#080808;border-top:2px solid var(--yellow);z-index:50;box-shadow:0 8px 18px rgba(0,0,0,.55)}
+.menu-destaque:hover .submenu-origens,.menu-destaque:focus-within .submenu-origens{display:block}
+.menu-principal .submenu-origens a{display:block;border:0;padding:9px 15px;color:var(--white);font-size:.76rem;letter-spacing:.5px}
+.menu-principal .submenu-origens a:hover,.menu-principal .submenu-origens a:focus{color:var(--yellow)}
+
 
 main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .pagina{display:none;animation:aparecer .3s ease}
@@ -101,6 +108,8 @@ footer{border-top:2px solid var(--yellow);padding:30px;text-align:center}
   .marca p{font-size:.7rem;letter-spacing:.5px}
   nav{width:100%;justify-content:space-between;gap:0;font-size:.66rem}
   nav a{padding:0 8px}
+  .menu-principal .menu-destaque{padding:0 8px}
+  .submenu-origens{left:0;min-width:140px}
   main{padding:30px 18px 50px}
   .grid-filmes{grid-template-columns:1fr}
   .em-breve{gap:12px}
@@ -304,6 +313,23 @@ a:focus-visible{
 
 .filme-card img[src="pequenas-tragedias.jpg"]{object-position:center center}
 .filme-card img[src="sabes-de-mim-agora-esqueca.png"]{object-position:center center}
+
+/* DESTAQUE — opções legíveis no fundo preto, como os demais links */
+.menu-faixa .menu-principal .submenu-origens a,
+.menu-faixa .menu-principal .submenu-origens a:visited,
+.menu-faixa .menu-principal .submenu-origens a:active{
+  display:block;
+  color:#ffffff !important;
+  opacity:1 !important;
+  padding:9px 15px;
+}
+.menu-faixa .menu-principal .submenu-origens a:hover,
+.menu-faixa .menu-principal .submenu-origens a:focus,
+.menu-faixa .menu-principal .submenu-origens a:focus-visible{
+  color:var(--yellow) !important;
+  opacity:1 !important;
+}
+
 </style>
   <meta name="disfora-site-verification" content="bfd05613769b1341d60fe7afbf3e0fde">
   <script src="https://disfora.com/public/disfora.js" async></script>
@@ -368,7 +394,14 @@ a:focus-visible{
   <div class="menu-faixa">
     <nav>
       <div class="menu-principal">
-        <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio">DESTAQUE</a>
+        <div class="menu-destaque">
+          <a href="#inicio" onclick="mostrarPagina('inicio'); return false;" id="menu-inicio" aria-haspopup="true" aria-expanded="false">DESTAQUE</a>
+          <div class="submenu-origens">
+            <a href="#categoria-festival" onclick="mostrarCategoria('FESTIVAL'); return false;">FESTIVAL</a>
+            <a href="#categoria-streaming" onclick="mostrarCategoria('STREAMING'); return false;">STREAMING</a>
+            <a href="#categoria-circuito" onclick="mostrarCategoria('CIRCUITO'); return false;">CIRCUITO</a>
+          </div>
+        </div>
         <a href="#arquivo" onclick="mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
         <a href="#listas" onclick="mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
         <a href="#minimos-obvios" onclick="mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
@@ -388,6 +421,12 @@ a:focus-visible{
 
   <div class="centro">
   </div>
+</section>
+
+<section id="categoria-origem" class="pagina">
+  <h2 class="titulo-pagina" id="titulo-categoria-origem">FESTIVAL</h2>
+  <p class="subtitulo-pagina">Filmes em destaque e no arquivo.</p>
+  <div id="categoria-grid" class="grid-filmes"></div>
 </section>
 
 
@@ -823,6 +862,7 @@ const filmes = [
   {
     id: "ana",
     arquivado: true,
+    origem: "CIRCUITO",
     ordemArquivo: 1,
     titulo: "Ana, en passant",
     diretor: "Fernanda Salgado",
@@ -843,6 +883,7 @@ const filmes = [
   {
     id: "flesh",
     arquivado: true,
+    origem: "FESTIVAL",
     ordemArquivo: 3,
     titulo: "Flesh & Fuel",
     diretor: "Pierre le Gall",
@@ -864,6 +905,7 @@ const filmes = [
 {
     id: "fjord",
     arquivado: true,
+    origem: "FESTIVAL",
     ordemArquivo: 2,
     titulo: "Fjord",
     diretor: "Cristian Mungiu",
@@ -999,6 +1041,15 @@ function montarInicio(){
     filmes.slice(0, 10).map(cardFilme).join("");
 }
 
+function mostrarCategoria(origem){
+  const resultados = filmes.filter(filme => filme.origem === origem);
+  document.getElementById("titulo-categoria-origem").textContent = origem;
+  document.getElementById("categoria-grid").innerHTML = resultados.length
+    ? resultados.map(cardFilme).join("")
+    : '<p class="subtitulo-pagina">Nenhum filme cadastrado nesta categoria.</p>';
+  mostrarPagina("categoria-origem");
+}
+
 
 function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
   const campo = document.getElementById("campo-busca");
@@ -1047,6 +1098,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
           <div class="arquivo-item" onclick="abrirCritica('${filme.id}')">
             <img src="${filme.imagem}" alt="${filme.titulo}">
             <div>
+              <p class="origem-filme">${filme.origem || ""}</p>
               <h3>${filme.titulo}</h3>
               <p>${filme.diretor} | ${filme.ano}</p>
             </div>
@@ -1318,7 +1370,7 @@ function carregarPeloEndereco(){
     abrirNostalgia(nostalgiaId, false);
   }else{
     const paginaHash = window.location.hash.replace("#", "");
-    const paginasValidas = ["inicio","arquivo","listas","sobre","minimos-obvios","midia-fisica","nostalgia"];
+    const paginasValidas = ["inicio","arquivo","listas","sobre","minimos-obvios","midia-fisica","nostalgia","categoria-origem"];
     mostrarPagina(paginasValidas.includes(paginaHash) ? paginaHash : "inicio", false);
   }
 }
