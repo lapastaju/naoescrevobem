@@ -35,7 +35,7 @@ nav a:hover,nav a.ativo{color:var(--yellow)}
 .menu-principal .menu-destaque{position:relative;border-left:0;padding:0 17px}
 .menu-principal .menu-destaque>a{display:block;border-left:0;padding:0}
 .submenu-origens{display:none;position:absolute;top:100%;left:0;min-width:155px;padding:9px 0;background:#080808;border-top:2px solid var(--yellow);z-index:50;box-shadow:0 8px 18px rgba(0,0,0,.55)}
-.menu-destaque:hover .submenu-origens,.menu-destaque:focus-within .submenu-origens,.menu-destaque.aberto .submenu-origens{display:block}
+.menu-destaque.aberto .submenu-origens{display:block}
 .menu-principal .submenu-origens a{display:block;border:0;padding:9px 15px;color:var(--white);font-size:.76rem;letter-spacing:.5px}
 .menu-principal .submenu-origens a:hover,.menu-principal .submenu-origens a:focus{color:var(--yellow)}
 
@@ -658,7 +658,7 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
 
 <section id="pagina-critica" class="pagina">
   <div class="critica-conteudo">
-    <div class="tipo">ANOTAÇÃO</div>
+    <div class="tipo" id="critica-origem"></div>
     <h2 id="critica-titulo" class="titulo-critica"></h2>
     <p id="critica-dados" class="dados-filme"></p>
     <img id="critica-imagem" class="imagem-critica" src="" alt="">
@@ -1108,12 +1108,12 @@ function acionarDestaque(event){
   const link = document.getElementById("menu-inicio");
   if (!menu || !submenu || !link) return false;
 
-  if (window.matchMedia("(max-width: 800px)").matches) {
-    event.preventDefault();
-    mostrarPagina("inicio");
-    const aberto = !menu.classList.contains("aberto");
+  event.preventDefault();
+  mostrarPagina("inicio");
+  const aberto = !menu.classList.contains("aberto");
 
-    if (aberto) {
+  if (aberto) {
+    if (window.matchMedia("(max-width: 800px)").matches) {
       const rect = link.getBoundingClientRect();
       submenu.style.position = "fixed";
       submenu.style.top = Math.round(rect.bottom + 2) + "px";
@@ -1123,17 +1123,14 @@ function acionarDestaque(event){
       submenu.style.maxHeight = "none";
       submenu.style.overflow = "visible";
       submenu.style.zIndex = "10000";
-      menu.classList.add("aberto");
-      link.setAttribute("aria-expanded", "true");
-    } else {
-      menu.classList.remove("aberto");
-      link.setAttribute("aria-expanded", "false");
-      submenu.removeAttribute("style");
     }
-    return false;
+    menu.classList.add("aberto");
+    link.setAttribute("aria-expanded", "true");
+  } else {
+    menu.classList.remove("aberto");
+    link.setAttribute("aria-expanded", "false");
+    submenu.removeAttribute("style");
   }
-
-  mostrarPagina("inicio");
   return false;
 }
 
@@ -1409,6 +1406,7 @@ function abrirCritica(id, atualizarUrl = true){
 
   filmeAtualId = id;
 
+  document.getElementById("critica-origem").textContent = filme.origem || "ANOTAÇÃO";
   document.getElementById("critica-titulo").textContent = filme.titulo;
   document.getElementById("critica-dados").textContent =
     `${filme.diretor} | ${filme.ano}`;
