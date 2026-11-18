@@ -13,6 +13,7 @@
   gtag('config', 'G-429VSEDNL5');
 </script>
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
+<meta name="description" content="Anotações e críticas de cinema por Egídio La Pasta. Cinema contemporâneo, independente e internacional.">
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
@@ -1455,6 +1456,11 @@ function filtrarNostalgia(){
 }
 
 function mostrarPagina(nome, atualizarUrl = true){
+  document.title = "Não Escrevo Bem — Mas continuo escrevendo.";
+  const descricaoPadrao = "Anotações e críticas de cinema por Egídio La Pasta. Cinema contemporâneo, independente e internacional.";
+  let metaDescricao = document.querySelector('meta[name="description"]');
+  if(metaDescricao) metaDescricao.setAttribute("content", descricaoPadrao);
+
   document.querySelectorAll(".pagina").forEach(p => p.classList.remove("ativa"));
   document.getElementById(nome).classList.add("ativa");
 
@@ -1500,6 +1506,18 @@ function abrirCritica(id, atualizarUrl = true){
   }
 
   mostrarPagina("pagina-critica", false);
+
+  document.title = `${filme.titulo} (${filme.ano}) — Não Escrevo Bem`;
+  const elementoDescricao = document.createElement("div");
+  elementoDescricao.innerHTML = filme.texto;
+  const textoDescricao = (elementoDescricao.textContent || elementoDescricao.innerText || "")
+    .replace(/\s+/g, " ").trim();
+  const metaDescricao = document.querySelector('meta[name="description"]');
+  if(metaDescricao){
+    metaDescricao.setAttribute("content",
+      textoDescricao.slice(0, 155).replace(/\s+\S*$/, "") || `${filme.titulo} — crítica de cinema no Não Escrevo Bem.`
+    );
+  }
 
   if(atualizarUrl){
     const url = new URL(window.location.href);
