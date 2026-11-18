@@ -10,7 +10,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-429VSEDNL5', { send_page_view: false });
+  gtag('config', 'G-429VSEDNL5');
 </script>
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
 <meta name="description" content="Anotações e críticas de cinema por Egídio La Pasta. Cinema contemporâneo, independente e internacional.">
@@ -45,6 +45,9 @@ nav a:hover,nav a.ativo{color:var(--yellow)}
 .menu-principal .menu-destaque{position:relative;border-left:0;padding:0 17px}
 .menu-principal .menu-destaque>a{display:block;border-left:0;padding:0}
 .submenu-origens{display:none;position:absolute;top:100%;left:0;min-width:155px;padding:9px 0;background:#080808;border-top:2px solid var(--yellow);z-index:50;box-shadow:0 8px 18px rgba(0,0,0,.55)}
+/* No computador, o submenu aparece ao passar o cursor e some ao sair */
+.menu-destaque:hover .submenu-origens,
+.menu-destaque:focus-within .submenu-origens,
 .menu-destaque.aberto .submenu-origens{display:block}
 .menu-principal .submenu-origens a{display:block;border:0;padding:9px 15px;color:var(--white);font-size:.76rem;letter-spacing:.5px}
 .menu-principal .submenu-origens a:hover,.menu-principal .submenu-origens a:focus{color:var(--yellow)}
@@ -1186,20 +1189,21 @@ function acionarDestaque(event){
 
   event.preventDefault();
   mostrarPagina("inicio");
-  const aberto = !menu.classList.contains("aberto");
 
+  /* Em telas grandes, a abertura é controlada pelo hover do CSS. */
+  if (!window.matchMedia("(max-width: 800px)").matches) return false;
+
+  const aberto = !menu.classList.contains("aberto");
   if (aberto) {
-    if (window.matchMedia("(max-width: 800px)").matches) {
-      const rect = link.getBoundingClientRect();
-      submenu.style.position = "fixed";
-      submenu.style.top = Math.round(rect.bottom + 2) + "px";
-      submenu.style.left = Math.max(8, Math.round(rect.left)) + "px";
-      submenu.style.right = "auto";
-      submenu.style.width = "min(190px, calc(100vw - 16px))";
-      submenu.style.maxHeight = "none";
-      submenu.style.overflow = "visible";
-      submenu.style.zIndex = "10000";
-    }
+    const rect = link.getBoundingClientRect();
+    submenu.style.position = "fixed";
+    submenu.style.top = Math.round(rect.bottom + 2) + "px";
+    submenu.style.left = Math.max(8, Math.round(rect.left)) + "px";
+    submenu.style.right = "auto";
+    submenu.style.width = "min(190px, calc(100vw - 16px))";
+    submenu.style.maxHeight = "none";
+    submenu.style.overflow = "visible";
+    submenu.style.zIndex = "10000";
     menu.classList.add("aberto");
     link.setAttribute("aria-expanded", "true");
   } else {
@@ -1624,10 +1628,6 @@ montarInicio();
 montarArquivo();
 montarListas();
 carregarPeloEndereco();
-
-/* Registra a visualização inicial somente depois que a página correta e seu título
-   (inclusive uma crítica aberta diretamente por ?filme=) já foram carregados. */
-registrarVisualizacaoInterna();
 
 </script>
 </body>
