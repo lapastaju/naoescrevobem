@@ -183,7 +183,7 @@ footer{border-top:2px solid var(--yellow);padding:30px;text-align:center}
 .poster-ranking{width:82px;height:116px;background:#171717;border:1px solid #333;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-family:Arial,sans-serif;font-size:.72rem;line-height:1.1;color:#777}
 .poster-ranking img{width:100%;height:100%;object-fit:cover}
 .ranking-info h3{font-family:Arial,sans-serif;font-size:1.55rem;line-height:1.1;margin-bottom:7px}
-.ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)}
+.ranking-info h3.link-critica{cursor:pointer;color:var(--yellow)} .ranking-info h3.link-critica a{color:inherit;text-decoration:none}
 .ranking-info p{font-family:"Courier New",monospace;font-size:.82rem;color:var(--gray)}
 .ranking-info .tem-anotacao{display:inline-block;margin-top:10px;color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold}
 @media(max-width:600px){.item-ranking{grid-template-columns:46px 64px 1fr;gap:13px}.poster-ranking{width:64px;height:92px}.numero-ranking{font-size:1.5rem}.ranking-info h3{font-size:1.18rem}.lista-card{gap:14px;padding:16px 0}.lista-card h3{font-size:1.08rem}.lista-ver{font-size:1.6rem}}
@@ -465,19 +465,19 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
     <nav>
       <div class="menu-principal">
         <div class="menu-destaque">
-          <a href="#inicio" onclick="return acionarDestaque(event);" id="menu-inicio" aria-haspopup="true" aria-expanded="false">DESTAQUE</a>
+          <a href="#inicio" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; return acionarDestaque(event);" id="menu-inicio" aria-haspopup="true" aria-expanded="false">DESTAQUE</a>
           <div class="submenu-origens">
-            <a href="#categoria-festival" onclick="mostrarCategoria('FESTIVAL'); return false;">FESTIVAL</a>
-            <a href="#categoria-streaming" onclick="mostrarCategoria('STREAMING'); return false;">STREAMING</a>
-            <a href="#categoria-circuito" onclick="mostrarCategoria('CIRCUITO'); return false;">CIRCUITO</a>
+            <a href="?categoria=FESTIVAL" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('FESTIVAL'); return false;">FESTIVAL</a>
+            <a href="?categoria=STREAMING" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('STREAMING'); return false;">STREAMING</a>
+            <a href="?categoria=CIRCUITO" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('CIRCUITO'); return false;">CIRCUITO</a>
           </div>
         </div>
-        <a href="#arquivo" onclick="mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
-        <a href="#listas" onclick="mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
-        <a href="#minimos-obvios" onclick="mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
-        <a href="#midia-fisica" onclick="mostrarPagina('midia-fisica'); return false;" id="menu-midia-fisica">MÍDIA FÍSICA</a>
-        <a href="#nostalgia" onclick="mostrarPagina('nostalgia'); return false;" id="menu-nostalgia">NOSTALGIA</a>
-        <a href="#sobre" onclick="mostrarPagina('sobre'); return false;" id="menu-sobre">SOBRE</a>
+        <a href="#arquivo" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
+        <a href="#listas" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('listas'); return false;" id="menu-listas">LISTAS</a>
+        <a href="#minimos-obvios" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('minimos-obvios'); return false;" id="menu-minimos-obvios">MÍNIMOS ÓBVIOS</a>
+        <a href="#midia-fisica" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('midia-fisica'); return false;" id="menu-midia-fisica">MÍDIA FÍSICA</a>
+        <a href="#nostalgia" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('nostalgia'); return false;" id="menu-nostalgia">NOSTALGIA</a>
+        <a href="#sobre" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('sobre'); return false;" id="menu-sobre">SOBRE</a>
       </div>
     </nav>
   </div>
@@ -528,15 +528,15 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
   </div>
 
   <div class="minimos-arquivo">
-    <a class="minimo-item" onclick="abrirMinimo('volver')">
+    <a class="minimo-item" href="?minimo=volver" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirMinimo('volver'); return false;">
       <h3>VOLVER</h3>
       <span class="ler-minimo">LER →</span>
     </a>
-    <a class="minimo-item" onclick="abrirMinimo('o-pecado-de-todos-nos')">
+    <a class="minimo-item" href="?minimo=o-pecado-de-todos-nos" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirMinimo('o-pecado-de-todos-nos'); return false;">
       <h3>O PECADO DE TODOS NÓS</h3>
       <span class="ler-minimo">LER →</span>
     </a>
-    <a class="minimo-item" onclick="abrirMinimo('o-ceu-de-suely')">
+    <a class="minimo-item" href="?minimo=o-ceu-de-suely" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirMinimo('o-ceu-de-suely'); return false;">
       <h3>O CÉU DE SUELY</h3>
       <span class="ler-minimo">LER →</span>
     </a>
@@ -552,7 +552,7 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
   </div>
 
   <div class="minimos-arquivo">
-    <a class="minimo-item" onclick="abrirMidiaFisica('em-breve-midia')">
+    <a class="minimo-item" href="?midia=em-breve-midia" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirMidiaFisica('em-breve-midia'); return false;">
       <h3>EM BREVE</h3>
       <span class="ler-minimo">LER →</span>
     </a>
@@ -568,7 +568,7 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
   </div>
 
   <div class="minimos-arquivo">
-    <a class="minimo-item" onclick="abrirNostalgia('em-breve-nostalgia')">
+    <a class="minimo-item" href="?nostalgia=em-breve-nostalgia" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirNostalgia('em-breve-nostalgia'); return false;">
       <h3>EM BREVE</h3>
       <span class="ler-minimo">LER →</span>
     </a>
@@ -1089,14 +1089,14 @@ function montarListas(filtro = ""){
   const listasFiltradas = listas.filter(lista => `${lista.etiqueta} ${lista.titulo} ${lista.subtitulo}`.toLowerCase().includes(termo));
 
   document.getElementById("listas-grid").innerHTML = listasFiltradas.length ? listasFiltradas.map(lista => `
-    <article class="lista-card" onclick="abrirLista('${lista.id}')">
+    <a class="lista-card" href="?lista=${lista.id}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirLista('${lista.id}'); return false;">
       <div>
         <div class="lista-etiqueta">${lista.etiqueta}</div>
         <h3 class="lista-titulo-festival">${lista.titulo}</h3>
         <p>${lista.subtitulo}</p>
       </div>
       <span class="lista-ver">→</span>
-    </article>
+    </a>
   `).join("") : `<p class="subtitulo-pagina" style="margin-top:25px">Nenhuma lista encontrada.</p>`;
 }
 
@@ -1116,7 +1116,7 @@ function abrirLista(id, atualizarUrl = true){
       <div class="numero-ranking">${String(i+1).padStart(2,"0")}</div>
       <div class="poster-ranking">${filme.imagem ? `<img src="${filme.imagem}" alt="Pôster de ${filme.titulo}">` : filme.titulo}</div>
       <div class="ranking-info">
-        <h3 class="${filme.criticaId ? 'link-critica' : ''}" ${filme.criticaId ? `onclick="abrirCritica('${filme.criticaId}')"` : ''}>${filme.titulo}</h3>
+        <h3 class="${filme.criticaId ? 'link-critica' : ''}">${filme.criticaId ? `<a href="?filme=${filme.criticaId}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirCritica('${filme.criticaId}'); return false;">${filme.titulo}</a>` : filme.titulo}</h3>
         <p>${filme.diretor}</p>
         ${filme.criticaId ? '<span class="tem-anotacao">LER ANOTAÇÃO →</span>' : ''}
       </div>
@@ -1140,7 +1140,7 @@ let filmeAtualId = null;
 
 function cardFilme(filme){
   return `
-    <article class="filme-card" onclick="abrirCritica('${filme.id}')">
+    <a class="filme-card" href="?filme=${filme.id}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirCritica('${filme.id}'); return false;">
       <img src="${filme.imagem}" alt="${filme.titulo}">
       <div class="filme-info">
         <p class="origem-filme">${filme.origem}</p>
@@ -1148,7 +1148,7 @@ function cardFilme(filme){
         <p class="diretor">${filme.diretor} | ${filme.ano}</p>
         <span class="ler-critica">LER →</span>
       </div>
-    </article>
+    </a>
   `;
 }
 
@@ -1190,7 +1190,7 @@ function acionarDestaque(event){
   return false;
 }
 
-function mostrarCategoria(origem){
+function mostrarCategoria(origem, atualizarUrl = true){
   const menu = document.querySelector(".menu-destaque");
   if (menu) {
     menu.classList.remove("aberto");
@@ -1204,7 +1204,13 @@ function mostrarCategoria(origem){
   document.getElementById("categoria-grid").innerHTML = resultados.length
     ? resultados.map(cardFilme).join("")
     : '<p class="subtitulo-pagina">Nenhum filme cadastrado nesta categoria.</p>';
-  mostrarPagina("categoria-origem");
+  mostrarPagina("categoria-origem", false);
+  if(atualizarUrl){
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("categoria", origem);
+    history.pushState({categoria:origem}, "", url);
+  }
 }
 
 
@@ -1252,7 +1258,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
       <div class="arquivo-ano">
         <h2>${ano}</h2>
         ${grupos[ano].map(filme => `
-          <div class="arquivo-item" onclick="abrirCritica('${filme.id}')">
+          <a class="arquivo-item" href="?filme=${filme.id}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirCritica('${filme.id}'); return false;">
             <img src="${filme.imagem}" alt="${filme.titulo}">
             <div>
               <p class="origem-filme">${filme.origem || ""}</p>
@@ -1260,7 +1266,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
               <p>${filme.diretor} | ${filme.ano}</p>
             </div>
             <span class="seta">→</span>
-          </div>
+          </a>
         `).join("")}
       </div>
     `).join("");
@@ -1530,6 +1536,7 @@ function carregarPeloEndereco(){
   const minimoId = parametros.get("minimo");
   const midiaId = parametros.get("midia");
   const nostalgiaId = parametros.get("nostalgia");
+  const categoria = parametros.get("categoria");
 
   if(filmeId && filmes.some(filme => filme.id === filmeId)){
     abrirCritica(filmeId, false);
@@ -1541,6 +1548,8 @@ function carregarPeloEndereco(){
     abrirMidiaFisica(midiaId, false);
   }else if(nostalgiaId && nostalgias.some(item => item.id === nostalgiaId)){
     abrirNostalgia(nostalgiaId, false);
+  }else if(categoria && ["FESTIVAL","STREAMING","CIRCUITO"].includes(categoria)){
+    mostrarCategoria(categoria, false);
   }else{
     const paginaHash = window.location.hash.replace("#", "");
     const paginasValidas = ["inicio","arquivo","listas","sobre","minimos-obvios","midia-fisica","nostalgia","categoria-origem"];
