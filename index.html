@@ -10,7 +10,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-429VSEDNL5');
+  gtag('config', 'G-429VSEDNL5', { send_page_view: false });
 </script>
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
 <meta name="description" content="Anotações e críticas de cinema por Egídio La Pasta. Cinema contemporâneo, independente e internacional.">
@@ -1624,6 +1624,10 @@ montarInicio();
 montarArquivo();
 montarListas();
 carregarPeloEndereco();
+
+/* Registra a visualização inicial somente depois que a página correta e seu título
+   (inclusive uma crítica aberta diretamente por ?filme=) já foram carregados. */
+registrarVisualizacaoInterna();
 
 </script>
 </body>
