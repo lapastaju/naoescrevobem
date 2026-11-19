@@ -62,6 +62,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .titulo-pagina::after{content:"";display:block;width:110px;height:4px;background:var(--yellow);margin:12px 0 18px}
 #inicio .titulo-pagina{margin-bottom:28px}
 .subtitulo-pagina{font-family:"Courier New",monospace;margin-bottom:35px}
+#arquivo .subtitulo-pagina{margin-bottom:17px}
 .grid-filmes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .filme-card{background:var(--panel);display:grid;grid-template-columns:1fr 1fr;min-height:195px;overflow:hidden;cursor:pointer;transition:.2s}
 .filme-card:hover{transform:translateY(-4px)}
@@ -84,8 +85,9 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .busca-arquivo input:focus{box-shadow:0 0 0 2px rgba(242,207,0,.18)}
 .busca-arquivo input::placeholder{color:#888}
 .anos{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-.ano-btn{background:transparent;color:var(--white);border:1px solid var(--white);padding:8px 20px;cursor:pointer}
-.ano-btn.ativo,.ano-btn:hover{background:var(--yellow);color:#000;border-color:var(--yellow)}
+.ano-btn{background:#000;color:var(--white);border:1px solid var(--white);padding:8px 20px;cursor:pointer}
+.ano-btn.ativo{background:#000;color:var(--white);border-color:var(--white)}
+.ano-btn:hover{background:var(--yellow);color:#000;border-color:var(--yellow)}
 .arquivo-ano{margin-top:32px}
 .arquivo-ano h2{border-bottom:2px solid var(--yellow);padding-bottom:8px;font-family:Arial,sans-serif}
 .arquivo-item{display:grid;grid-template-columns:210px 1fr auto;gap:24px;align-items:center;border-bottom:1px solid var(--yellow);padding:10px 0;cursor:pointer}
@@ -506,7 +508,7 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
 
 <section id="arquivo" class="pagina">
   <h2 class="titulo-pagina">ARQUIVO</h2>
-  <p class="subtitulo-pagina">Todas as anotações, organizadas por ano.</p>
+  <p class="subtitulo-pagina" aria-hidden="true">&nbsp;</p>
 
   <div class="busca-arquivo">
     <input
@@ -1238,7 +1240,7 @@ function mostrarCategoria(origem, atualizarUrl = true){
 }
 
 
-function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
+function montarArquivo(anoSelecionado = null, termoBusca = null){
   const campo = document.getElementById("campo-busca");
   const termo = termoBusca !== null
     ? termoBusca.toLowerCase().trim()
@@ -1250,9 +1252,9 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
     .sort((a,b) => (a.ordemArquivo || 9999) - (b.ordemArquivo || 9999));
 
   const anosUnicos = [...new Set(filmesArquivados.map(f => f.arquivoAno || f.ano))].sort((a,b)=>b-a);
+  if(anoSelecionado === null || anoSelecionado === "Todos") anoSelecionado = anosUnicos[0] ?? "Todos";
 
   document.getElementById("anos").innerHTML =
-    `<button class="ano-btn ${anoSelecionado==="Todos"?"ativo":""}" onclick="montarArquivo('Todos')">Todos</button>` +
     anosUnicos.map(ano =>
       `<button class="ano-btn ${anoSelecionado===ano?"ativo":""}" onclick="montarArquivo(${ano})">${ano}</button>`
     ).join("");
@@ -1280,7 +1282,7 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
   document.getElementById("arquivo-lista").innerHTML =
     Object.keys(grupos).sort((a,b)=>b-a).map(ano => `
       <div class="arquivo-ano">
-        <h2>${ano}</h2>
+        <h2>FILMES PUBLICADOS</h2>
         ${grupos[ano].map(filme => `
           <a class="arquivo-item" href="?filme=${filme.id}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirCritica('${filme.id}'); return false;">
             <img src="${filme.imagem}" alt="${filme.titulo}">
@@ -1298,9 +1300,9 @@ function montarArquivo(anoSelecionado = "Todos", termoBusca = null){
 
 function buscarFilmes(){
   const anosAtivos = document.querySelector(".ano-btn.ativo");
-  const anoSelecionado = anosAtivos && anosAtivos.textContent !== "Todos"
+  const anoSelecionado = anosAtivos
     ? Number(anosAtivos.textContent)
-    : "Todos";
+    : null;
 
   montarArquivo(anoSelecionado);
 }
