@@ -10,7 +10,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-429VSEDNL5');
+  gtag('config', 'G-429VSEDNL5', { send_page_view: false });
 </script>
 <title>Não Escrevo Bem — Mas continuo escrevendo.</title>
 <meta name="description" content="Anotações e críticas de cinema por Egídio La Pasta. Cinema contemporâneo, independente e internacional.">
@@ -1619,19 +1619,27 @@ function carregarPeloEndereco(){
 window.addEventListener("popstate", carregarPeloEndereco);
 window.addEventListener("hashchange", carregarPeloEndereco);
 
-/* Google Analytics: registra também as navegações internas do site.
-   O carregamento inicial já é registrado pela configuração padrão do gtag. */
+/* Google Analytics: envia uma única visualização por endereço.
+   O page_view automático do carregamento inicial foi desligado na configuração
+   acima; este controle registra a página inicial e as navegações internas. */
+let ultimaVisualizacaoRegistrada = "";
+
 function registrarVisualizacaoInterna(){
   if(typeof gtag !== "function") return;
+
+  const enderecoAtual = window.location.href;
+  if(enderecoAtual === ultimaVisualizacaoRegistrada) return;
+
+  ultimaVisualizacaoRegistrada = enderecoAtual;
+
   gtag("event", "page_view", {
     page_title: document.title,
-    page_location: window.location.href,
+    page_location: enderecoAtual,
     page_path: window.location.pathname + window.location.search + window.location.hash
   });
 }
 
-/* O site navega entre páginas sem recarregar o documento.
-   Este monitoramento registra cada mudança feita com pushState. */
+/* Registra mudanças internas feitas pelo próprio site. */
 const pushStateOriginal = history.pushState.bind(history);
 history.pushState = function(){
   const resultado = pushStateOriginal(...arguments);
@@ -1639,13 +1647,18 @@ history.pushState = function(){
   return resultado;
 };
 
-/* Também registra quando o visitante usa os botões voltar/avançar do navegador. */
+/* Registra voltar/avançar. A proteção pelo endereço evita repetição
+   caso o navegador também dispare hashchange para a mesma navegação. */
 window.addEventListener("popstate", registrarVisualizacaoInterna);
+window.addEventListener("hashchange", registrarVisualizacaoInterna);
 
 montarInicio();
 montarArquivo();
 montarListas();
 carregarPeloEndereco();
+
+/* Registra a página inicial já com o título e o conteúdo corretos. */
+registrarVisualizacaoInterna();
 
 </script>
 </body>
