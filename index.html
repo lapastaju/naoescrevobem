@@ -79,6 +79,9 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .botao{display:inline-block;padding:12px 24px;border:2px solid var(--yellow);color:var(--yellow);font-family:Arial,sans-serif;font-weight:bold;text-transform:uppercase;cursor:pointer;transition:.2s}
 .botao:hover{background:var(--yellow);color:#000}
 .centro{text-align:center;margin-top:42px}
+/* Aproxima o rodapé da prévia do Arquivo somente na página inicial */
+#inicio .centro{margin-top:0}
+#inicio{margin-bottom:-30px}
 
 .busca-arquivo{margin:28px 0 22px}
 .busca-arquivo input{width:100%;background:#0d0d0d;color:var(--white);border:1px solid var(--yellow);padding:15px 18px;font-family:"Courier New",monospace;font-size:1rem;outline:none}
@@ -110,6 +113,21 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 .texto-critica p{margin-bottom:25px}
 .texto-critica p:first-child::first-letter{color:var(--yellow);float:left;font-size:5rem;line-height:.75;padding-right:12px;font-weight:bold}
 .navegacao-critica{margin-top:60px;display:flex;justify-content:space-between;gap:15px}
+
+
+/* Miniaturas do Arquivo na página inicial */
+#inicio .arquivo-previa{width:100%;margin:28px 0 0;padding:0}
+#inicio .arquivo-previa>h2{color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:400;letter-spacing:3px;text-align:center;margin:0 0 10px}
+#inicio .arquivo-previa-lista{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;width:100%}
+#inicio .arquivo-previa-item{display:block;min-width:0;text-align:center}
+#inicio .arquivo-previa-item img{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:contain;background:#050505;border:2px solid var(--yellow);filter:grayscale(100%);transition:filter .3s ease}
+#inicio .arquivo-previa-item:hover img{filter:grayscale(0%)}
+#inicio .arquivo-previa-item span{display:block;margin-top:4px;color:var(--gray);font-family:"Courier New",monospace;font-size:.62rem;line-height:1.25}
+#inicio .arquivo-previa-item:hover span{color:var(--yellow)}
+#inicio .arquivo-previa-link{display:block;width:max-content;margin:8px auto 0;color:var(--yellow);font-family:Arial,sans-serif;font-size:.62rem;font-weight:bold;letter-spacing:.5px}
+#inicio .arquivo-previa-link:hover{color:var(--white)}
+@media(max-width:800px){#inicio .arquivo-previa-lista{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}#inicio .arquivo-previa-item span{font-size:.52rem}}
+@media(max-width:480px){#inicio .arquivo-previa-lista{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 
 footer{border-top:2px solid var(--yellow);padding:30px;text-align:center}
 .redes{display:flex;justify-content:center;gap:28px;font-family:Arial,sans-serif;font-size:.9rem;font-weight:bold}
@@ -494,6 +512,12 @@ nav .menu-principal .menu-destaque .submenu-origens a:focus{
 <section id="inicio" class="pagina ativa">
   <h2 class="titulo-pagina">Em destaque</h2>
   <div id="inicio-grid" class="grid-filmes"></div>
+
+  <section class="arquivo-previa" aria-label="Alguns filmes do arquivo">
+    <h2>ARQUIVO</h2>
+    <div id="arquivo-previa-lista" class="arquivo-previa-lista"></div>
+    <a class="arquivo-previa-link" href="#arquivo" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('arquivo'); return false;">VER ARQUIVO COMPLETO →</a>
+  </section>
 
   <div class="centro">
   </div>
@@ -1113,6 +1137,22 @@ const filmes = [
 ];
 
 
+function montarArquivoPrevia(){
+  const idsSelecionados = ["primetime", "predators", "la-bola-negra", "soy-mario", "test"];
+  const selecionados = idsSelecionados
+    .map(id => filmes.find(f => f.id === id && f.arquivado === true))
+    .filter(Boolean);
+  const container = document.getElementById("arquivo-previa-lista");
+  if(!container) return;
+  container.innerHTML = selecionados.map(filme => `
+    <a class="arquivo-previa-item" href="?filme=${filme.id}" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; abrirCritica('${filme.id}'); return false;">
+      <img src="${filme.imagem}" alt="${filme.titulo}" loading="lazy">
+      <span>${filme.titulo}</span>
+    </a>
+  `).join("");
+}
+
+
 const listas = [
   {
     id: "isso-nao-e-um-top",
@@ -1670,6 +1710,7 @@ history.pushState = function(){
 window.addEventListener("popstate", registrarVisualizacaoInterna);
 
 montarInicio();
+montarArquivoPrevia();
 montarArquivo();
 montarListas();
 carregarPeloEndereco();
