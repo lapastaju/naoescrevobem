@@ -118,7 +118,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 /* Miniaturas do Arquivo na página inicial */
 #inicio .arquivo-previa{width:100%;margin:28px 0 0;padding:0}
 #inicio .arquivo-previa>h2{color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:400;letter-spacing:3px;text-align:center;margin:0 0 10px}
-#inicio .arquivo-previa-lista{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;width:100%}
+#inicio .arquivo-previa-lista{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;width:100%}
 #inicio .arquivo-previa-item{display:block;min-width:0;text-align:center}
 #inicio .arquivo-previa-item img{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:contain;background:#050505;border:2px solid var(--yellow);filter:grayscale(100%);transition:filter .3s ease}
 #inicio .arquivo-previa-item:hover img{filter:grayscale(0%)}
@@ -126,7 +126,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 #inicio .arquivo-previa-item:hover span{color:var(--yellow)}
 #inicio .arquivo-previa-link{display:block;width:max-content;margin:8px auto 0;color:var(--yellow);font-family:Arial,sans-serif;font-size:.62rem;font-weight:bold;letter-spacing:.5px}
 #inicio .arquivo-previa-link:hover{color:var(--white)}
-@media(max-width:800px){#inicio .arquivo-previa-lista{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}#inicio .arquivo-previa-item span{font-size:.52rem}}
+@media(max-width:800px){#inicio .arquivo-previa-lista{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}#inicio .arquivo-previa-item span{font-size:.52rem}}
 @media(max-width:480px){#inicio .arquivo-previa-lista{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 
 footer{
@@ -1213,7 +1213,7 @@ const filmes = [
 
 
 function montarArquivoPrevia(){
-  const idsSelecionados = ["primetime", "predators", "la-bola-negra", "soy-mario", "test"];
+  const idsSelecionados = ["primetime", "predators", "la-bola-negra", "soy-mario", "test", "ana"];
   const selecionados = idsSelecionados
     .map(id => filmes.find(f => f.id === id && f.arquivado === true))
     .filter(Boolean);
