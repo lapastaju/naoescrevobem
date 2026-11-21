@@ -117,7 +117,7 @@ main{max-width:1200px;margin:auto;padding:45px 30px 70px}
 
 /* Miniaturas do Arquivo na página inicial */
 #inicio .arquivo-previa{width:100%;margin:28px 0 0;padding:0}
-#inicio .arquivo-previa>h2{color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:400;letter-spacing:3px;text-align:center;margin:0 0 10px}
+#inicio .arquivo-previa>h2{color:var(--yellow);font-family:Arial,sans-serif;font-size:.72rem;font-weight:400;letter-spacing:3px;text-align:left;margin:0 0 10px}
 #inicio .arquivo-previa-lista{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;width:100%}
 #inicio .arquivo-previa-item{display:block;min-width:0;text-align:center}
 #inicio .arquivo-previa-item img{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:contain;background:#050505;border:2px solid var(--yellow);filter:grayscale(100%);transition:filter .3s ease}
@@ -589,7 +589,7 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
   <div id="inicio-grid" class="grid-filmes"></div>
 
   <section class="arquivo-previa" aria-label="Alguns filmes do arquivo">
-    <h2>ARQUIVO</h2>
+    <h2>MAIS FILMES</h2>
     <div id="arquivo-previa-lista" class="arquivo-previa-lista"></div>
     <a class="arquivo-previa-link" href="#arquivo" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('arquivo'); return false;">VER ARQUIVO COMPLETO →</a>
   </section>
