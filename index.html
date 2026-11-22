@@ -142,6 +142,8 @@ footer{
 .redes{display:flex;justify-content:center;gap:28px;font-family:Arial,sans-serif;font-size:.9rem;font-weight:bold}
 .redes a:hover{color:var(--yellow)}
 .separador{color:var(--yellow)}
+.copyright-site{margin-top:14px;color:#888;font-family:Georgia,"Times New Roman",serif;font-size:.72rem;letter-spacing:.15px}
+.assinatura-autor{margin:38px 0 0!important;padding-top:13px;border-top:1px solid var(--line);color:#b8b8b0;font-family:Georgia,"Times New Roman",serif;font-size:.88rem;line-height:1.4;text-align:left!important}
 
 @media(max-width:800px){
   .header-inner{min-height:auto;flex-wrap:wrap;padding:18px 20px;gap:14px}
@@ -803,6 +805,7 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
     <span class="separador">|</span>
     <a href="mailto:lapastaju@gmail.com">✉ CONTATO</a>
   </div>
+  <div class="copyright-site">© 2026 Não Escrevo Bem. Todos os direitos reservados.</div>
   <div style="display:flex;justify-content:center;align-items:center;margin-top:12px;min-height:18px">
     <div style="transform:scale(.8);transform-origin:center">
       <script src="https://www.stats4u.net/s4u.js" data-id="5206179643" data-style="4438" async></script>
@@ -1593,7 +1596,7 @@ function abrirMinimo(id, atualizarUrl = true){
   document.getElementById("minimo-imagem").src = minimo.imagem;
   document.getElementById("minimo-imagem").alt = minimo.titulo;
   document.getElementById("minimo-destaque").textContent = minimo.destaque;
-  document.getElementById("minimo-texto").innerHTML = minimo.texto;
+  document.getElementById("minimo-texto").innerHTML = minimo.texto + '<p class="assinatura-autor">Texto: Egídio La Pasta Junior.</p>';
 
   mostrarPagina("pagina-minimo", false);
 
@@ -1637,7 +1640,7 @@ function abrirMidiaFisica(id, atualizarUrl = true){
   if(!item) return;
 
   document.getElementById("midia-fisica-titulo").textContent = item.titulo;
-  document.getElementById("midia-fisica-texto").innerHTML = item.texto;
+  document.getElementById("midia-fisica-texto").innerHTML = item.texto + '<p class="assinatura-autor">Texto: Egídio La Pasta Junior.</p>';
   mostrarPagina("pagina-midia-fisica", false);
 
   if(atualizarUrl){
@@ -1657,7 +1660,7 @@ function abrirNostalgia(id, atualizarUrl = true){
   if(!item) return;
 
   document.getElementById("nostalgia-titulo").textContent = item.titulo;
-  document.getElementById("nostalgia-texto").innerHTML = item.texto;
+  document.getElementById("nostalgia-texto").innerHTML = item.texto + '<p class="assinatura-autor">Texto: Egídio La Pasta Junior.</p>';
   mostrarPagina("pagina-nostalgia", false);
 
   if(atualizarUrl){
@@ -1726,7 +1729,7 @@ function abrirCritica(id, atualizarUrl = true){
     `${filme.diretor} | ${filme.ano}`;
   document.getElementById("critica-imagem").src = filme.imagem;
   document.getElementById("critica-imagem").alt = filme.titulo;
-  document.getElementById("critica-texto").innerHTML = filme.texto;
+  document.getElementById("critica-texto").innerHTML = filme.texto + '<p class="assinatura-autor">Texto: Egídio La Pasta Junior.</p>';
 
   const indiceAtual = filmes.findIndex(item => item.id === filme.id);
   const botaoProximo = document.querySelector('[onclick="proximaCritica()"]');
