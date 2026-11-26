@@ -47,8 +47,8 @@ nav a:hover,nav a.ativo{color:var(--yellow)}
 .submenu-origens{display:none;position:absolute;top:100%;left:0;min-width:155px;padding:9px 0;background:#080808;border-top:2px solid var(--yellow);z-index:50;box-shadow:0 8px 18px rgba(0,0,0,.55)}
 /* No computador, o submenu aparece ao passar o cursor e some ao sair */
 .menu-destaque:hover .submenu-origens,
-.menu-destaque:focus-within .submenu-origens,
 .menu-destaque.aberto .submenu-origens{display:block}
+.menu-destaque.recolhido .submenu-origens{display:none !important}
 .menu-principal .submenu-origens a{display:block;border:0;padding:9px 15px;color:var(--white);font-size:.76rem;letter-spacing:.5px}
 .menu-principal .submenu-origens a:hover,.menu-principal .submenu-origens a:focus{color:var(--yellow)}
 
@@ -571,6 +571,7 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
             <a href="?categoria=FESTIVAL" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('FESTIVAL'); return false;">FESTIVAL</a>
             <a href="?categoria=STREAMING" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('STREAMING'); return false;">STREAMING</a>
             <a href="?categoria=CIRCUITO" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('CIRCUITO'); return false;">CIRCUITO</a>
+            <a href="?categoria=CURTA" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarCategoria('CURTA'); return false;">CURTA</a>
           </div>
         </div>
         <a href="#arquivo" onclick="if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return true; mostrarPagina('arquivo'); return false;" id="menu-arquivo">ARQUIVO</a>
@@ -1402,6 +1403,16 @@ const filmes = [
 
 ];
 
+// CURTA só aparece no submenu quando houver ao menos um curta cadastrado.
+const opcaoCurta = document.querySelector('.submenu-origens a[href="?categoria=CURTA"]');
+if (opcaoCurta) {
+  const existeCurta = filmes.some(filme => filme.origem === "CURTA");
+  if (existeCurta) {
+    opcaoCurta.style.removeProperty("display");
+  } else {
+    opcaoCurta.style.setProperty("display", "none", "important");
+  }
+}
 
 function montarArquivoPrevia(){
   const idsSelecionados = ["vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca", "pequenas-tragedias"];
@@ -1544,6 +1555,7 @@ function acionarDestaque(event){
   /* Em telas grandes, a abertura é controlada pelo hover do CSS. */
   if (!window.matchMedia("(max-width: 800px)").matches) return false;
 
+  menu.classList.remove("recolhido");
   const aberto = !menu.classList.contains("aberto");
   if (aberto) {
     const rect = link.getBoundingClientRect();
@@ -1569,6 +1581,10 @@ function mostrarCategoria(origem, atualizarUrl = true){
   const menu = document.querySelector(".menu-destaque");
   if (menu) {
     menu.classList.remove("aberto");
+    menu.classList.add("recolhido");
+    menu.addEventListener("mouseleave", function liberarSubmenu(){
+      menu.classList.remove("recolhido");
+    }, {once:true});
     const submenu = menu.querySelector(".submenu-origens");
     if (submenu) submenu.removeAttribute("style");
   }
@@ -1940,7 +1956,7 @@ function carregarPeloEndereco(){
     abrirMidiaFisica(midiaId, false);
   }else if(nostalgiaId && nostalgias.some(item => item.id === nostalgiaId)){
     abrirNostalgia(nostalgiaId, false);
-  }else if(categoria && ["FESTIVAL","STREAMING","CIRCUITO"].includes(categoria)){
+  }else if(categoria && ["FESTIVAL","STREAMING","CIRCUITO","CURTA"].includes(categoria)){
     mostrarCategoria(categoria, false);
   }else{
     const paginaHash = window.location.hash.replace("#", "");
