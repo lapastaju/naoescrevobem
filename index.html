@@ -835,6 +835,29 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
 
 const filmes = [
   {
+    id: "leviticus-ritual-de-sangue",
+    origem: "CIRCUITO",
+    titulo: "Leviticus: Ritual de Sangue",
+    diretor: "Adrian Chiarella",
+    ano: 2026,
+    imagem: "imagens/leviticus-ritual-de-sangue.jpeg",
+    texto: `
+      <p>Em <em>Leviticus</em> (2026), o horror encontra uma matéria-prima particularmente cruel na relação entre desejo, religião e repressão. O despertar afetivo de dois adolescentes em uma comunidade conservadora transforma aquilo que deveria ser uma descoberta íntima em motivo de punição e perseguição. O sobrenatural aparece associado a um ambiente em que a intolerância já funciona como uma ameaça concreta, muito antes de qualquer manifestação extraordinária.</p>
+
+      <p>É um filme que muda o rumo do horror no decorrer do roteiro. E me parece muito mais assustador do que sugere. Porque lida com o olhar da sociedade num ambiente religioso, onde o despertar dos jovens são observados silenciosamente. Sob a fachada de um rito de expurgo, o medo se torna um castigo constante, transformando a culpa em algo muito palpável: uma dívida moral e espiritual que cobra o preço. E os persegue incansavelmente, minando o desejo, o afeto, a confiança, a possibilidade.</p>
+
+      <p>O mais perverso é que os meninos não estão apenas tentando compreender o que sentem, o que já seria enorme de administrar na vida de um jovem, mas também a questionar o próprio afeto. O desejo passa a ser tratado como uma ameaça e os laços de intimidade, que poderiam oferecer alguma confiança, tornam-se motivo de exposição. Há uma violência particular em fazer alguém acreditar que existe algo de errado na condução do seu despertar.</p>
+
+      <p>A virada do horror acontece quando a ameaça escapa da encenação do ritual e passa a contaminar a própria percepção dos rapazes. A tentativa de erradicar o que a comunidade considera inaceitável ganha outra dimensão: não existe um lugar seguro nem para escapar. O medo atravessa o espaço religioso sem qualquer respaldo de responsabilidade para lidar com eles e interfere na maneira como eles se reconhecem. E de como são vistos. É uma mudança importante porque o filme deixa de depender apenas da expectativa de uma manifestação sobrenatural e encontra uma ameaça muito mais difícil de combater: a dúvida.</p>
+
+      <p>Nessa travessia, o horror muda de natureza. A violência está também na possibilidade de que o afeto seja transformado em culpa e de que o desejo seja algo abominável. O componente sobrenatural encontra sua função mais interessante. Não se estrutura apenas para produzir sustos ou alimentar a perseguição, mas para materializar uma estrutura de repressão já instaurada. O monstro religioso assume formas e passa a ocupar os espaços onde os personagens deveriam encontrar acolhimento. Não te parece fácil de relacionar?</p>
+
+      <p>Ali na reta final, de uma maneira sóbria, a coragem ganha oportunidade na força da juventude e rompe. É onde o filme me ganha.</p>
+
+      <p>Em circuito a partir de amanhã, 26/11.</p>
+    `
+  },
+  {
     id: "yellow-cake",
     origem: "CIRCUITO",
     titulo: "Yellow Cake",
@@ -1019,6 +1042,8 @@ const filmes = [
   },
   {
     id: "vicentina-pede-desculpas",
+    arquivado: true,
+    ordemArquivo: 0.5,
     origem: "CIRCUITO",
     titulo: "Vicentina Pede Desculpas",
     diretor: "Gabriel Martins",
@@ -1379,7 +1404,7 @@ const filmes = [
 
 
 function montarArquivoPrevia(){
-  const idsSelecionados = ["peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca", "pequenas-tragedias", "covarde"];
+  const idsSelecionados = ["vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca", "pequenas-tragedias"];
   const selecionados = idsSelecionados
     .map(id => filmes.find(f => f.id === id && f.arquivado === true))
     .filter(Boolean);
