@@ -836,6 +836,28 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
 
 const filmes = [
   {
+    id: "no-passo-da-cobra",
+    origem: "STREAMING",
+    titulo: "No Passo da Cobra",
+    diretor: "Estêvão Ciavatta",
+    ano: 2026,
+    imagem: "imagens/12064-large.jpg",
+    texto: `
+      <p>O tempo é um bom camarada. Porque é através dele que a gente ganha a oportunidade de se reorganizar. Em <em>No Passo da Cobra</em>, Estêvão Ciavatta transforma uma experiência pessoal em um documento sobre adaptação. Depois de sofrer um acidente que provocou uma lesão medular e alterou radicalmente sua relação com o movimento, o diretor retorna ao acontecimento, num exercício bravo de revisita, onde o tempo, mais uma vez, é determinante na compreensão de que a cadência dos dias é mais interessante para seu processo de adaptação do que a expectativa. É um documentário profundamente íntimo, que revela um jogo de cintura muito maduro diante do acidente, mas com um alcance humano de fácil conexão, porque lida com a sorte de uma recuperação bem-sucedida e testemunha o percurso árduo que o diretor percorreu, sem abandonar sua identidade, mas transformá-la.</p>
+
+      <p>Não é um material que explora a superação da forma como costumamos consumir. Mas há elegância na condução, um respeito pela nova oportunidade de olhar para essa expectativa a partir de uma experiência concreta: a de um homem que, depois de um acidente grave, reconstruiu sua relação com o corpo e com a sua natureza. É um filme que carrega essa tradução da necessidade de reconexão, com os pés no chão, com serenidade, envolto nos cuidados de amigos e familiares, no reencontro com sua fé, na retomada de suas realidades dentro de uma nova realidade. Os depoimentos dos médicos que o auxiliaram reforçam a gravidade da sua lesão. Também é significativo o espaço que ele reserva à família e aos amigos, as declarações de afeto e ao reconhecimento do quanto foram todos muito importantes não apenas na sua recuperação, que sempre lhe exigiu fisicamente, mas na força incondicional de quem mira no futuro.</p>
+
+      <p>O depoimento da companheira, Regina Casé, é um belo momento. A forma como eles se observam, o cuidado de como revisitam a memória, eu amo gente que sorri mesmo quando fala sobre a dor. Sabe gente que tem o sorriso na forma de falar, independente do assunto? Eu acho que isso diz muito sobre elas e também sobre o filme, mesmo sem dizer, está lá. Preenchendo o silêncio, percorrendo os corredores, como um feixe de luz que entra sem pedir licença. É uma linda maneira de trafegar pelo tempo.</p>
+
+      <p>O retorno ao local do acidente e a escalada da Pedra da Gávea (meu pai do céu, aquieta essa alma, homem) acrescentam uma dimensão simbólica. Porque não é só o corpo a se adaptar ao novo homem em construção, mas também o emocional. Não sei se há antes e depois, naquela leitura clássica de superação. Mas há o durante, talvez com hiatos difíceis, solitários, pensamentos que jamais saberemos, particulares. Mas é um belo registro de memória, de uma desconstrução abrupta da identidade, que o lança diante da dúvida e uma possibilidade real de recomeço. Que exige movimento que não é muscular, um movimento que não vem só do afeto. É uma dinâmica que vai lá nas profundezas da origem, que parte da compreensão profunda sobre ser, estar, permanecer. No respiro do equilibrista. No durante.</p>
+
+      <p>“O meu equilíbrio é uma coisa muito particular”, ele diz ao fisioterapeuta. E eu vou levar essa frase como um abraço.</p>
+
+      <p>Na plataforma Aquarius a partir de 27/11.</p>
+      <p>O relato também ganhou uma versão em livro, publicada pela Editora Record; a obra chegou às livrarias em 10 de novembro, data que marca os 18 anos do acidente.</p>
+    `
+  },
+  {
     id: "leviticus-ritual-de-sangue",
     origem: "CIRCUITO",
     titulo: "Leviticus: Ritual de Sangue",
@@ -1029,6 +1051,8 @@ const filmes = [
 
   {
     id: "feito-pipa",
+    arquivado: true,
+    ordemArquivo: 0.25,
     origem: "CIRCUITO",
     titulo: "Feito Pipa",
     diretor: "Allan Deberton",
@@ -1417,7 +1441,7 @@ if (opcaoCurta) {
 }
 
 function montarArquivoPrevia(){
-  const idsSelecionados = ["vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca", "pequenas-tragedias"];
+  const idsSelecionados = ["feito-pipa", "vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca"];
   const selecionados = idsSelecionados
     .map(id => filmes.find(f => f.id === id && f.arquivado === true))
     .filter(Boolean);
