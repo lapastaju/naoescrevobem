@@ -838,7 +838,8 @@ const filmes = [
   {
     id: "o-afinador-tuner",
     origem: "STREAMING",
-    titulo: "O Afinador (Tuner)",
+    titulo: "O Afinador",
+    tituloOriginal: "Tuner",
     diretor: "Daniel Roher",
     ano: 2025,
     imagem: "imagens/o-afinador-tuner.jpg",
@@ -904,6 +905,7 @@ const filmes = [
     id: "leviticus-ritual-de-sangue",
     origem: "CIRCUITO",
     titulo: "Leviticus: Ritual de Sangue",
+    tituloOriginalCritica: "Leviticus",
     diretor: "Adrian Chiarella",
     ano: 2026,
     imagem: "imagens/leviticus-ritual-de-sangue.jpeg",
@@ -975,6 +977,7 @@ const filmes = [
     id: "tudo-pode-ser-visto",
     origem: "CIRCUITO",
     titulo: "Tudo Pode Ser Visto",
+    tituloOriginal: "You Can See Everything",
     diretor: "Nathan Fielder, Lance Oppenheim",
     ano: 2026,
     imagem: "imagens/tudo-pode-ser-visto.webp",
@@ -1057,6 +1060,7 @@ const filmes = [
     ordemArquivo: -2,
     origem: "CIRCUITO",
     titulo: "Josephine: Fragmentos de um Crime",
+    tituloOriginal: "Josephine",
     diretor: "Beth de Araújo",
     ano: 2026,
     imagem: "imagens/josephine-fragmentos-de-um-crime.webp",
@@ -1257,6 +1261,7 @@ const filmes = [
     ordemArquivo: 5,
     origem: "FESTIVAL",
     titulo: "Covarde",
+    tituloOriginal: "Coward",
     diretor: "Lukas Dhont",
     ano: 2026,
     imagem: "coward.jpg",
@@ -1603,7 +1608,7 @@ function cardFilme(filme){
       <div class="filme-info">
         <p class="origem-filme">${filme.origem}</p>
         <h3>${filme.titulo}</h3>
-        <p class="diretor">${filme.diretor} | ${filme.ano}</p>
+        <p class="diretor">${filme.id !== "tudo-pode-ser-visto" && filme.id !== "o-afinador-tuner" && filme.tituloOriginal ? filme.tituloOriginal + " | " : ""}${filme.diretor} | ${filme.ano}</p>
         <span class="ler-critica">LER →</span>
       </div>
     </a>
@@ -1727,7 +1732,7 @@ function montarArquivo(anoSelecionado = null, termoBusca = null){
             <div>
               <p class="origem-filme">${filme.origem || ""}</p>
               <h3>${filme.titulo}</h3>
-              <p>${filme.diretor} | ${filme.ano}</p>
+              <p>${filme.id !== "tudo-pode-ser-visto" && filme.tituloOriginal ? filme.tituloOriginal + " | " : ""}${filme.diretor} | ${filme.ano}</p>
             </div>
             <span class="seta">→</span>
           </a>
@@ -1955,7 +1960,7 @@ function abrirCritica(id, atualizarUrl = true){
   document.getElementById("critica-origem").textContent = filme.origem || "ANOTAÇÃO";
   document.getElementById("critica-titulo").textContent = filme.titulo;
   document.getElementById("critica-dados").textContent =
-    `${filme.diretor} | ${filme.ano}`;
+    `${filme.tituloOriginalCritica || filme.tituloOriginal ? (filme.tituloOriginalCritica || filme.tituloOriginal) + " | " : ""}${filme.diretor} | ${filme.ano}`;
   document.getElementById("critica-imagem").src = filme.imagem;
   document.getElementById("critica-imagem").alt = filme.titulo;
   document.getElementById("critica-texto").innerHTML = filme.texto + '<p class="assinatura-autor">Texto: Egídio La Pasta Junior.</p>';
