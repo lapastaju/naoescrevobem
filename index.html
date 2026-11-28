@@ -836,6 +836,28 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
 
 const filmes = [
   {
+    id: "retratos-da-varzea",
+    origem: "CIRCUITO",
+    titulo: "Retratos da Várzea",
+    diretor: "Lucas Campolina",
+    ano: 2026,
+    imagem: "imagens/varzea02.png",
+    texto: `
+      <p>O futebol costuma ser apresentado como uma atividade capaz de colocar em suspensão temporariamente as diferenças sociais. Mas, distante dos grandes estádios, a realidade é menos simples. Em <em>Retratos da Várzea</em>, Lucas Campolina observa com atenção os campos e as pessoas que mantêm vivo o futebol amador na periferia de Belo Horizonte. Acompanhando Damião, Jana, Balotelli e a equipe do Capitão Eduardo Futebol Clube, o documentário encontra histórias em que a relação com a bola está ligada às condições de vida, ao ofício e a quem permanece na batalha pelo sonho.</p>
+
+      <p>Há quem precise conciliar a jornada de trabalho com os treinos, quem procure uma equipe para continuar jogando e quem assuma a tarefa de mobilizar os moradores para manter um time em atividade. São diferentes formas de envolvimento que ajudam a compreender a várzea como uma estrutura de convivência e desenvolvimento, construída por atletas que ocupam funções distintas. O presidente de um clube pode ser gari, a cozinheira pode também ser artilheira e o funcionamento de uma equipe depende de uma quantidade razoável de trabalho que raramente recebe a mesma atenção dedicada aos jogadores no gramado.</p>
+
+      <p>A disputa pela permanência dos campos, ameaçados pela privatização e pelas transformações urbanas, expõe uma dura realidade: espaços que durante anos serviram gratuitamente à comunidade podem se tornar áreas de acesso limitadas pelo dinheiro. A possibilidade de mudança não altera apenas o lugar onde se joga. Interfere nas relações que se desenvolvem ali, nas chances de participação que o esporte propõe e na autonomia de quem construiu aquele espaço coletivamente.</p>
+
+      <p>A experiência de Jana é muito significativa, pois essa busca por uma equipe expõe uma dificuldade particular para as mulheres que desejam continuar jogando. A várzea é um ambiente de pertencimento, mas não está livre das barreiras que atravessam o próprio futebol. Nesse sentido, observar quem consegue ocupar o campo e em quais condições, amplia o retrato para além de uma celebração nostálgica da paixão brasileira pelo esporte. É um espelho da luta pela presença e pelo reconhecimento.</p>
+
+      <p>Campolina encontra matéria para refletir o futebol como uma prática cotidiana, que coloca a comunidade em movimento, estruturada por vínculos que não cabem nas estatísticas nem dependem de reconhecimento profissional. É um documentário que compreende que a comunidade participa ativamente da construção dos times, da organização dos encontros e busca maneiras de continuar jogando mesmo quando as circunstâncias parecem desfavoráveis. A várzea sobrevive porque existe uma rede de pessoas dispostas a mantê-la de pé. E dentro desse esforço, o placar é o que menos importa.</p>
+
+      <p>Em circuito.</p>
+    `
+  },
+
+  {
     id: "no-passo-da-cobra",
     origem: "STREAMING",
     titulo: "No Passo da Cobra",
@@ -1031,6 +1053,8 @@ const filmes = [
 
   {
     id: "jim-queen",
+    arquivado: true,
+    ordemArquivo: -1,
     origem: "CIRCUITO",
     titulo: "Jim Queen",
     diretor: "Marco Nguyen, Nicolas Athané",
@@ -1441,7 +1465,7 @@ if (opcaoCurta) {
 }
 
 function montarArquivoPrevia(){
-  const idsSelecionados = ["feito-pipa", "vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio", "sabes-de-mim-agora-esqueca"];
+  const idsSelecionados = ["jim-queen", "feito-pipa", "vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio"];
   const selecionados = idsSelecionados
     .map(id => filmes.find(f => f.id === id && f.arquivado === true))
     .filter(Boolean);
