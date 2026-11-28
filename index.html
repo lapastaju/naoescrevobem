@@ -836,6 +836,27 @@ footer{background-color:#050505 !important;background-image:linear-gradient(rgba
 
 const filmes = [
   {
+    id: "o-afinador-tuner",
+    origem: "STREAMING",
+    titulo: "O Afinador (Tuner)",
+    diretor: "Daniel Roher",
+    ano: 2025,
+    imagem: "imagens/o-afinador-tuner.jpg",
+    texto: `
+      <p>Existe uma ideia muito boa no centro de <em>Tuner</em>: transformar uma habilidade em instrumento. Niki White tem uma audição extremamente sensível, condição que interfere na possibilidade de seguir uma carreira como pianista, seu sonho, mas que lhe permite perceber sons que passam despercebidos por outras pessoas. Como afinador de pianos, ele encontra uma maneira de trabalhar com essa particularidade. Não existe nem nunca existiu uma vocação criminosa em Niki, tampouco ambição financeira. Ele é um cara que vive dentro do seu fone de ouvido, com poucas relações, dia após dia. Quando descobre que consegue identificar os mecanismos de cofres através dos clics das combinações, sua habilidade se reformula. A música e o crime compartilham o mesmo princípio: a capacidade de perceber aquilo que quase ninguém consegue ouvir.</p>
+
+      <p>É curioso como o roteiro aproxima duas atividades que, à primeira vista, parecem distantes. Afinar um piano exige atenção, técnica, paciência e uma relação precisa com os desvios. Abrir um cofre sem o segredo, dentro da lógica do filme, depende de uma concentração semelhante. A passagem de uma ocupação para outra não parece tão absurda quando percebemos que o personagem continua fazendo essencialmente a mesma coisa: procurando frequências, identificando diferenças imperceptíveis, tentando compreender o funcionamento de um mecanismo. Mapeando um padrão. Ambas as atividades exigem foco e precisão, seu terreno mais confortável.</p>
+
+      <p>É um trabalho de som muito bem executado, que brinca com a alternância entre o ambiente externo e o universo dele, entre o ruído e o silêncio. Não é apenas um elemento técnico. Ele é narrativa; interfere na maneira como Niki se relaciona com o ambiente e com as pessoas. Há uma negociação constante entre o que ele consegue suportar de ruído e o que precisa bloquear para permanecer presente.</p>
+
+      <p>Leo Woodall impressiona pela segurança, cheguei a imaginar que ele pudesse ter algum problema auditivo, mas é construção, que se sustenta do início ao fim. Tem um elenco de apoio que o ajuda muito, mas o filme funciona demais no rosto melancólico dele. É um ator para não tirar o olho. Dustin Hoffman como Harry, o mentor de Niki no trabalho como afinador, cujo vínculo desenha uma relação de proteção/projeção. É uma participação luxuosa e existe um elo familiar na convivência em que o aprendizado, a admiração e a responsabilidade se misturam. Havana Rose Liu é Ruthie, estudante de música, mas sua relação com a criação parece mais livre, menos condicionada pelas limitações que afastaram o protagonista de seu antigo projeto de vida. A dificuldade de se acessarem existe, mas ela encontra um espaço até então inédito na vida dele.</p>
+
+      <p>O roteiro parece forçar um conflito na reta final, que funciona como um tudo ou nada muito bem encenado. A tensão funciona, mas parece haver um esforço considerável para fechar bem o filme. Ainda assim, gosto da maneira como Roher trabalha com uma premissa tão peculiar e consegue extrair dela um suspense policial de fácil acesso, divertido e visualmente interessante.</p>
+
+      <p>Streaming: Telecine.</p>
+    `
+  },
+  {
     id: "retratos-da-varzea",
     origem: "CIRCUITO",
     titulo: "Retratos da Várzea",
@@ -1032,6 +1053,8 @@ const filmes = [
   },
   {
     id: "josephine-fragmentos-de-um-crime",
+    arquivado: true,
+    ordemArquivo: -2,
     origem: "CIRCUITO",
     titulo: "Josephine: Fragmentos de um Crime",
     diretor: "Beth de Araújo",
@@ -1465,7 +1488,7 @@ if (opcaoCurta) {
 }
 
 function montarArquivoPrevia(){
-  const idsSelecionados = ["jim-queen", "feito-pipa", "vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas", "a-margem-do-rio"];
+  const idsSelecionados = ["josephine-fragmentos-de-um-crime", "jim-queen", "feito-pipa", "vicentina-pede-desculpas", "peixe-abissal", "privadas-de-suas-vidas"];
   const selecionados = idsSelecionados
     .map(id => filmes.find(f => f.id === id && f.arquivado === true))
     .filter(Boolean);
